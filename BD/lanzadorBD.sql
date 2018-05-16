@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   Nombre varchar(45) DEFAULT NULL,
   Apellido varchar(45) DEFAULT NULL,
   Fecha_Inscrip date NOT NULL,
+  esAvanzado bool DEFAULT NULL,
   PRIMARY KEY (idUser));
 
 CREATE TABLE IF NOT EXISTS review (
@@ -34,6 +35,11 @@ idGen int (11) NOT NULL,
 Nombre varchar (45) NOT NULL,
 PRIMARY KEY (idGen));
 
+CREATE TABLE IF NOT EXISTS generoJuego (
+idGen int (11) NOT NULL,
+Nombre varchar (45) NOT NULL,
+PRIMARY KEY (idGen));
+
 CREATE TABLE IF NOT EXISTS juego (
   idReview int(11) NOT NULL,
   productora varchar(45) NOT NULL,
@@ -41,7 +47,7 @@ CREATE TABLE IF NOT EXISTS juego (
   idGen int (11) NOT NULL,
   PRIMARY KEY (`idReview`),
   FOREIGN KEY (idReview) REFERENCES review (idReview),
-  FOREIGN KEY (idGen) REFERENCES genero (idGen)
+  FOREIGN KEY (idGen) REFERENCES generoJuego (idGen)
 );
 
 CREATE TABLE IF NOT EXISTS serie (
@@ -51,7 +57,7 @@ CREATE TABLE IF NOT EXISTS serie (
   productora varchar(45) NOT NULL,
   idGen int (11) NOT NULL,
   PRIMARY KEY (`idReview`),
-  FOREIGN KEY (idReview) REFERENCES review (idReview)
+  FOREIGN KEY (idReview) REFERENCES review (idReview),
   FOREIGN KEY (idGen) REFERENCES genero (idGen)
 );
 
@@ -62,7 +68,7 @@ CREATE TABLE IF NOT EXISTS libro (
   paginas int(11) NOT NULL,
   idGen int (11) NOT NULL,
   PRIMARY KEY (`idReview`),
-  FOREIGN KEY (idReview) REFERENCES review (idReview)
+  FOREIGN KEY (idReview) REFERENCES review (idReview),
   FOREIGN KEY (idGen) REFERENCES genero (idGen)
 );
 
@@ -74,7 +80,7 @@ CREATE TABLE IF NOT EXISTS pelicula (
   fecha_estreno date NOT NULL,
   idGen int (11) NOT NULL,
   PRIMARY KEY (`idReview`),
-  FOREIGN KEY (idReview) REFERENCES review (idReview)
+  FOREIGN KEY (idReview) REFERENCES review (idReview),
   FOREIGN KEY (idGen) REFERENCES genero (idGen)
 );
 
