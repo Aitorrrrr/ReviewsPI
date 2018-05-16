@@ -22,8 +22,34 @@ import java.awt.Insets;
 public class login extends JFrame {
 
 	private JPanel contLogo;
+	private JPanel contCampos;
+	private GridBagLayout gbl_contCampos;
 	private JTextField campEmail;
 	private JTextField campoPassword;
+	private JLabel logo;
+	private JLabel lblEmail;
+	private JLabel lblPassword;
+	private JButton btnIniciarSesion;
+	private JButton btnRecuperarContr;
+	private JButton btnNuevoUsuario;
+	private Component espacioBotones;
+	private Component espacioEmailPassword;
+	private Component espacioContrSeparador;
+	private JSeparator separadorCamposBotones;
+	private JSeparator separadorBotonesBorde;
+	private GridBagConstraints gbc_lblEmail;
+	private GridBagConstraints gbc_campEmail;
+	private GridBagConstraints gbc_espacioEmailPassword;
+	private GridBagConstraints gbc_lblPassword;
+	private GridBagConstraints gbc_campoPassword;
+	private GridBagConstraints gbc_espacioContrSeparador;
+	private GridBagConstraints gbc_separadorCamposBotones;
+	private GridBagConstraints gbc_btnIniciarSesion;
+	private GridBagConstraints gbc_espacioBotones;
+	private GridBagConstraints gbc_btnRecuperarContr;
+	private GridBagConstraints gbc_btnNuevoUsuario;
+	private GridBagConstraints gbc_separadorBotonesBorde;
+	
 
 	/**
 	 * Launch the application.
@@ -54,23 +80,23 @@ public class login extends JFrame {
 		contLogo.setLayout(new BorderLayout(0, 0));
 		setContentPane(contLogo);
 		
-		JLabel logo = new JLabel("");
+		logo = new JLabel("");
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
 		logo.setIcon(new ImageIcon("E:\\Florida\\PI\\TEST.png"));
 		contLogo.add(logo, BorderLayout.NORTH);
 		
-		JPanel contCampos = new JPanel();
+		contCampos = new JPanel();
 		contLogo.add(contCampos, BorderLayout.CENTER);
-		GridBagLayout gbl_contCampos = new GridBagLayout();
+		gbl_contCampos = new GridBagLayout();
 		gbl_contCampos.columnWidths = new int[]{186, 254, 254, 0};
 		gbl_contCampos.rowHeights = new int[]{36, 14, 20, 20, 14, 20, 20, 2, 23, 20, 23, 2, 0};
 		gbl_contCampos.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contCampos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contCampos.setLayout(gbl_contCampos);
 		
-		JLabel lblEmail = new JLabel("Email");
+		lblEmail = new JLabel("Email");
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+		gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.NORTH;
 		gbc_lblEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 0);
@@ -80,7 +106,7 @@ public class login extends JFrame {
 		contCampos.add(lblEmail, gbc_lblEmail);
 		
 		campEmail = new JTextField();
-		GridBagConstraints gbc_campEmail = new GridBagConstraints();
+		gbc_campEmail = new GridBagConstraints();
 		gbc_campEmail.anchor = GridBagConstraints.NORTH;
 		gbc_campEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_campEmail.insets = new Insets(0, 0, 5, 0);
@@ -90,27 +116,27 @@ public class login extends JFrame {
 		contCampos.add(campEmail, gbc_campEmail);
 		campEmail.setColumns(10);
 		
-		Component espacioEmailPassword = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_espacioEmailPassword = new GridBagConstraints();
+		espacioEmailPassword = Box.createVerticalStrut(20);
+		gbc_espacioEmailPassword = new GridBagConstraints();
 		gbc_espacioEmailPassword.anchor = GridBagConstraints.NORTH;
 		gbc_espacioEmailPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_espacioEmailPassword.gridx = 1;
 		gbc_espacioEmailPassword.gridy = 3;
 		contCampos.add(espacioEmailPassword, gbc_espacioEmailPassword);
 		
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_lblContrasea = new GridBagConstraints();
-		gbc_lblContrasea.anchor = GridBagConstraints.NORTH;
-		gbc_lblContrasea.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblContrasea.insets = new Insets(0, 0, 5, 0);
-		gbc_lblContrasea.gridwidth = 2;
-		gbc_lblContrasea.gridx = 1;
-		gbc_lblContrasea.gridy = 4;
-		contCampos.add(lblContrasea, gbc_lblContrasea);
+		lblPassword = new JLabel("Contrase\u00F1a");
+		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		gbc_lblPassword = new GridBagConstraints();
+		gbc_lblPassword.anchor = GridBagConstraints.NORTH;
+		gbc_lblPassword.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblPassword.insets = new Insets(0, 0, 5, 0);
+		gbc_lblPassword.gridwidth = 2;
+		gbc_lblPassword.gridx = 1;
+		gbc_lblPassword.gridy = 4;
+		contCampos.add(lblPassword, gbc_lblPassword);
 		
 		campoPassword = new JTextField();
-		GridBagConstraints gbc_campoPassword = new GridBagConstraints();
+		gbc_campoPassword = new GridBagConstraints();
 		gbc_campoPassword.anchor = GridBagConstraints.NORTH;
 		gbc_campoPassword.fill = GridBagConstraints.HORIZONTAL;
 		gbc_campoPassword.insets = new Insets(0, 0, 5, 0);
@@ -120,17 +146,17 @@ public class login extends JFrame {
 		contCampos.add(campoPassword, gbc_campoPassword);
 		campoPassword.setColumns(10);
 		
-		Component espacioContrSeparador = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_espacioContrSeparador = new GridBagConstraints();
+		espacioContrSeparador = Box.createVerticalStrut(20);
+		gbc_espacioContrSeparador = new GridBagConstraints();
 		gbc_espacioContrSeparador.anchor = GridBagConstraints.NORTH;
 		gbc_espacioContrSeparador.insets = new Insets(0, 0, 5, 5);
 		gbc_espacioContrSeparador.gridx = 1;
 		gbc_espacioContrSeparador.gridy = 6;
 		contCampos.add(espacioContrSeparador, gbc_espacioContrSeparador);
 		
-		JSeparator separadorCamposBotones = new JSeparator();
+		separadorCamposBotones = new JSeparator();
 		separadorCamposBotones.setForeground(Color.BLACK);
-		GridBagConstraints gbc_separadorCamposBotones = new GridBagConstraints();
+		gbc_separadorCamposBotones = new GridBagConstraints();
 		gbc_separadorCamposBotones.anchor = GridBagConstraints.NORTH;
 		gbc_separadorCamposBotones.fill = GridBagConstraints.HORIZONTAL;
 		gbc_separadorCamposBotones.insets = new Insets(0, 0, 5, 0);
@@ -139,8 +165,8 @@ public class login extends JFrame {
 		gbc_separadorCamposBotones.gridy = 7;
 		contCampos.add(separadorCamposBotones, gbc_separadorCamposBotones);
 		
-		JButton btnIniciarSesion = new JButton("Iniciar Sesion");
-		GridBagConstraints gbc_btnIniciarSesion = new GridBagConstraints();
+		btnIniciarSesion = new JButton("Iniciar Sesion");
+		gbc_btnIniciarSesion = new GridBagConstraints();
 		gbc_btnIniciarSesion.anchor = GridBagConstraints.NORTH;
 		gbc_btnIniciarSesion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnIniciarSesion.insets = new Insets(0, 0, 5, 0);
@@ -149,16 +175,16 @@ public class login extends JFrame {
 		gbc_btnIniciarSesion.gridy = 8;
 		contCampos.add(btnIniciarSesion, gbc_btnIniciarSesion);
 		
-		Component espacioBotones = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_espacioBotones = new GridBagConstraints();
+		espacioBotones = Box.createVerticalStrut(20);
+		gbc_espacioBotones = new GridBagConstraints();
 		gbc_espacioBotones.anchor = GridBagConstraints.NORTH;
 		gbc_espacioBotones.insets = new Insets(0, 0, 5, 5);
 		gbc_espacioBotones.gridx = 1;
 		gbc_espacioBotones.gridy = 9;
 		contCampos.add(espacioBotones, gbc_espacioBotones);
 		
-		JButton btnRecuperarContr = new JButton("Recuperar Contrase\u00F1a");
-		GridBagConstraints gbc_btnRecuperarContr = new GridBagConstraints();
+		btnRecuperarContr = new JButton("Recuperar Contrase\u00F1a");
+		gbc_btnRecuperarContr = new GridBagConstraints();
 		gbc_btnRecuperarContr.anchor = GridBagConstraints.NORTH;
 		gbc_btnRecuperarContr.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnRecuperarContr.insets = new Insets(0, 0, 5, 5);
@@ -166,8 +192,8 @@ public class login extends JFrame {
 		gbc_btnRecuperarContr.gridy = 10;
 		contCampos.add(btnRecuperarContr, gbc_btnRecuperarContr);
 		
-		JButton btnNuevoUsuario = new JButton("Nuevo Usuario");
-		GridBagConstraints gbc_btnNuevoUsuario = new GridBagConstraints();
+		btnNuevoUsuario = new JButton("Nuevo Usuario");
+		gbc_btnNuevoUsuario = new GridBagConstraints();
 		gbc_btnNuevoUsuario.anchor = GridBagConstraints.NORTH;
 		gbc_btnNuevoUsuario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNuevoUsuario.insets = new Insets(0, 0, 5, 0);
@@ -175,9 +201,9 @@ public class login extends JFrame {
 		gbc_btnNuevoUsuario.gridy = 10;
 		contCampos.add(btnNuevoUsuario, gbc_btnNuevoUsuario);
 		
-		JSeparator separadorBotonesBorde = new JSeparator();
+		separadorBotonesBorde = new JSeparator();
 		separadorBotonesBorde.setForeground(Color.BLACK);
-		GridBagConstraints gbc_separadorBotonesBorde = new GridBagConstraints();
+		gbc_separadorBotonesBorde = new GridBagConstraints();
 		gbc_separadorBotonesBorde.anchor = GridBagConstraints.NORTH;
 		gbc_separadorBotonesBorde.fill = GridBagConstraints.HORIZONTAL;
 		gbc_separadorBotonesBorde.gridwidth = 2;
