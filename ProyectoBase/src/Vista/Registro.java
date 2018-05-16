@@ -26,25 +26,27 @@ import javax.swing.JCheckBox;
 public class Registro extends JFrame {
 
 	private JPanel contentPane;
+	private JPanel panel;
 	private Border bordejpanel;
 	private JTextField textNombre;
 	private JTextField textEmail;
+	private JTextField textNombreReal;
+	private JTextField textFechaNacimiento;
 	private JPasswordField pwdContraseña;
+	private JPasswordField passwordConfirmar;
 	private JLabel labelEmail;
 	private JLabel lblNombreDeUsuario;
 	private JLabel lblConfirmarContrasea;
-	private JPasswordField passwordConfirmar;
 	private JLabel lblDatosOpcionales;
-	private JPanel panel_1;
-	private JTextField textNombreReal;
-	private JTextField textFechaNacimiento;
 	private JLabel lblGenero;
 	private JLabel lblFechaDeNacimiento;
 	private JLabel lblNombreReal;
 	private JLabel lblSubirLaFoto;
-	private JPanel Captcha;
+	private JLabel lblDatos;
 	private JLabel lblNewLabel;
+	private JPanel Captcha;
 	private JPanel Condiciones;
+	private JPanel panel_1;
 	private JRadioButton rdbtnCondiciones;
 	private JRadioButton rdbtnNotificaciones;
 
@@ -68,6 +70,7 @@ public class Registro extends JFrame {
 	 * Create the frame.
 	 */
 	public Registro() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 925, 495);
 		contentPane = new JPanel();
@@ -75,7 +78,7 @@ public class Registro extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.setForeground(Color.WHITE);
 		panel.setBounds(38, 56, 408, 255);
@@ -122,7 +125,7 @@ public class Registro extends JFrame {
 		passwordConfirmar.setBounds(187, 177, 211, 35);
 		panel.add(passwordConfirmar);
 		
-		JLabel lblDatos = new JLabel("DATOS OBLIGATORIOS");
+		lblDatos = new JLabel("DATOS OBLIGATORIOS");
 		lblDatos.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblDatos.setForeground(Color.GRAY);
 		lblDatos.setHorizontalAlignment(SwingConstants.CENTER);

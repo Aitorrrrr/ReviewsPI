@@ -50,7 +50,7 @@ public class Pantalla_Pelicula_Admin extends JFrame {
 	private JButton buttonValorar;
 	private JTextField txtValoracinMedia;
 	private Choice choiceValoracion;
-	private JButton btnAgregarComentario;
+	private JButton btnAgregarReview;
 	private JButton buttonOpcionesAdmin;
 	
 	
@@ -75,6 +75,7 @@ public class Pantalla_Pelicula_Admin extends JFrame {
 	 * Create the frame.
 	 */
 	public Pantalla_Pelicula_Admin() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 969, 656);
 		
@@ -88,9 +89,9 @@ public class Pantalla_Pelicula_Admin extends JFrame {
 		menuBar.add(textNombreUsuario);
 		textNombreUsuario.setColumns(10);
 		
-		btnAgregarComentario = new JButton("Crear un nuevo comentario");
-		btnAgregarComentario.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		menuBar.add(btnAgregarComentario);
+		btnAgregarReview = new JButton("Crear una nueva Review");
+		btnAgregarReview.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		menuBar.add(btnAgregarReview);
 		
 		mnCuenta = new JMenu("Cuenta");
 		mnCuenta.setFont(new Font("Segoe UI", Font.PLAIN, 16));
