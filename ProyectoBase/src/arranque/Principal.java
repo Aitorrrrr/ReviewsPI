@@ -11,7 +11,18 @@ public class Principal {
 		
 		UsuarioBD ubd=new UsuarioBD();
 		
-		ubd.insertarUser(cbd, "Homer", "Nombre1", "Apell1", "20000121");
+		cbd.cargarDriver();
+		
+		cbd.conectar();
+		if (ubd.insertarUser(cbd, "Yoyoyo", "Nombre1", "Apell1", "20000121")==1)
+		{
+			System.out.println("Usuario insertado");
+		}
+		else
+		{
+			System.out.println("Alias en uso");
+		}
+		cbd.desconectar();
 	}
 
 }
