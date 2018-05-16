@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   Nombre varchar(45) DEFAULT NULL,
   Apellido varchar(45) DEFAULT NULL,
   Fecha_Inscrip date NOT NULL,
-  esAvanzado bool DEFAULT NULL,
+  esAvanzado bool DEFAULT FALSE,
   PRIMARY KEY (idUser));
 
 CREATE TABLE IF NOT EXISTS review (
