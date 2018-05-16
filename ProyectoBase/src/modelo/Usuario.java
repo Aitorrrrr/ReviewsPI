@@ -76,9 +76,4 @@ public class Usuario {
 	public void setFecha_inscrip(Calendar fecha_inscrip) {
 		this.fecha_inscrip = fecha_inscrip;
 	}
-	
-	
-	
-	
-	
 }
