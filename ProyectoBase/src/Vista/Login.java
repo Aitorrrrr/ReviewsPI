@@ -1,5 +1,7 @@
 package Vista;
 
+import controlador.Controlador;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -23,34 +25,23 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
 	private JPanel contenedorPrincipal;
-	private JTextField campoNombreUsuario;
-	private JTextField campoUsuario;
+	private JTextField campoNom;
+	private JTextField campoContra;
+	
+	private Controlador c1;
+	private boolean conectado;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login frame = new Login();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Login() {
+		c1=new Controlador();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 888, 600);
 		
@@ -116,12 +107,39 @@ public class Login extends JFrame {
 		contenedorBotones.add(horizontalStrut_8);
 		
 		JButton botonInicioSesion = new JButton("Iniciar Sesion");
+		botonInicioSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				conectado=c1.primeraConex(campoNom.getText(), campoContra.getText());
+				
+				if (conectado)
+				{
+					c1.desconectar();
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(Login.this, "No se puede conectar con la bbdd");
+				}
+				
+				if (c1.loginUser(campoNom.getText(), campoContra.getText()))
+				{
+					JOptionPane.showMessageDialog(Login.this, "Dentro");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(Login.this, "User/PW erróneos");
+				}
+			}
+		});
 		contenedorBotones.add(botonInicioSesion);
 		
 		Component horizontalStrut_9 = Box.createHorizontalStrut(20);
 		contenedorBotones.add(horizontalStrut_9);
 		
 		JButton botonNuevoUsuario = new JButton("Nuevo Usuario");
+		botonNuevoUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		contenedorBotones.add(botonNuevoUsuario);
 		
 		Component horizontalStrut_12 = Box.createHorizontalStrut(20);
@@ -171,9 +189,9 @@ public class Login extends JFrame {
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut);
 		
-		campoNombreUsuario = new JTextField();
-		contenedorCampos.add(campoNombreUsuario);
-		campoNombreUsuario.setColumns(10);
+		campoNom = new JTextField();
+		contenedorCampos.add(campoNom);
+		campoNom.setColumns(10);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_3);
@@ -191,9 +209,9 @@ public class Login extends JFrame {
 		Component horizontalStrut_6 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_6);
 		
-		campoUsuario = new JTextField();
-		contenedorCampos.add(campoUsuario);
-		campoUsuario.setColumns(10);
+		campoContra = new JTextField();
+		contenedorCampos.add(campoContra);
+		campoContra.setColumns(10);
 		
 		Component horizontalStrut_7 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_7);
