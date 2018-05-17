@@ -3,11 +3,11 @@ USE `pint`;
 
 CREATE TABLE IF NOT EXISTS usuario (
   idUser int(11) NOT NULL AUTO_INCREMENT,
-  Alias varchar(45) NOT NULL,
+  Alias varchar(45) NOT NULL UNIQUE,
   Nombre varchar(45) DEFAULT NULL,
   Apellido varchar(45) DEFAULT NULL,
   Fecha_Inscrip date NOT NULL,
-  esAvanzado bool DEFAULT NULL,
+  esAvanzado bool DEFAULT FALSE,
   PRIMARY KEY (idUser));
 
 CREATE TABLE IF NOT EXISTS review (
