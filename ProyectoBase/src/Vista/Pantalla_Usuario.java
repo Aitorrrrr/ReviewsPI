@@ -1,48 +1,59 @@
 package Vista;
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JTextField;
-import javax.swing.JMenu;
-import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
+import javax.swing.JMenuBar;
+import javax.swing.JTextField;
+import java.awt.Choice;
+import javax.swing.JComboBox;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import java.awt.CardLayout;
+import java.awt.GridBagLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JMenu;
 import javax.swing.JButton;
 
 public class Pantalla_Usuario extends JFrame {
 
-	private JPanel contentPane;
-	private JPanel panelFotoPerfil;
-	private JPanel Barra1;
-	private JPanel Barra2;
-	private JPanel panelBiografia;
-	private JPanel panelUltimasPublicaciones;
-	private JTextField textNombre;
-	private JTextField textNombreUsuario;
-	private JTextField textEmail;
-	private JTextField textNombreReal;
-	private JTextField textFechaNacimiento;
-	private JTextField textGenero;
-	private JLabel lblNombre;
-	private JLabel lblNombreDeUsuario;
-	private JLabel labelEmail;
-	private JLabel labelNombreReal;
-	private JLabel labelFechaNacimiento;
-	private JLabel labelGenero;
-	private JLabel lblUltimasPublicaciones;
-	private JButton btnAnadirAmigo;
-	private JButton buttonEnviarMensaje;
-	private JButton buttonBloquearUsuario;
+	protected JPanel contentPane;
+	protected JPanel panelFoto;
+	protected JPanel panelBiografia;
+	protected JPanel panelComentarios;
+	protected JPanel panelPublicaciones;
+	protected JPanel panelComents;
+	protected JPanel panelNombre;
+	protected JPanel panelDatos;
+	protected JPanel panelFotoUsuario;
+	protected JLabel lblUltimasPublicaciones;
+	protected JMenuBar menuBar;
+	protected JScrollPane scrollComentarios;
+	protected JTextArea textComentarios;
+	protected JLabel lblNombre;
+	protected JLabel lblNombreReal;
+	protected JLabel lblEmail;
+	protected JLabel lblGenero;
+	protected JLabel lblFechaNacimiento;
+	protected JTextField textNombre;
+	protected JTextField textEmail;
+	protected JTextField textNombreReal;
+	protected JTextField textGenero;
+	protected JTextField textFechaNacimiento;
+	protected JLabel lblUsuario;
 	
-	
-	private JMenu mnCuenta;
 
 	/**
 	 * Launch the application.
@@ -64,140 +75,206 @@ public class Pantalla_Usuario extends JFrame {
 	 * Create the frame.
 	 */
 	public Pantalla_Usuario() {
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 963, 619);
+		setBounds(100, 100, 964, 621);
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		textNombre = new JTextField();
-		textNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textNombre.setEditable(false);
-		textNombre.setText("Nombre de Usuario/Admin");
-		menuBar.add(textNombre);
-		textNombre.setColumns(10);
-		
-		mnCuenta = new JMenu("Cuenta");
-		mnCuenta.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		menuBar.add(mnCuenta);
-		mnCuenta.add("Perfil");
-		mnCuenta.add("Configuracion");
-		mnCuenta.add("Salir");
+		JMenu mnNombreUsuario = new JMenu("Nombre de Usuario");
+		mnNombreUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		menuBar.add(mnNombreUsuario);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		lblNombre = new JLabel("Nombre");
-		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblNombre.setBounds(39, 11, 144, 39);
-		contentPane.add(lblNombre);
+		mnNombreUsuario.add("Perfil");
+		mnNombreUsuario.add("Configuración");
+		mnNombreUsuario.add("Salir...");
 		
-		panelFotoPerfil = new JPanel();
-		panelFotoPerfil.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panelFotoPerfil.setBounds(10, 48, 210, 260);
-		contentPane.add(panelFotoPerfil);
-		
-		Barra1 = new JPanel();
-		Barra1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.BLACK, Color.BLACK));
-		Barra1.setBounds(246, 11, 4, 531);
-		contentPane.add(Barra1);
-		Barra1.setLayout(null);
-		
-		Barra2 = new JPanel();
-		Barra2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.BLACK, Color.BLACK));
-		Barra2.setBounds(260, 154, 677, 4);
-		contentPane.add(Barra2);
+		panelFoto = new JPanel();
+		panelFoto.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		panelBiografia = new JPanel();
-		panelBiografia.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.BLACK, Color.BLACK));
-		panelBiografia.setBounds(260, 11, 677, 133);
-		contentPane.add(panelBiografia);
-		panelBiografia.setLayout(null);
+		panelBiografia.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
-		lblNombreDeUsuario = new JLabel("Nombre de Usuario:");
-		lblNombreDeUsuario.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNombreDeUsuario.setBounds(10, 11, 151, 28);
-		panelBiografia.add(lblNombreDeUsuario);
+		panelComentarios = new JPanel();
+		panelComentarios.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelFoto, GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(panelComentarios, GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+						.addComponent(panelBiografia, GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panelFoto, GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+							.addGap(83))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panelBiografia, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panelComentarios, GroupLayout.PREFERRED_SIZE, 324, Short.MAX_VALUE)
+							.addGap(21))))
+		);
 		
-		textNombreUsuario = new JTextField();
-		textNombreUsuario.setEditable(false);
-		textNombreUsuario.setBounds(166, 11, 145, 28);
-		panelBiografia.add(textNombreUsuario);
-		textNombreUsuario.setColumns(10);
+		panelPublicaciones = new JPanel();
+		panelPublicaciones.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 51, 0), new Color(255, 51, 0)));
+		
+		panelComents = new JPanel();
+		GroupLayout gl_panelComentarios = new GroupLayout(panelComentarios);
+		gl_panelComentarios.setHorizontalGroup(
+			gl_panelComentarios.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelComentarios.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelComentarios.createParallelGroup(Alignment.LEADING)
+						.addComponent(panelPublicaciones, GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+						.addGroup(gl_panelComentarios.createSequentialGroup()
+							.addComponent(panelComents, GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+							.addGap(2)))
+					.addContainerGap())
+		);
+		gl_panelComentarios.setVerticalGroup(
+			gl_panelComentarios.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelComentarios.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelPublicaciones, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelComents, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+					.addGap(8))
+		);
+		panelComents.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		scrollComentarios = new JScrollPane();
+		panelComents.add(scrollComentarios);
+		
+		textComentarios = new JTextArea();
+		textComentarios.setEditable(false);
+		scrollComentarios.setViewportView(textComentarios);
+		panelPublicaciones.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		lblUltimasPublicaciones = new JLabel("Ultimas Publicaciones: ");
+		lblUltimasPublicaciones.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblUltimasPublicaciones.setHorizontalAlignment(SwingConstants.CENTER);
+		panelPublicaciones.add(lblUltimasPublicaciones);
+		panelComentarios.setLayout(gl_panelComentarios);
+		
+		panelDatos = new JPanel();
+		panelDatos.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 51, 0), new Color(255, 51, 0)));
+		GroupLayout gl_panelBiografia = new GroupLayout(panelBiografia);
+		gl_panelBiografia.setHorizontalGroup(
+			gl_panelBiografia.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelBiografia.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelDatos, GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+					.addGap(13))
+		);
+		gl_panelBiografia.setVerticalGroup(
+			gl_panelBiografia.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelBiografia.createSequentialGroup()
+					.addComponent(panelDatos, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+					.addGap(21))
+		);
+		panelDatos.setLayout(new GridLayout(5, 8, 0, 0));
+		
+		lblNombre = new JLabel("Nombre de Usuario:");
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		panelDatos.add(lblNombre);
+		
+		textNombre = new JTextField();
+		textNombre.setEditable(false);
+		textNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panelDatos.add(textNombre);
+		textNombre.setColumns(10);
+		
+		lblEmail = new JLabel("Email:");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		panelDatos.add(lblEmail);
 		
 		textEmail = new JTextField();
 		textEmail.setEditable(false);
+		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panelDatos.add(textEmail);
 		textEmail.setColumns(10);
-		textEmail.setBounds(166, 50, 145, 28);
-		panelBiografia.add(textEmail);
 		
-		labelEmail = new JLabel("Email:");
-		labelEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelEmail.setBounds(10, 50, 151, 28);
-		panelBiografia.add(labelEmail);
-		
-		labelNombreReal = new JLabel("Nombre Real:");
-		labelNombreReal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelNombreReal.setBounds(10, 89, 151, 28);
-		panelBiografia.add(labelNombreReal);
+		lblNombreReal = new JLabel("Nombre Real:");
+		lblNombreReal.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNombreReal.setHorizontalAlignment(SwingConstants.CENTER);
+		panelDatos.add(lblNombreReal);
 		
 		textNombreReal = new JTextField();
 		textNombreReal.setEditable(false);
+		textNombreReal.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panelDatos.add(textNombreReal);
 		textNombreReal.setColumns(10);
-		textNombreReal.setBounds(166, 89, 145, 28);
-		panelBiografia.add(textNombreReal);
 		
-		labelFechaNacimiento = new JLabel("Fecha de Nacimiento:");
-		labelFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelFechaNacimiento.setBounds(344, 11, 167, 28);
-		panelBiografia.add(labelFechaNacimiento);
+		lblFechaNacimiento = new JLabel("Fecha de Nacimiento:");
+		lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblFechaNacimiento.setHorizontalAlignment(SwingConstants.CENTER);
+		panelDatos.add(lblFechaNacimiento);
 		
 		textFechaNacimiento = new JTextField();
 		textFechaNacimiento.setEditable(false);
+		textFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panelDatos.add(textFechaNacimiento);
 		textFechaNacimiento.setColumns(10);
-		textFechaNacimiento.setBounds(522, 13, 145, 28);
-		panelBiografia.add(textFechaNacimiento);
 		
-		labelGenero = new JLabel("Genero:");
-		labelGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelGenero.setBounds(344, 50, 167, 28);
-		panelBiografia.add(labelGenero);
+		lblGenero = new JLabel("Genero:");
+		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblGenero.setHorizontalAlignment(SwingConstants.CENTER);
+		panelDatos.add(lblGenero);
 		
 		textGenero = new JTextField();
 		textGenero.setEditable(false);
+		textGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panelDatos.add(textGenero);
 		textGenero.setColumns(10);
-		textGenero.setBounds(522, 54, 145, 28);
-		panelBiografia.add(textGenero);
+		panelBiografia.setLayout(gl_panelBiografia);
 		
-		btnAnadirAmigo = new JButton("A\u00F1adir Amigo");
-		btnAnadirAmigo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnAnadirAmigo.setBounds(10, 328, 210, 31);
-		contentPane.add(btnAnadirAmigo);
+		panelNombre = new JPanel();
+		panelNombre.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 204, 255), new Color(51, 204, 255)));
 		
-		buttonEnviarMensaje = new JButton("Enviar Mensaje");
-		buttonEnviarMensaje.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonEnviarMensaje.setBounds(10, 370, 210, 31);
-		contentPane.add(buttonEnviarMensaje);
+		panelFotoUsuario = new JPanel();
+		panelFotoUsuario.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 51, 0), new Color(255, 51, 0)));
+		GroupLayout gl_panelFoto = new GroupLayout(panelFoto);
+		gl_panelFoto.setHorizontalGroup(
+			gl_panelFoto.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelFoto.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(13))
+				.addGroup(gl_panelFoto.createSequentialGroup()
+					.addGap(13)
+					.addComponent(panelFotoUsuario, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panelFoto.setVerticalGroup(
+			gl_panelFoto.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelFoto.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelNombre, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panelFotoUsuario, GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+					.addGap(52))
+		);
+		panelFotoUsuario.setLayout(new GridLayout(1, 0, 0, 0));
+		panelNombre.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		buttonBloquearUsuario = new JButton("Bloquear Usuario");
-		buttonBloquearUsuario.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		buttonBloquearUsuario.setBounds(10, 412, 210, 31);
-		contentPane.add(buttonBloquearUsuario);
-		
-		panelUltimasPublicaciones = new JPanel();
-		panelUltimasPublicaciones.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.BLACK, Color.BLACK));
-		panelUltimasPublicaciones.setBounds(260, 169, 677, 373);
-		contentPane.add(panelUltimasPublicaciones);
-		panelUltimasPublicaciones.setLayout(null);
-		
-		lblUltimasPublicaciones = new JLabel("Ultimas Publicaciones:");
-		lblUltimasPublicaciones.setForeground(Color.BLACK);
-		lblUltimasPublicaciones.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblUltimasPublicaciones.setBounds(10, 11, 235, 27);
-		panelUltimasPublicaciones.add(lblUltimasPublicaciones);
+		lblUsuario = new JLabel("Usuario");
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		panelNombre.add(lblUsuario);
+		panelFoto.setLayout(gl_panelFoto);
+		contentPane.setLayout(gl_contentPane);
 	}
-
 }
