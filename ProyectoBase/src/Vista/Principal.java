@@ -189,7 +189,7 @@ public class Principal extends JFrame {
 		JPanel contenedorReview2 = new JPanel();
 		
 		imagenReview1 = new JLabel("");
-		imagenReview1.setIcon(new ImageIcon(Principal.class.getResource("/assets/1233.png")));
+		imagenReview1.setIcon(new ImageIcon(Principal.class.getResource("/assets/poster_placeholder.png")));
 		imagenReview1.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JSeparator SeparadorRev1 = new JSeparator();
@@ -321,7 +321,7 @@ public class Principal extends JFrame {
 		
 		imagenReview2 = new JLabel("");
 		imagenReview2.setHorizontalAlignment(SwingConstants.CENTER);
-		imagenReview2.setIcon(new ImageIcon(Principal.class.getResource("/assets/1233.png")));
+		imagenReview2.setIcon(new ImageIcon(Principal.class.getResource("/assets/poster_placeholder.png")));
 		
 		lblTituloReview2 = new JLabel("TITULO");
 		lblTituloReview2.setHorizontalAlignment(SwingConstants.CENTER);
