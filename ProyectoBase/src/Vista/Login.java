@@ -44,8 +44,8 @@ import java.awt.event.ActionEvent;
 public class Login extends JFrame {
 
 	private JPanel contenedorPrincipal;
-	private JTextField campoNombreUsuario;
-	private JTextField campoUsuario;
+	private JTextField campoNom;
+	private JTextField campoContra;
 	
 	
 	private JMenu mnIdioma;
@@ -243,9 +243,9 @@ public class Login extends JFrame {
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut);
 		
-		campoNombreUsuario = new JTextField();
-		contenedorCampos.add(campoNombreUsuario);
-		campoNombreUsuario.setColumns(10);
+		campoNom = new JTextField();
+		contenedorCampos.add(campoNom);
+		campoNom.setColumns(10);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_3);
@@ -264,9 +264,9 @@ public class Login extends JFrame {
 		Component horizontalStrut_6 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_6);
 		
-		campoUsuario = new JTextField();
-		contenedorCampos.add(campoUsuario);
-		campoUsuario.setColumns(10);
+		campoContra = new JTextField();
+		contenedorCampos.add(campoContra);
+		campoContra.setColumns(10);
 		
 		Component horizontalStrut_7 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_7);
