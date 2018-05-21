@@ -276,9 +276,8 @@ public class Login extends JFrame {
 		
 	      BufferedImage img = null;
 	        try {
-	            img = ImageIO.read(new File("C:\\\\Users\\\\miamme\\\\Desktop\\\\logo.png"));
+	            img = ImageIO.read(new File("/assets/logo.png"));
 	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }
 	        Image Dimg= img.getScaledInstance(580, 350, Image.SCALE_SMOOTH);
