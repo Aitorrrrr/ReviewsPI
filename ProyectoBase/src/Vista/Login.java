@@ -1,24 +1,33 @@
 package Vista;
 
-import controlador.Controlador;
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Vista.Login;
+import controlador.Controlador;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Component;
+
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.JPasswordField;
 import java.awt.Color;
@@ -27,6 +36,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
+import java.awt.Toolkit;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -36,47 +47,90 @@ public class Login extends JFrame {
 	private JTextField campoNom;
 	private JTextField campoContra;
 	
+	
+	private JMenu mnIdioma;
+	private JMenuItem mntmEsp;
+	private JMenuItem mntmEng;
+	private JButton botonInicioSesion;
+	private JButton botonNuevoUsuario;
+	private JButton botonRecuperarPassword;
+	private JLabel labelNombreUsuario;
+	private JLabel labelPassword;
+	
 	private Controlador c1;
 	private boolean conectado;
+	
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Login frame = new Login();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
 	public Login() {
-		c1=new Controlador();
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\miamme\\Desktop\\ico.png"));
+		setTitle("REVIEWSX");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 888, 600);
+		setBounds(100, 100, 888, 711);
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(153, 0, 0));
 		setJMenuBar(menuBar);
 		
-		JMenu mnIdioma = new JMenu("Idioma");
+		mnIdioma = new JMenu("Idioma");
+		mnIdioma.setBorder(null);
+		mnIdioma.setMinimumSize(new Dimension(50, 50));
+		mnIdioma.setBackground(Color.DARK_GRAY);
+		mnIdioma.setForeground(Color.WHITE);
 		menuBar.add(mnIdioma);
 		
-		JMenuItem mntmEspaol = new JMenuItem("Espa\u00F1ol");
-		mntmEspaol.setIcon(new ImageIcon(Login.class.getResource("/assets/esp.png")));
-		mnIdioma.add(mntmEspaol);
+		mntmEsp = new JMenuItem("Espa\u00F1ol");
+		mntmEsp.setForeground(Color.WHITE);
+		mntmEsp.setBackground(new Color(153, 0, 0));
+		mntmEsp.setIcon(new ImageIcon(Login.class.getResource("/assets/esp.png")));
+		mnIdioma.add(mntmEsp);
 		
-		JMenuItem mntmIngles = new JMenuItem("Ingles");
-		mntmIngles.setIcon(new ImageIcon(Login.class.getResource("/assets/eng.png")));
-		mnIdioma.add(mntmIngles);
+		mntmEng = new JMenuItem("Ingles");
+		mntmEng.setForeground(Color.WHITE);
+		mntmEng.setBackground(new Color(153, 0, 0));
+		mntmEng.setIcon(new ImageIcon(Login.class.getResource("/assets/eng.png")));
+		mnIdioma.add(mntmEng);
 		contenedorPrincipal = new JPanel();
+		contenedorPrincipal.setBackground(new Color(38, 38, 38));
 		contenedorPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedorPrincipal);
 		
 		JPanel contenedorLogo = new JPanel();
+		contenedorLogo.setBackground(new Color(38, 38, 38));
 		
 		JSeparator separator = new JSeparator();
-		separator.setForeground(Color.BLACK);
+		separator.setForeground(Color.WHITE);
 		
 		JPanel contenedorCampos = new JPanel();
+		contenedorCampos.setBackground(new Color(38, 38, 38));
 		
 		JSeparator separador1 = new JSeparator();
-		separador1.setForeground(Color.BLACK);
+		separador1.setForeground(Color.WHITE);
 		
 		JPanel contenedorBotones = new JPanel();
+		contenedorBotones.setBackground(new Color(38, 38, 38));
 		GroupLayout gl_contenedorPrincipal = new GroupLayout(contenedorPrincipal);
 		gl_contenedorPrincipal.setHorizontalGroup(
-			gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contenedorPrincipal.createSequentialGroup()
+			gl_contenedorPrincipal.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
 					.addGap(130)
 					.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.TRAILING)
 						.addComponent(contenedorLogo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
@@ -89,9 +143,9 @@ public class Login extends JFrame {
 		gl_contenedorPrincipal.setVerticalGroup(
 			gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-					.addGap(40)
-					.addComponent(contenedorLogo, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addContainerGap()
+					.addComponent(contenedorLogo, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(separador1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(29)
 					.addComponent(contenedorCampos, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
@@ -99,16 +153,16 @@ public class Login extends JFrame {
 					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(31)
 					.addComponent(contenedorBotones, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(31, Short.MAX_VALUE))
+					.addContainerGap(45, Short.MAX_VALUE))
 		);
 		contenedorBotones.setLayout(new GridLayout(0, 5, 0, 0));
 		
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		contenedorBotones.add(horizontalStrut_8);
 		
-		JButton botonInicioSesion = new JButton("Iniciar Sesion");
+		botonInicioSesion = new JButton("Iniciar Sesion");
 		botonInicioSesion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				conectado=c1.primeraConex(campoNom.getText(), campoContra.getText());
 				
 				if (conectado)
@@ -130,16 +184,14 @@ public class Login extends JFrame {
 				}
 			}
 		});
+		botonInicioSesion.setBackground(Color.WHITE);
 		contenedorBotones.add(botonInicioSesion);
 		
 		Component horizontalStrut_9 = Box.createHorizontalStrut(20);
 		contenedorBotones.add(horizontalStrut_9);
 		
-		JButton botonNuevoUsuario = new JButton("Nuevo Usuario");
-		botonNuevoUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		botonNuevoUsuario = new JButton("Nuevo Usuario");
+		botonNuevoUsuario.setBackground(Color.WHITE);
 		contenedorBotones.add(botonNuevoUsuario);
 		
 		Component horizontalStrut_12 = Box.createHorizontalStrut(20);
@@ -166,7 +218,8 @@ public class Login extends JFrame {
 		Component horizontalStrut_11 = Box.createHorizontalStrut(20);
 		contenedorBotones.add(horizontalStrut_11);
 		
-		JButton botonRecuperarPassword = new JButton("Recuperar Contrase\u00F1a");
+		botonRecuperarPassword = new JButton("Recuperar Contrase\u00F1a");
+		botonRecuperarPassword.setBackground(Color.WHITE);
 		contenedorBotones.add(botonRecuperarPassword);
 		
 		Component horizontalStrut_13 = Box.createHorizontalStrut(20);
@@ -179,7 +232,8 @@ public class Login extends JFrame {
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_1);
 		
-		JLabel labelNombreUsuario = new JLabel("Nombre de Usuario");
+		labelNombreUsuario = new JLabel("Nombre de Usuario");
+		labelNombreUsuario.setForeground(Color.WHITE);
 		labelNombreUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		contenedorCampos.add(labelNombreUsuario);
 		
@@ -199,7 +253,8 @@ public class Login extends JFrame {
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_4);
 		
-		JLabel labelPassword = new JLabel("Contrase\u00F1a");
+		labelPassword = new JLabel("Contrase\u00F1a");
+		labelPassword.setForeground(Color.WHITE);
 		labelPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		contenedorCampos.add(labelPassword);
 		
@@ -218,8 +273,19 @@ public class Login extends JFrame {
 		contenedorLogo.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JLabel labelLogo = new JLabel("");
-		labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		labelLogo.setIcon(new ImageIcon(Login.class.getResource("/assets/placeholder.png")));
+		
+	      BufferedImage img = null;
+	        try {
+	            img = ImageIO.read(new File("/assets/logo.png"));
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        Image Dimg= img.getScaledInstance(580, 350, Image.SCALE_SMOOTH);
+	        ImageIcon iIcon= new ImageIcon(Dimg);
+	        labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
+	        labelLogo.setIcon(iIcon);
+		
+	
 		contenedorLogo.add(labelLogo);
 		contenedorPrincipal.setLayout(gl_contenedorPrincipal);
 	}
