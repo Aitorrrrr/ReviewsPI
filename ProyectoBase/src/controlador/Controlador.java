@@ -38,11 +38,19 @@ public class Controlador {
 		}
 	}
 	
-	public boolean primeraConex(String nombre, String pw)
+	public void primeraConex()
 	{
 		this.cbd=new ConexionBD("52.15.36.253", "pint", "proyecto", "proyecto1");
 		this.cbd.cargarDriver();
-		return this.cbd.conectar();
+		
+		if (this.conectar())
+		{
+			System.out.println("Dentro");
+		}
+		else
+		{
+			System.out.println("Fuera");
+		}
 	}
 	
 	public boolean loginUser(String alias, String pw)
@@ -52,5 +60,13 @@ public class Controlador {
 		this.desconectar();
 		
 		return correcto;
+	}
+	
+	public UsuarioBD getUser() {
+		return this.ubd;
+	}
+	
+	public ConexionBD getConexion() {
+		return this.cbd;
 	}
 }

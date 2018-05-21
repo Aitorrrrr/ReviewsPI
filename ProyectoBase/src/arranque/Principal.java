@@ -9,8 +9,11 @@ public class Principal {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Login l1=new Login();
-		l1.setVisible(true);
+		Controlador c1=new Controlador();
+		
+		c1.primeraConex();
+		
+		c1.getConexion().conectarAD();
 	}
 
 }
