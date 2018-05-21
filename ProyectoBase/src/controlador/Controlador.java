@@ -40,7 +40,7 @@ public class Controlador {
 	
 	public boolean primeraConex(String nombre, String pw)
 	{
-		this.cbd=new ConexionBD("localhost", "pint", "root", "");
+		this.cbd=new ConexionBD("52.15.36.253", "pint", "proyecto", "proyecto1");
 		this.cbd.cargarDriver();
 		return this.cbd.conectar();
 	}
