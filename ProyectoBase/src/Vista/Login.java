@@ -81,6 +81,8 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		c1=new Controlador();
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\miamme\\Desktop\\ico.png"));
 		setTitle("REVIEWSX");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -163,7 +165,7 @@ public class Login extends JFrame {
 		botonInicioSesion = new JButton("Iniciar Sesion");
 		botonInicioSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				conectado=c1.primeraConex(campoNom.getText(), campoContra.getText());
+				conectado=c1.primeraConex();
 				
 				if (conectado)
 				{
@@ -277,15 +279,14 @@ public class Login extends JFrame {
 	      BufferedImage img = null;
 	        try {
 	            img = ImageIO.read(new File("/assets/logo.png"));
+	            Image Dimg=img.getScaledInstance(580, 350, Image.SCALE_SMOOTH);
+		        ImageIcon iIcon= new ImageIcon(Dimg);
+		        labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		        labelLogo.setIcon(iIcon);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        Image Dimg= img.getScaledInstance(580, 350, Image.SCALE_SMOOTH);
-	        ImageIcon iIcon= new ImageIcon(Dimg);
-	        labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
-	        labelLogo.setIcon(iIcon);
-		
-	
+	        
 		contenedorLogo.add(labelLogo);
 		contenedorPrincipal.setLayout(gl_contenedorPrincipal);
 	}

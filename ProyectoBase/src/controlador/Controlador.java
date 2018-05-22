@@ -38,18 +38,18 @@ public class Controlador {
 		}
 	}
 	
-	public void primeraConex()
+	public boolean primeraConex()
 	{
 		this.cbd=new ConexionBD("52.15.36.253", "pint", "proyecto", "proyecto1");
 		this.cbd.cargarDriver();
 		
 		if (this.conectar())
 		{
-			System.out.println("Dentro");
+			return true;
 		}
 		else
 		{
-			System.out.println("Fuera");
+			return false;
 		}
 	}
 	
