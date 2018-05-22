@@ -3,6 +3,12 @@ package modelo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Hashtable;
+
+import javax.naming.Context;
+import javax.naming.NamingException;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
 
 public class ConexionBD {
 
@@ -68,6 +74,31 @@ static final String CONTROLADOR_MYSQL="com.mysql.jdbc.Driver";
 		catch (SQLException sqle)
 		{
 			sqle.printStackTrace();
+		}
+	}
+	
+	public void conectarAD(String user, String pw)
+	{
+		Hashtable <String, String> env=new Hashtable<String, String>();
+		
+		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+		env.put(Context.SECURITY_AUTHENTICATION, "simple");
+		env.put(Context.PROVIDER_URL, "ldap://10.2.72.74");
+		
+		env.put(Context.SECURITY_PRINCIPAL, user+"@proyint.com");
+		env.put(Context.SECURITY_CREDENTIALS, pw);
+		
+		DirContext ctx;
+		
+		try
+		{
+			ctx=new InitialDirContext(env);
+			System.out.println("Autenticado en Windows Server");
+			ctx.close();
+		}
+		catch (NamingException ne)
+		{
+			System.out.println("Autenticación fallida");
 		}
 	}
 }

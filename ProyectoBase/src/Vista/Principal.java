@@ -22,6 +22,10 @@ import javax.swing.JSeparator;
 import java.awt.Font;
 import javax.swing.JCheckBox;
 
+import controlador.Controlador;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class Principal extends JFrame {
 
 	private JPanel contenedorPrincipal;
@@ -40,16 +44,16 @@ public class Principal extends JFrame {
 	
 	private JLabel imagenReview1;
 	private JLabel lblSinopsisReview1;
-	private JTextField campoSinopsisReview1;
+	private JTextField campoSinopsis;
 	private JLabel lblTituloReview1;
 	private JButton botonVerReviews1;
 	private JButton botonHacerReviews1;
 	private JTextField campoPuntuacionReview1;
 	
 	private JLabel imagenReview2;
-	private JLabel lblSinopsisReview2;
+	private JLabel lblSinopsis;
 	private JTextField campoSinopsisReview2;
-	private JLabel lblTituloReview2;
+	private JLabel lblTitulo;
 	private JButton botonVerReviews2;
 	private JButton botonHacerReviews2;
 	private JTextField campoPuntuacionReview2;
@@ -72,31 +76,13 @@ public class Principal extends JFrame {
 	private JButton botonCateg2;
 	private JButton botonCateg3;
 	private JButton botonCateg4;
-	private JButton botonBuscar; 
+	private JButton botonBuscar;
 	
+	private int cont;
 	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Principal frame = new Principal();
-					frame.setVisible(true);
-					frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Principal() {
+	public Principal(Controlador c1) {
+		cont=0;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1643, 912);
 		
@@ -199,9 +185,9 @@ public class Principal extends JFrame {
 		lblSinopsisReview1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSinopsisReview1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		campoSinopsisReview1 = new JTextField();
-		campoSinopsisReview1.setEditable(false);
-		campoSinopsisReview1.setColumns(10);
+		campoSinopsis = new JTextField();
+		campoSinopsis.setEditable(false);
+		campoSinopsis.setColumns(10);
 		
 		lblTituloReview1 = new JLabel("TITULO");
 		lblTituloReview1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -236,7 +222,7 @@ public class Principal extends JFrame {
 									.addGap(86))
 								.addGroup(gl_contenedorReview2.createSequentialGroup()
 									.addGap(18)
-									.addComponent(campoSinopsisReview1, GroupLayout.PREFERRED_SIZE, 408, GroupLayout.PREFERRED_SIZE)
+									.addComponent(campoSinopsis, GroupLayout.PREFERRED_SIZE, 408, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)))
 							.addGap(5))
 						.addGroup(gl_contenedorReview2.createSequentialGroup()
@@ -268,7 +254,7 @@ public class Principal extends JFrame {
 									.addGap(18)
 									.addComponent(lblSinopsisReview1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 									.addGap(20)
-									.addComponent(campoSinopsisReview1, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
+									.addComponent(campoSinopsis, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
 							.addContainerGap())
 						.addGroup(gl_contenedorReview2.createSequentialGroup()
 							.addComponent(botonVerReviews1)
@@ -323,9 +309,9 @@ public class Principal extends JFrame {
 		imagenReview2.setHorizontalAlignment(SwingConstants.CENTER);
 		imagenReview2.setIcon(new ImageIcon(Principal.class.getResource("/assets/poster_placeholder.png")));
 		
-		lblTituloReview2 = new JLabel("TITULO");
-		lblTituloReview2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTituloReview2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTitulo = new JLabel("TITULO");
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JSeparator SeparadorRev2 = new JSeparator();
 		SeparadorRev2.setOrientation(SwingConstants.VERTICAL);
@@ -341,9 +327,9 @@ public class Principal extends JFrame {
 		campoPuntuacionReview2.setText("10/10");
 		campoPuntuacionReview2.setColumns(10);
 		
-		lblSinopsisReview2 = new JLabel("SINOPSIS");
-		lblSinopsisReview2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSinopsisReview2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSinopsis = new JLabel("SINOPSIS");
+		lblSinopsis.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSinopsis.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		botonHacerReviews2 = new JButton("Hacer Review");
 		
@@ -362,7 +348,7 @@ public class Principal extends JFrame {
 							.addGroup(gl_contenedorReview1.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contenedorReview1.createSequentialGroup()
 									.addGap(113)
-									.addComponent(lblSinopsisReview2, GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+									.addComponent(lblSinopsis, GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
 									.addGap(86))
 								.addGroup(gl_contenedorReview1.createSequentialGroup()
 									.addGap(18)
@@ -371,7 +357,7 @@ public class Principal extends JFrame {
 							.addGap(5))
 						.addGroup(Alignment.TRAILING, gl_contenedorReview1.createSequentialGroup()
 							.addGap(119)
-							.addComponent(lblTituloReview2, GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+							.addComponent(lblTitulo, GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
 							.addGap(62)))
 					.addComponent(campoPuntuacionReview2, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
@@ -393,9 +379,9 @@ public class Principal extends JFrame {
 								.addComponent(SeparadorRev2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
 								.addComponent(imagenReview2, GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
 								.addGroup(Alignment.LEADING, gl_contenedorReview1.createSequentialGroup()
-									.addComponent(lblTituloReview2)
+									.addComponent(lblTitulo)
 									.addGap(18)
-									.addComponent(lblSinopsisReview2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblSinopsis, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 									.addGap(20)
 									.addComponent(campoSinopsisReview2, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)))
 							.addContainerGap())
@@ -519,6 +505,11 @@ public class Principal extends JFrame {
 		campoBuscar.setColumns(10);
 		
 		botonBuscar = new JButton("Buscar");
+		botonBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				c1.buscarReview(campoBuscar.getText(), lblTitulo, campoSinopsis);
+			}
+		});
 		contenedorBusqueda.add(botonBuscar);
 		contenedorMenu.setLayout(gl_contenedorMenu);
 		contenedorPrincipal.setLayout(gl_contenedorPrincipal);
