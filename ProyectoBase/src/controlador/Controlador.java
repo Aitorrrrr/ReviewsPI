@@ -2,16 +2,21 @@ package controlador;
 
 import java.sql.SQLException;
 
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
 import modelo.*;
 
 public class Controlador {
 
 	private ConexionBD cbd;
 	private UsuarioBD ubd;
+	private ReviewBD rbd;
 	
 	public Controlador()
 	{
 		this.ubd=new UsuarioBD();
+		this.rbd=new ReviewBD();
 	}
 	
 	public boolean conectar()
@@ -68,5 +73,11 @@ public class Controlador {
 	
 	public ConexionBD getConexion() {
 		return this.cbd;
+	}
+	
+	public void buscarReview(String tit, JLabel j1, JTextField j3) {
+		this.conectar();
+		rbd.buscarReview(cbd, tit, j1, j3);
+		this.desconectar();
 	}
 }

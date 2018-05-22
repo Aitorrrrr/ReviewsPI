@@ -179,6 +179,9 @@ public class Login extends JFrame {
 				if (c1.loginUser(campoNom.getText(), campoContra.getText()))
 				{
 					JOptionPane.showMessageDialog(Login.this, "Dentro");
+					Principal p1=new Principal(c1);
+					p1.setVisible(true);
+					Login.this.dispose();
 				}
 				else
 				{
@@ -278,7 +281,7 @@ public class Login extends JFrame {
 		
 	      BufferedImage img = null;
 	        try {
-	            img = ImageIO.read(new File("/assets/logo.png"));
+	            img = ImageIO.read(new File("assets/logo.png"));
 	            Image Dimg=img.getScaledInstance(580, 350, Image.SCALE_SMOOTH);
 		        ImageIcon iIcon= new ImageIcon(Dimg);
 		        labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
