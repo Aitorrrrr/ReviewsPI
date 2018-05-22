@@ -25,38 +25,38 @@ import java.awt.event.ActionEvent;
 
 public class Pantalla_Registro extends JFrame {
 
-	protected JPanel contentPane;
-	protected JPanel panelDatosObligatorios;
-	protected JPanel panelDatosOpcionales;
-	protected JPanel panelCaptcha;
-	protected JPanel panelCondiciones;
-	protected JPanel panelDatos2;
-	protected JPanel panelDatosOpcionales2;
-	protected JPanel panelTexto;
-	protected JPanel panelDatos;
-	protected JLabel lblDatosOpcionales;
-	protected JLabel lblFoto;
-	protected JLabel labelFechaNacimiento;
-	protected JLabel labelNombreReal;
-	protected JLabel labelGenero;
-	protected JLabel lblNombre;
-	protected JLabel lblEmail;
-	protected JLabel lblContraseña;
-	protected JLabel lblRepetirContraseña;
-	protected JLabel lblDatosObligatorios;
-	protected JTextField textNombre;
-	protected JTextField textEmail;
-	protected JPasswordField passwordContrasena;
-	protected JPasswordField passwordRepetirContrasena;
-	protected JTextField textNombreReal;
-	protected JTextField textFechaNacimiento;
-	protected JTextField textFoto;
-	protected JTextField textCapcha;
-	protected JRadioButton rdbtnCondicionesLegales;
-	protected JRadioButton rdbtnNotificaciones;
-	protected JButton btnRegistrar;
-	protected JButton buttonRestablecer;
-	protected JComboBox comboBoxGenero;
+	private JPanel contentPane;
+	private JPanel panelDatosObligatorios;
+	private JPanel panelDatosOpcionales;
+	private JPanel panelCaptcha;
+	private JPanel panelCondiciones;
+	private JPanel panelDatos2;
+	private JPanel panelDatosOpcionales2;
+	private JPanel panelTexto;
+	private JPanel panelDatos;
+	private JLabel lblDatosOpcionales;
+	private JLabel lblFoto;
+	private JLabel labelFechaNacimiento;
+	private JLabel labelNombreReal;
+	private JLabel labelGenero;
+	private JLabel lblNombre;
+	private JLabel lblEmail;
+	private JLabel lblContrasena;
+	private JLabel lblRepetirContraseña;
+	private JLabel lblDatosObligatorios;
+	private JTextField textNombre;
+	private JTextField textEmail;
+	private JPasswordField passwordContrasena;
+	private JPasswordField passwordRepetirContrasena;
+	private JTextField textNombreReal;
+	private JTextField textFechaNacimiento;
+	private JTextField textFoto;
+	private JTextField textCapcha;
+	private JRadioButton rdbtnCondicionesLegales;
+	private JRadioButton rdbtnNotificaciones;
+	private JButton btnRegistrar;
+	private JButton buttonRestablecer;
+	private JComboBox comboBoxGenero;
 
 	
 	public Pantalla_Registro() {
@@ -112,6 +112,11 @@ public class Pantalla_Registro extends JFrame {
 		rdbtnNotificaciones.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		btnRegistrar = new JButton("Registrar");
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		buttonRestablecer = new JButton("Restablecer");
@@ -310,10 +315,10 @@ public class Pantalla_Registro extends JFrame {
 		panelDatos.add(textEmail);
 		textEmail.setColumns(10);
 		
-		lblContraseña = new JLabel("Contrase\u00F1a:");
-		lblContraseña.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblContraseña.setHorizontalAlignment(SwingConstants.CENTER);
-		panelDatos.add(lblContraseña);
+		lblContrasena = new JLabel("Contrase\u00F1a:");
+		lblContrasena.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblContrasena.setHorizontalAlignment(SwingConstants.CENTER);
+		panelDatos.add(lblContrasena);
 		
 		passwordContrasena = new JPasswordField();
 		passwordContrasena.setHorizontalAlignment(SwingConstants.CENTER);

@@ -7,17 +7,25 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.io.IOException;
+import java.net.URL;
+
 import javax.swing.SwingConstants;
 import javax.swing.JMenuBar;
 import javax.swing.JTextField;
 import java.awt.Choice;
 import javax.swing.JComboBox;
 import java.awt.FlowLayout;
+
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import java.awt.CardLayout;
 import java.awt.GridBagLayout;
@@ -30,14 +38,11 @@ import javax.swing.JButton;
 public class Pantalla_Usuario extends JFrame {
 
 	protected JPanel contentPane;
-	protected JPanel panelFoto;
 	protected JPanel panelBiografia;
 	protected JPanel panelComentarios;
 	protected JPanel panelPublicaciones;
 	protected JPanel panelComents;
-	protected JPanel panelNombre;
 	protected JPanel panelDatos;
-	protected JPanel panelFotoUsuario;
 	protected JLabel lblUltimasPublicaciones;
 	protected JMenuBar menuBar;
 	protected JScrollPane scrollComentarios;
@@ -52,8 +57,6 @@ public class Pantalla_Usuario extends JFrame {
 	protected JTextField textNombreReal;
 	protected JTextField textGenero;
 	protected JTextField textFechaNacimiento;
-	protected JLabel lblUsuario;
-	
 
 	public Pantalla_Usuario() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,9 +76,6 @@ public class Pantalla_Usuario extends JFrame {
 		mnNombreUsuario.add("Configuración");
 		mnNombreUsuario.add("Salir...");
 		
-		panelFoto = new JPanel();
-		panelFoto.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		
 		panelBiografia = new JPanel();
 		panelBiografia.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
@@ -84,27 +84,20 @@ public class Pantalla_Usuario extends JFrame {
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panelFoto, GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelComentarios, GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
-						.addComponent(panelBiografia, GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)))
+						.addComponent(panelComentarios, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+						.addComponent(panelBiografia, GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(panelFoto, GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
-							.addGap(83))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(panelBiografia, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panelComentarios, GroupLayout.PREFERRED_SIZE, 324, Short.MAX_VALUE)
-							.addGap(21))))
+					.addComponent(panelBiografia, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelComentarios, GroupLayout.PREFERRED_SIZE, 324, Short.MAX_VALUE)
+					.addGap(21))
 		);
 		
 		panelPublicaciones = new JPanel();
@@ -161,8 +154,8 @@ public class Pantalla_Usuario extends JFrame {
 		gl_panelBiografia.setVerticalGroup(
 			gl_panelBiografia.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelBiografia.createSequentialGroup()
-					.addComponent(panelDatos, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-					.addGap(21))
+					.addComponent(panelDatos, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		panelDatos.setLayout(new GridLayout(5, 8, 0, 0));
 		
@@ -222,40 +215,8 @@ public class Pantalla_Usuario extends JFrame {
 		textGenero.setColumns(10);
 		panelBiografia.setLayout(gl_panelBiografia);
 		
-		panelNombre = new JPanel();
-		panelNombre.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 204, 255), new Color(51, 204, 255)));
 		
-		panelFotoUsuario = new JPanel();
-		panelFotoUsuario.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 51, 0), new Color(255, 51, 0)));
-		GroupLayout gl_panelFoto = new GroupLayout(panelFoto);
-		gl_panelFoto.setHorizontalGroup(
-			gl_panelFoto.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelFoto.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panelNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(13))
-				.addGroup(gl_panelFoto.createSequentialGroup()
-					.addGap(13)
-					.addComponent(panelFotoUsuario, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_panelFoto.setVerticalGroup(
-			gl_panelFoto.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelFoto.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panelNombre, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panelFotoUsuario, GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-					.addGap(52))
-		);
-		panelFotoUsuario.setLayout(new GridLayout(1, 0, 0, 0));
-		panelNombre.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		lblUsuario = new JLabel("Usuario");
-		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		panelNombre.add(lblUsuario);
-		panelFoto.setLayout(gl_panelFoto);
+		lblImagen = new JLabel();
 		contentPane.setLayout(gl_contentPane);
 	}
 }
