@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS usuario (
   Email varchar(70) NOT NULL,
   Fecha_Nacim date DEFAULT NULL,
   esAvanzado bool DEFAULT FALSE,
+  esVaron bool DEFAULT NULL,
+  imagen varchar (80) DEFAULT NULL,
   PRIMARY KEY (idUser));
 
 CREATE TABLE IF NOT EXISTS review (
