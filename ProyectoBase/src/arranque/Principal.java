@@ -13,7 +13,11 @@ public class Principal {
 		
 		c1.primeraConex();
 		
-		c1.getConexion().conectarAD();
+		c1.getConexion().conectarAD("userpi", "Proyecto1");
+		
+		c1.desconectar();
+		
+		c1.conectar();
 	}
 
 }

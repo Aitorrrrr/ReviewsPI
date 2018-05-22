@@ -77,7 +77,7 @@ static final String CONTROLADOR_MYSQL="com.mysql.jdbc.Driver";
 		}
 	}
 	
-	public void conectarAD()
+	public void conectarAD(String user, String pw)
 	{
 		Hashtable <String, String> env=new Hashtable<String, String>();
 		
@@ -85,8 +85,8 @@ static final String CONTROLADOR_MYSQL="com.mysql.jdbc.Driver";
 		env.put(Context.SECURITY_AUTHENTICATION, "simple");
 		env.put(Context.PROVIDER_URL, "ldap://10.2.72.74");
 		
-		env.put(Context.SECURITY_PRINCIPAL, "userpi@proyint.com");
-		env.put(Context.SECURITY_CREDENTIALS, "Proyecto1");
+		env.put(Context.SECURITY_PRINCIPAL, user+"@proyint.com");
+		env.put(Context.SECURITY_CREDENTIALS, pw);
 		
 		DirContext ctx;
 		
