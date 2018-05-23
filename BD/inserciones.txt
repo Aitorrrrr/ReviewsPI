@@ -1,0 +1,15 @@
+INSERT INTO usuario (Alias, Contrasenia, Nombre, Apellido, Email, Fecha_N
+acim, esAvanzado, esVaron) VALUES ('Pep', 1234, 'Pep', 'Polla', 'Email', '200001
+01', false, false);
+
+INSERT INTO review (idUser, Titulo, Sinopsis, ValMedia)
+ VALUES (1, 'TituoEjemplo', 'Sinopsis y cosas', 0);
+
+
+INSERT INTO comentario (texto, valoracion, idUser, idReview) 
+VALUES ('Texto random', 8, 1, 1);
+
+INSERT INTO genero (idGen, Nombre) VALUES (1, 'Acción');
+
+INSERT INTO pelicula (idReview, director, productora, duracion, fecha_est
+reno, idGen) VALUES (1, 'Director', 'Productora', 100, '20000101', 1);

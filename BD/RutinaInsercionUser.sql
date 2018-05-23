@@ -1,3 +1,5 @@
+DELIMITER $$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsercionUser`(
 	IN `Ali` VARCHAR(45),
 	IN `Nom` VARCHAR(45),
@@ -25,3 +27,5 @@ SET err1=1;
 INSERT INTO usuario (Alias, Nombre, Apellido, Fecha_Inscrip) VALUES (Ali, Nom, Apell, FechaIns);
 
 END
+
+$$

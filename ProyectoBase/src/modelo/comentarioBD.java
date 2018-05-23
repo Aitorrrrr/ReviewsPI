@@ -7,11 +7,11 @@ import java.util.GregorianCalendar;
 public class comentarioBD {
 	Calendar fecha=Calendar.getInstance();
 	Calendar calendario = new GregorianCalendar();
-	private static Statement state=null;
+	private static Statement state;
 	
 	public comentarioBD()
 	{
-		
+		this.state=null;
 	}
 	
 	public String crearComentario(String idComentario, Calendar fecha, String hora, String texto, int valoracion, int idUser, int idReview, ConexionBD conbd1)
