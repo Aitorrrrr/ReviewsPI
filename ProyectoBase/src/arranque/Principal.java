@@ -14,7 +14,11 @@ public class Principal {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Pantalla_Usuario pu=new Pantalla_Usuario();
+		Controlador c1=new Controlador();
+		c1.primeraConex();
+		c1.desconectar();
+		
+		Pantalla_Usuario pu=new Pantalla_Usuario(c1);
 		pu.setVisible(true);
 	}
 
