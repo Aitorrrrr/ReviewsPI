@@ -265,26 +265,45 @@ public class Pantalla_Pelicula extends JFrame {
 		
 		btnPublicar = new JButton("Publicar");
 		btnPublicar.setFont(new Font("Tahoma", Font.BOLD, 16));
+		
+		
+		btnValorar = new JButton("Valorar");
+		
+		comboBoxMedia = new JComboBox();
+		comboBoxMedia.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		comboBoxMedia.addItem(1);
+		comboBoxMedia.addItem(2);
+		comboBoxMedia.addItem(3);
+		comboBoxMedia.addItem(4);
+		comboBoxMedia.addItem(5);
 		GroupLayout gl_panelPublicarComentarios = new GroupLayout(panelPublicarComentarios);
 		gl_panelPublicarComentarios.setHorizontalGroup(
 			gl_panelPublicarComentarios.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelPublicarComentarios.createSequentialGroup()
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-					.addGap(371))
-				.addGroup(gl_panelPublicarComentarios.createSequentialGroup()
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnPublicar, GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+					.addGroup(gl_panelPublicarComentarios.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panelPublicarComentarios.createSequentialGroup()
+							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+							.addGap(18)
+							.addComponent(btnValorar, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
+					.addGap(18)
+					.addGroup(gl_panelPublicarComentarios.createParallelGroup(Alignment.LEADING)
+						.addComponent(comboBoxMedia, 0, 99, Short.MAX_VALUE)
+						.addComponent(btnPublicar, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panelPublicarComentarios.setVerticalGroup(
 			gl_panelPublicarComentarios.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelPublicarComentarios.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panelPublicarComentarios.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelPublicarComentarios.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnValorar, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+							.addComponent(comboBoxMedia, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panelPublicarComentarios.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnPublicar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
+						.addComponent(btnPublicar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
 					.addGap(10))
 		);
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
@@ -362,19 +381,6 @@ public class Pantalla_Pelicula extends JFrame {
 		textValoracionMedia.setEditable(false);
 		panelVer.add(textValoracionMedia);
 		textValoracionMedia.setColumns(10);
-		
-		comboBoxMedia = new JComboBox();
-		comboBoxMedia.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panelVer.add(comboBoxMedia);
-		comboBoxMedia.addItem(1);
-		comboBoxMedia.addItem(2);
-		comboBoxMedia.addItem(3);
-		comboBoxMedia.addItem(4);
-		comboBoxMedia.addItem(5);
-		
-		
-		btnValorar = new JButton("Valorar");
-		panelVer.add(btnValorar);
 		
 		lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 22));
