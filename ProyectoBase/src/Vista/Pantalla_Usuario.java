@@ -9,6 +9,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
+
+import controlador.Controlador;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -58,7 +61,7 @@ public class Pantalla_Usuario extends JFrame {
 	protected JTextField textGenero;
 	protected JTextField textFechaNacimiento;
 
-	public Pantalla_Usuario() {
+	public Pantalla_Usuario(Controlador c1) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 964, 621);
 		
@@ -216,5 +219,7 @@ public class Pantalla_Usuario extends JFrame {
 		panelBiografia.setLayout(gl_panelBiografia);
 		
 		contentPane.setLayout(gl_contentPane);
+		
+		c1.buscarComentario("1", textComentarios);
 	}
 }

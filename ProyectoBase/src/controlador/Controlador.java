@@ -3,6 +3,7 @@ package controlador;
 import java.sql.SQLException;
 
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import modelo.*;
@@ -12,11 +13,13 @@ public class Controlador {
 	private ConexionBD cbd;
 	private UsuarioBD ubd;
 	private ReviewBD rbd;
+	private comentarioBD comenbd;
 	
 	public Controlador()
 	{
 		this.ubd=new UsuarioBD();
 		this.rbd=new ReviewBD();
+		this.comenbd=new comentarioBD();
 	}
 	
 	public boolean conectar()
@@ -78,6 +81,13 @@ public class Controlador {
 	public void buscarReview(String tit, JLabel j1, JTextField j3) {
 		this.conectar();
 		rbd.buscarReview(cbd, tit, j1, j3);
+		this.desconectar();
+	}
+	
+	public void buscarComentario(String id, JTextArea jarea)
+	{
+		this.conectar();
+		this.comenbd.MostrarComentariosUsuario(id, this.cbd, jarea);
 		this.desconectar();
 	}
 }

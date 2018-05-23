@@ -3,6 +3,9 @@ import java.sql.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.swing.JTextArea;
+
+import Vista.Pantalla_Usuario;
 
 public class comentarioBD {
 	Calendar fecha=Calendar.getInstance();
@@ -30,19 +33,26 @@ public class comentarioBD {
 		return texto;
 	}
 	
-	public String MostrarComentariosUsuario(String idUser, String texto, ConexionBD conbd2)
+	public void MostrarComentariosUsuario(String idUser, ConexionBD conbd2, JTextArea text)
 	{
 		ResultSet rs2;
 		try
 		{
 			state=conbd2.getConexion().createStatement();
-			String sql2="Select Texto from Comentario where idUser=";
+			String sql2="Select Texto from Comentario where idUser='"+idUser+"'";
+			
+			rs2=state.executeQuery(sql2);
+			
+			while (rs2.next())
+			{
+					text.setText(text.getText()+rs2.getString(1)+"\n\n");
+			}
 		}
 		catch (SQLException sql2)
 		{
 			sql2.printStackTrace();
-			return null;
 		}
-		return texto;
 	}
+	
+	
 }
