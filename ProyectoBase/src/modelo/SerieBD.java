@@ -37,4 +37,34 @@ public class SerieBD {
 			sqle.printStackTrace();
 		}
 	}
+	public int insertarSerie(ConexionBD cbd,int idReview, String titulo, String temporadas, String dura_cap, String productora, int idGen)
+	{
+		ResultSet rs;
+		
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="SELECT idReview FROM review WHERE titulo='"+titulo+"'";
+			
+			rs=state.executeQuery(sql);
+			
+			if (rs.next())
+			{
+				return 0;
+			}
+			else
+			{
+				sql="INSERT INTO serie (idReview, temporadas, dura_cap, productora, idGen) VALUES ('"+idReview+"', '"+titulo+"', '"+temporadas+"', '"+dura_cap+", '"+productora+"', '"+idGen+"')";
+				state.executeUpdate(sql);
+				
+				return 1;
+			}
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+			return 0;
+		}
+	}
 }
