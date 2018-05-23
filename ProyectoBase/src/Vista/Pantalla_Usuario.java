@@ -215,8 +215,6 @@ public class Pantalla_Usuario extends JFrame {
 		textGenero.setColumns(10);
 		panelBiografia.setLayout(gl_panelBiografia);
 		
-		
-		lblImagen = new JLabel();
 		contentPane.setLayout(gl_contentPane);
 	}
 }
