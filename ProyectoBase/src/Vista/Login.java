@@ -60,10 +60,6 @@ public class Login extends JFrame {
 	private Controlador c1;
 	private boolean conectado;
 	
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -77,9 +73,6 @@ public class Login extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Login() {
 		c1=new Controlador();
 		

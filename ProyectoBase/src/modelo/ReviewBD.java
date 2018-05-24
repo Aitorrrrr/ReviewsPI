@@ -14,7 +14,7 @@ public class ReviewBD {
 	
 	}
 	
-	public void buscarReview(ConexionBD cbd, String tit, JLabel j1, JTextField j3)
+	public void buscarReview(ConexionBD cbd, String tit, JLabel titulo, JTextField sinopsis, JTextField valmedia)
 	{
 		ResultSet rs;
 		
@@ -22,15 +22,16 @@ public class ReviewBD {
 		{
 			state=cbd.getConexion().createStatement();
 			
-			String sql="SELECT r.Titulo, c.texto FROM review r INNER JOIN comentario c ON c.idReview=r.idReview WHERE Titulo='"+tit+"'";
+			String sql="SELECT r.Titulo, r.Sinopsis, r.ValMedia FROM review r INNER JOIN comentario c ON c.idReview=r.idReview WHERE Titulo='"+tit+"'";
 			
 			
 			rs=state.executeQuery(sql);
 			
 			rs.next();
 			
-			j1.setText(rs.getString(1));
-			j3.setText(rs.getString(2));
+			titulo.setText(rs.getString(1));
+			sinopsis.setText(rs.getString(2));
+			valmedia.setText(rs.getString(3));
 		}
 		catch (SQLException sqle)
 		{
