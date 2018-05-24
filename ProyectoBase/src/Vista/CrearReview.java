@@ -13,6 +13,9 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EtchedBorder;
+
+import controlador.Controlador;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
@@ -49,7 +52,7 @@ public class CrearReview extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CrearReview() {
+	public CrearReview(Controlador c1) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -64,7 +67,7 @@ public class CrearReview extends JFrame {
 		btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				dispose();
+				c1.
 			}
 		});
 		btnCrear.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -72,7 +75,7 @@ public class CrearReview extends JFrame {
 		buttonReestablecer = new JButton("Reestablecer");
 		buttonReestablecer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textReview.setText(null);
+				textReview.setText("");
 			}
 		});
 		buttonReestablecer.setFont(new Font("Tahoma", Font.BOLD, 18));

@@ -14,6 +14,9 @@ public class Controlador {
 	private UsuarioBD ubd;
 	private ReviewBD rbd;
 	private comentarioBD comenbd;
+	private SerieBD sbd;
+	private Pelicula pbd;
+	
 	
 	public Controlador()
 	{
@@ -90,4 +93,13 @@ public class Controlador {
 		this.comenbd.MostrarComentariosUsuario(id, this.cbd, jarea);
 		this.desconectar();
 	}
+	
+	public void insertarReview(ConexionBD cbd,int idReview, String autor, int idUser, String Titulo, double Valmedia)
+	{
+		this.conectar();
+		this.comenbd.insertarReview(idReview, this.cbd, autor,idUser,Titulo,Valmedia);
+		this.desconectar();
+	}
+	
+	
 }
