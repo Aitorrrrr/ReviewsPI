@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS review (
   PRIMARY KEY (`idReview`), FOREIGN KEY (idUser) REFERENCES usuario (idUser));
 
 CREATE TABLE IF NOT EXISTS comentario (
-idComentario int(11) NOT NULL,
+idComentario int(11) NOT NULL AUTO_INCREMENT,
 texto varchar(250) NOT NULL,
 valoracion int(2) NOT NULL,
 idUser int(11) NOT NULL,
