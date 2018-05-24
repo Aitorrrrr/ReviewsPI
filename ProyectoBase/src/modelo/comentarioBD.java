@@ -55,8 +55,6 @@ public class comentarioBD {
 		}
 	}
 	
-<<<<<<< HEAD
-=======
 	public void MostrarNombreUsuario(String idUser, ConexionBD conbd3, JTextField nombre)
 	{
 		ResultSet rs3;
@@ -167,6 +165,4 @@ public class comentarioBD {
 			sql7.printStackTrace();
 		}
 	}
-	
->>>>>>> origin/master
 }

@@ -163,15 +163,12 @@ public class Controlador {
 		this.desconectar();
 	}
 	
-<<<<<<< HEAD
 	public void insertarReview(ConexionBD cbd,int idReview, String autor, int idUser, String Titulo, double Valmedia)
 	{
 		this.conectar();
 		this.desconectar();
 	}
 	
-	
-=======
 	public void MostrarNombreUsuario(String id, JTextField nombre)
 	{
 		this.conectar();
@@ -206,5 +203,4 @@ public class Controlador {
 		this.comenbd.Genero(id, this.cbd, genero);
 		this.desconectar();
 	}
->>>>>>> origin/master
 }
