@@ -114,18 +114,38 @@ public class comentarioBD {
 		}
 	}
 	
-	public void mostrarNombreApellidos(String idUser, ConexionBD conbd6, JTextField Nombre)
+	public void mostrarNombre(String idUser, ConexionBD conbd6, JTextField Nombre)
 	{
 		ResultSet rs6;
 		try
 		{
 			state=conbd6.getConexion().createStatement();
-			String sql6="Select Nombre, Apellido from Usuario where idUser='"+idUser+"'";
+			String sql6="Select Nombre from Usuario where idUser='"+idUser+"'";
 			rs6=state.executeQuery(sql6);
 			while (rs6.next())
 			{
 				Nombre.setText(rs6.getString(1));
-				Nombre.setText(Nombre.getText()+" "+rs6.getString(2));
+			}
+		
+			
+		}
+		catch (SQLException sql6)
+		{
+			sql6.printStackTrace();
+		}
+	}
+	
+	public void mostrarApellido(String idUser, ConexionBD conbd7, JTextField Apellido)
+	{
+		ResultSet rs7;
+		try
+		{
+			state=conbd7.getConexion().createStatement();
+			String sql7="Select Apellido from Usuario where idUser='"+idUser+"'";
+			rs7=state.executeQuery(sql7);
+			while (rs7.next())
+			{
+				Apellido.setText(rs7.getString(1));
 			}
 		
 			

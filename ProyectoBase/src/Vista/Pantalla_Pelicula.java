@@ -36,21 +36,28 @@ public class Pantalla_Pelicula extends JFrame {
 	private JPanel panelPublicarComentarios;
 	private JPanel panelValorar1;
 	private JPanel panelPortada;
+	private JPanel panelAgregarDatos;
 	private JLabel lblComentariosDeLos;
 	private JLabel lblValorar;
 	private JLabel lblNombre;
+	private JLabel lblPublicarComentario;
+	private JLabel labelValoracion;
 	private JScrollPane scrollPane_2;
 	private JMenuBar menuBar;
 	private JMenu mnNombreUsuario;
 	private JButton btnCrearReview;
 	private JButton btnPublicar;
 	private JButton btnValorar;
+	private JButton btnVerNetflix;
+	private JButton buttonComprarAmazon;
+	private JButton buttonComprarEntradas;
 	private JScrollPane scrollPane_1;
 	private JTextArea textReviewsUsuarios;
 	private JComboBox comboBoxMedia;
 	private JLabel lblNombre_1;
 	private JTextField textNombreReview;
 	private JTextField textValoracionMedia;
+	private JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -81,6 +88,8 @@ public class Pantalla_Pelicula extends JFrame {
 		mnNombreUsuario = new JMenu("Nombre de Usuario");
 		mnNombreUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBar.add(mnNombreUsuario);
+		mnNombreUsuario.add("Perfil");
+		mnNombreUsuario.add("Salir...");
 		
 		btnCrearReview = new JButton("Crear Review");
 		btnCrearReview.addActionListener(new ActionListener() {
@@ -89,9 +98,6 @@ public class Pantalla_Pelicula extends JFrame {
 		});
 		btnCrearReview.setFont(new Font("Tahoma", Font.BOLD, 20));
 		menuBar.add(btnCrearReview);
-		mnNombreUsuario.add("Cuenta");
-		mnNombreUsuario.add("Configuracion");
-		mnNombreUsuario.add("Salir");
 		contentPantallaPelicula = new JPanel();
 		contentPantallaPelicula.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPantallaPelicula);
@@ -113,7 +119,7 @@ public class Pantalla_Pelicula extends JFrame {
 		btnPublicar = new JButton("Publicar");
 		btnPublicar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JLabel lblPublicarComentario = new JLabel("Publicar Comentario:");
+		lblPublicarComentario = new JLabel("Publicar Comentario:");
 		lblPublicarComentario.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GroupLayout gl_panelReviewsUsuarios = new GroupLayout(panelReviewsUsuarios);
 		gl_panelReviewsUsuarios.setHorizontalGroup(
@@ -154,7 +160,7 @@ public class Pantalla_Pelicula extends JFrame {
 							.addContainerGap())))
 		);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		scrollPane_2.setViewportView(textArea);
 		panelReviewsU.setLayout(new GridLayout(1, 0, 0, 0));
 		
@@ -173,7 +179,7 @@ public class Pantalla_Pelicula extends JFrame {
 		panelValorar = new JPanel();
 		panelValorar.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
-		JPanel panelAgregarDatos = new JPanel();
+		panelAgregarDatos = new JPanel();
 		panelAgregarDatos.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		GroupLayout gl_contentPantallaPelicula = new GroupLayout(contentPantallaPelicula);
 		gl_contentPantallaPelicula.setHorizontalGroup(
@@ -213,7 +219,7 @@ public class Pantalla_Pelicula extends JFrame {
 		textNombreReview.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textNombreReview.setColumns(10);
 		
-		JLabel labelValoracion = new JLabel("Valoracion Media:");
+		labelValoracion = new JLabel("Valoracion Media:");
 		labelValoracion.setHorizontalAlignment(SwingConstants.CENTER);
 		labelValoracion.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
@@ -222,11 +228,11 @@ public class Pantalla_Pelicula extends JFrame {
 		textValoracionMedia.setEditable(false);
 		textValoracionMedia.setColumns(10);
 		
-		JButton btnVerNetflix = new JButton("Ver en Netfilx");
+		btnVerNetflix = new JButton("Ver en Netfilx");
 		
-		JButton buttonComprarAmazon = new JButton("Comprar en Amazon");
+		buttonComprarAmazon = new JButton("Comprar en Amazon");
 		
-		JButton buttonComprarEntradas = new JButton("Comprar Entradas");
+		buttonComprarEntradas = new JButton("Comprar Entradas");
 		GroupLayout gl_panelAgregarDatos = new GroupLayout(panelAgregarDatos);
 		gl_panelAgregarDatos.setHorizontalGroup(
 			gl_panelAgregarDatos.createParallelGroup(Alignment.LEADING)

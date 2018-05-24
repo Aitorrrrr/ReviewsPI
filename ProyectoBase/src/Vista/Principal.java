@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -17,14 +18,22 @@ import javax.swing.SwingConstants;
 import javax.swing.JMenuItem;
 import javax.swing.ImageIcon;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import java.awt.Font;
 import javax.swing.JCheckBox;
 
 import controlador.Controlador;
+import modelo.Idioma;
+
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class Principal extends JFrame {
 
@@ -32,12 +41,8 @@ public class Principal extends JFrame {
 
 	private JMenuBar menuBar;
 	private JMenu menuUsuario;
-	private JMenu menuIdioma;
-	private JMenuItem menuIdiomaEsp;
-	private JMenuItem menuIdiomaEng;
 	
 	private JLabel logo2;
-	private JLabel bannerLateral;
 	
 	private JButton botonPaginaAnterior;
 	private JButton botonPaginaSiguiente;
@@ -78,46 +83,59 @@ public class Principal extends JFrame {
 	private boolean series;
 	
 	public Principal(Controlador c1) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/assets/ico.png")));
+		setTitle("REVIEWX");
+		Idioma idio = new Idioma();
 		cont=0;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1643, 912);
 		
 		menuBar = new JMenuBar();
+		menuBar.setForeground(Color.WHITE);
+		menuBar.setBackground(new Color(102, 0, 0));
 		setJMenuBar(menuBar);
 		
 		menuUsuario = new JMenu("[NOMBRE DE USUARIO AQUI]");
+		menuUsuario.setForeground(Color.WHITE);
 		menuBar.add(menuUsuario);
-		
-		menuIdioma = new JMenu("Idioma");
-		menuBar.add(menuIdioma);
-		
-		menuIdiomaEsp = new JMenuItem("Espa\u00F1ol");
-		menuIdiomaEsp.setIcon(new ImageIcon(Principal.class.getResource("/assets/esp.png")));
-		menuIdioma.add(menuIdiomaEsp);
-		
-		menuIdiomaEng = new JMenuItem("Ingles");
-		menuIdiomaEng.setIcon(new ImageIcon(Principal.class.getResource("/assets/eng.png")));
-		menuIdioma.add(menuIdiomaEng);
 		contenedorPrincipal = new JPanel();
+		contenedorPrincipal.setBackground(new Color(38, 38, 38));
 		contenedorPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedorPrincipal);
 		
 		JPanel contenedorMenu = new JPanel();
+		contenedorMenu.setBackground(new Color(38, 38, 38));
 		
 		JSeparator separador2 = new JSeparator();
 		separador2.setOrientation(SwingConstants.VERTICAL);
 		
 		JPanel contenedorReviews = new JPanel();
+		contenedorReviews.setBackground(new Color(38, 38, 38));
 		
 		logo2 = new JLabel("");
-		logo2.setIcon(new ImageIcon(Principal.class.getResource("/assets/placeholder2.png")));
+		
+		
+		
+		
+		 BufferedImage img = null;
+	        try {
+	            img = ImageIO.read(Login.class.getResource("/assets/logo.png"));
+	        } catch (IOException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+	        Image Dimg= img.getScaledInstance(210, 150, Image.SCALE_SMOOTH);
+	        ImageIcon iIcon= new ImageIcon(Dimg);
+	        logo2.setHorizontalAlignment(SwingConstants.CENTER);
+	        logo2.setIcon(iIcon);
+		
+		
+		
+		
 		
 		JSeparator separador1 = new JSeparator();
 		separador1.setOrientation(SwingConstants.VERTICAL);
-		
-		bannerLateral = new JLabel("");
-		bannerLateral.setIcon(new ImageIcon(Principal.class.getResource("/assets/placeholder3.png")));
 		GroupLayout gl_contenedorPrincipal = new GroupLayout(contenedorPrincipal);
 		gl_contenedorPrincipal.setHorizontalGroup(
 			gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
@@ -130,46 +148,47 @@ public class Principal extends JFrame {
 							.addComponent(logo2)))
 					.addGap(59)
 					.addComponent(separador2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(31)
+					.addGap(84)
 					.addComponent(contenedorReviews, GroupLayout.PREFERRED_SIZE, 1041, GroupLayout.PREFERRED_SIZE)
-					.addGap(9)
+					.addPreferredGap(ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
 					.addComponent(separador1, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(bannerLateral, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-					.addGap(14))
+					.addGap(23))
 		);
 		gl_contenedorPrincipal.setVerticalGroup(
 			gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-					.addComponent(contenedorReviews, GroupLayout.PREFERRED_SIZE, 817, GroupLayout.PREFERRED_SIZE)
-					.addGap(51))
-				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(contenedorMenu, GroupLayout.PREFERRED_SIZE, 554, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(logo2))
-				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-					.addGap(30)
-					.addComponent(separador2, GroupLayout.PREFERRED_SIZE, 762, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-					.addGap(33)
-					.addComponent(separador1, GroupLayout.PREFERRED_SIZE, 762, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(bannerLateral, GroupLayout.PREFERRED_SIZE, 836, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contenedorPrincipal.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(contenedorMenu, GroupLayout.PREFERRED_SIZE, 554, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(logo2))
+						.addGroup(gl_contenedorPrincipal.createSequentialGroup()
+							.addGap(30)
+							.addComponent(separador1, GroupLayout.PREFERRED_SIZE, 762, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contenedorPrincipal.createSequentialGroup()
+							.addGap(30)
+							.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
+								.addComponent(contenedorReviews, GroupLayout.PREFERRED_SIZE, 817, GroupLayout.PREFERRED_SIZE)
+								.addComponent(separador2, GroupLayout.PREFERRED_SIZE, 762, GroupLayout.PREFERRED_SIZE))))
+					.addGap(21))
 		);
 		
 		JPanel contenedorReview1 = new JPanel();
+		contenedorReview1.setBackground(new Color(38, 38, 38));
 		
 		JSeparator separadorReviews2 = new JSeparator();
 		
-		botonPaginaAnterior = new JButton("<- Pagina Anterior");
+		botonPaginaAnterior = new JButton(idio.traduz("button_previousPage"));
+		botonPaginaAnterior.setBackground(Color.WHITE);
 		
 		botonPaginaSiguiente = new JButton("Pagina Siguiente ->");
+		botonPaginaSiguiente.setBackground(Color.WHITE);
 		
 		JSeparator separadorReviews1 = new JSeparator();
 		
 		JPanel contenedorReview2 = new JPanel();
+		contenedorReview2.setBackground(new Color(38, 38, 38));
 		
 		imagenReview1 = new JLabel("");
 		imagenReview1.setIcon(new ImageIcon(Principal.class.getResource("/assets/poster_placeholder.png")));
@@ -178,28 +197,35 @@ public class Principal extends JFrame {
 		JSeparator SeparadorRev1 = new JSeparator();
 		SeparadorRev1.setOrientation(SwingConstants.VERTICAL);
 		
-		lblSinopsisReview1 = new JLabel("SINOPSIS");
+		lblSinopsisReview1 = new JLabel(idio.traduz("synopsis"));
+		lblSinopsisReview1.setForeground(Color.WHITE);
 		lblSinopsisReview1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSinopsisReview1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		campoSinopsisAbajo = new JTextField();
+		campoSinopsisAbajo.setBackground(Color.WHITE);
 		campoSinopsisAbajo.setEditable(false);
 		campoSinopsisAbajo.setColumns(10);
 		
-		lblTituloReview1 = new JLabel("TITULO");
+		lblTituloReview1 = new JLabel("<TITULO>");
+		lblTituloReview1.setForeground(Color.WHITE);
 		lblTituloReview1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloReview1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		campoPuntuacionReview1 = new JTextField();
+		campoPuntuacionReview1.setForeground(Color.WHITE);
+		campoPuntuacionReview1.setBackground(new Color(38, 38, 38));
 		campoPuntuacionReview1.setText("10/10");
 		campoPuntuacionReview1.setHorizontalAlignment(SwingConstants.CENTER);
 		campoPuntuacionReview1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		campoPuntuacionReview1.setEditable(false);
 		campoPuntuacionReview1.setColumns(10);
 		
-		botonVerReviews1 = new JButton("Ver Reviews");
+		botonVerReviews1 = new JButton(idio.traduz("button_seeReview"));
+		botonVerReviews1.setBackground(Color.WHITE);
 		
-		botonHacerReviews1 = new JButton("Hacer Review");
+		botonHacerReviews1 = new JButton(idio.traduz("button_newReview"));
+		botonHacerReviews1.setBackground(Color.WHITE);
 		GroupLayout gl_contenedorReview2 = new GroupLayout(contenedorReview2);
 		gl_contenedorReview2.setHorizontalGroup(
 			gl_contenedorReview2.createParallelGroup(Alignment.TRAILING)
@@ -262,17 +288,17 @@ public class Principal extends JFrame {
 		contenedorReview2.setLayout(gl_contenedorReview2);
 		GroupLayout gl_contenedorReviews = new GroupLayout(contenedorReviews);
 		gl_contenedorReviews.setHorizontalGroup(
-			gl_contenedorReviews.createParallelGroup(Alignment.TRAILING)
+			gl_contenedorReviews.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contenedorReviews.createSequentialGroup()
-					.addContainerGap(31, Short.MAX_VALUE)
-					.addGroup(gl_contenedorReviews.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contenedorReviews.createSequentialGroup()
+					.addContainerGap(38, Short.MAX_VALUE)
+					.addGroup(gl_contenedorReviews.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(Alignment.TRAILING, gl_contenedorReviews.createSequentialGroup()
 							.addComponent(botonPaginaAnterior)
-							.addPreferredGap(ComponentPlacement.RELATED, 752, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(botonPaginaSiguiente))
 						.addComponent(separadorReviews1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 993, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_contenedorReviews.createSequentialGroup()
+				.addGroup(gl_contenedorReviews.createSequentialGroup()
 					.addGap(28)
 					.addGroup(gl_contenedorReviews.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contenedorReviews.createSequentialGroup()
@@ -297,8 +323,8 @@ public class Principal extends JFrame {
 					.addComponent(separadorReviews1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(gl_contenedorReviews.createParallelGroup(Alignment.BASELINE)
-						.addComponent(botonPaginaAnterior)
-						.addComponent(botonPaginaSiguiente))
+						.addComponent(botonPaginaSiguiente)
+						.addComponent(botonPaginaAnterior))
 					.addGap(27))
 		);
 		
@@ -306,7 +332,8 @@ public class Principal extends JFrame {
 		imagenReview2.setHorizontalAlignment(SwingConstants.CENTER);
 		imagenReview2.setIcon(new ImageIcon(Principal.class.getResource("/assets/poster_placeholder.png")));
 		
-		lblTitulo = new JLabel("TITULO");
+		lblTitulo = new JLabel("<TITULO>");
+		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
@@ -314,23 +341,29 @@ public class Principal extends JFrame {
 		SeparadorRev2.setOrientation(SwingConstants.VERTICAL);
 		
 		campoSinopsisArriba = new JTextField();
+		campoSinopsisArriba.setBackground(Color.WHITE);
 		campoSinopsisArriba.setEditable(false);
 		campoSinopsisArriba.setColumns(10);
 		
 		campoPuntuacionArriba = new JTextField();
+		campoPuntuacionArriba.setForeground(Color.WHITE);
+		campoPuntuacionArriba.setBackground(new Color(38, 38, 38));
 		campoPuntuacionArriba.setEditable(false);
 		campoPuntuacionArriba.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		campoPuntuacionArriba.setHorizontalAlignment(SwingConstants.CENTER);
 		campoPuntuacionArriba.setText("10/10");
 		campoPuntuacionArriba.setColumns(10);
 		
-		lblSinopsis = new JLabel("SINOPSIS");
+		lblSinopsis = new JLabel(idio.traduz("synopsis"));
+		lblSinopsis.setForeground(Color.WHITE);
 		lblSinopsis.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSinopsis.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		botonHacerReviews2 = new JButton("Hacer Review");
+		botonHacerReviews2 = new JButton(idio.traduz("button_newReview"));
+		botonHacerReviews2.setBackground(Color.WHITE);
 		
-		botonVerReviews2 = new JButton("Ver Reviews");
+		botonVerReviews2 = new JButton(idio.traduz("button_seeReview"));
+		botonVerReviews2.setBackground(Color.WHITE);
 		GroupLayout gl_contenedorReview1 = new GroupLayout(contenedorReview1);
 		gl_contenedorReview1.setHorizontalGroup(
 			gl_contenedorReview1.createParallelGroup(Alignment.TRAILING)
@@ -392,26 +425,32 @@ public class Principal extends JFrame {
 		contenedorReviews.setLayout(gl_contenedorReviews);
 		
 		JPanel contenedorBusqueda = new JPanel();
+		contenedorBusqueda.setBackground(new Color(38, 38, 38));
 		
 		JSeparator separadorMenu1 = new JSeparator();
 		
 		JPanel contenedorCategorias = new JPanel();
+		contenedorCategorias.setBackground(new Color(38, 38, 38));
 		
-		lblCategorias = new JLabel("Categorias");
+		lblCategorias = new JLabel(idio.traduz("categories"));
+		lblCategorias.setForeground(Color.WHITE);
 		lblCategorias.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCategorias.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		
-		lblGeneros = new JLabel("Generos");
+		lblGeneros = new JLabel(idio.traduz("genres"));
+		lblGeneros.setForeground(Color.WHITE);
 		lblGeneros.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGeneros.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		
 		JPanel contenedorGeneros = new JPanel();
+		contenedorGeneros.setBackground(new Color(38, 38, 38));
 		
 		JSeparator separadorMenu2 = new JSeparator();
 		
 		JSeparator separadorMenu3 = new JSeparator();
 		
-		lblBuscar = new JLabel("Buscar");
+		lblBuscar = new JLabel(idio.traduz("search"));
+		lblBuscar.setForeground(Color.WHITE);
 		lblBuscar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBuscar.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		GroupLayout gl_contenedorMenu = new GroupLayout(contenedorMenu);
@@ -459,7 +498,10 @@ public class Principal extends JFrame {
 		);
 		contenedorGeneros.setLayout(new GridLayout(4, 2, 0, 0));
 		
-		genero1 = new JCheckBox("New check box");
+		genero1 = new JCheckBox(idio.traduz("gen_action"));
+		genero1.setForeground(Color.WHITE);
+		genero1.setBackground(new Color(38, 38, 38));
+		genero1.setHorizontalAlignment(SwingConstants.CENTER);
 		genero1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (genero1.isSelected())
@@ -479,7 +521,10 @@ public class Principal extends JFrame {
 		genero1.setEnabled(false);
 		contenedorGeneros.add(genero1);
 		
-		genero2 = new JCheckBox("New check box");
+		genero2 = new JCheckBox(idio.traduz("gen_horror"));
+		genero2.setForeground(Color.WHITE);
+		genero2.setBackground(new Color(38, 38, 38));
+		genero2.setHorizontalAlignment(SwingConstants.CENTER);
 		genero2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (genero2.isSelected())
@@ -499,7 +544,10 @@ public class Principal extends JFrame {
 		genero2.setEnabled(false);
 		contenedorGeneros.add(genero2);
 		
-		genero3 = new JCheckBox("New check box");
+		genero3 = new JCheckBox(idio.traduz("gen_comedy"));
+		genero3.setForeground(Color.WHITE);
+		genero3.setBackground(new Color(38, 38, 38));
+		genero3.setHorizontalAlignment(SwingConstants.CENTER);
 		genero3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (genero3.isSelected())
@@ -519,7 +567,10 @@ public class Principal extends JFrame {
 		genero3.setEnabled(false);
 		contenedorGeneros.add(genero3);
 		
-		genero4 = new JCheckBox("New check box");
+		genero4 = new JCheckBox(idio.traduz("gen_scienceFiction"));
+		genero4.setForeground(Color.WHITE);
+		genero4.setBackground(new Color(38, 38, 38));
+		genero4.setHorizontalAlignment(SwingConstants.CENTER);
 		genero4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (genero4.isSelected())
@@ -538,11 +589,12 @@ public class Principal extends JFrame {
 		});
 		genero4.setEnabled(false);
 		contenedorGeneros.add(genero4);
-		contenedorCategorias.setLayout(new GridLayout(4, 0, 0, 0));
+		contenedorCategorias.setLayout(new GridLayout(2, 0, 0, 0));
 		
-		c1.ponerGeneros(genero1, genero2, genero3, genero4);
 		
-		botonCateg1 = new JButton("Peliculas");
+		
+		botonCateg1 = new JButton(idio.traduz("button_movies"));
+		botonCateg1.setBackground(Color.WHITE);
 		botonCateg1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				genero1.setEnabled(true);
@@ -563,7 +615,8 @@ public class Principal extends JFrame {
 		});
 		contenedorCategorias.add(botonCateg1);
 		
-		botonCateg2 = new JButton("Series");
+		botonCateg2 = new JButton(idio.traduz("button_shows"));
+		botonCateg2.setBackground(Color.WHITE);
 		botonCateg2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				genero1.setEnabled(true);
@@ -589,7 +642,9 @@ public class Principal extends JFrame {
 		contenedorBusqueda.add(campoBuscar);
 		campoBuscar.setColumns(10);
 		
-		botonBuscar = new JButton("Buscar");
+		botonBuscar = new JButton(idio.traduz("search"));
+		botonBuscar.setBackground(Color.WHITE);
+		botonBuscar.setForeground(Color.BLACK);
 		botonBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (peliculas==true)

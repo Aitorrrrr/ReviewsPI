@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -41,6 +42,8 @@ import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends JFrame {
 	
@@ -48,7 +51,6 @@ public class Login extends JFrame {
 
 	private JPanel contenedorPrincipal;
 	private JTextField campoNom;
-	private JTextField campoContra;
 	private JButton botonInicioSesion;
 	private JButton botonNuevoUsuario;
 	private JButton botonRecuperarPassword;
@@ -57,10 +59,19 @@ public class Login extends JFrame {
 	
 	private Controlador c1;
 	private boolean conectado;
+	private JPasswordField campoContra;
+	
+	UIManager UI=new UIManager();
+	
+	
 	
 
 	public Login() {
 		c1=new Controlador();
+		
+		 UI.put("OptionPane.background", new Color(38, 38, 38));
+		 UI.put("Panel.background", new Color(38, 38, 38));
+		 UI.put("OptionPane.messageForeground", Color.white);
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/assets/ico.png")));
 		setTitle("REVIEWSX");
@@ -122,6 +133,7 @@ public class Login extends JFrame {
 		botonInicioSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				conectado=c1.primeraConex();
+				String pw=new String(campoContra.getPassword());
 				
 				if (conectado)
 				{
@@ -134,11 +146,12 @@ public class Login extends JFrame {
 				
 				if (campoNom.getText().equals("userpi"))
 				{
-					if (c1.getConexion().conectarAD(campoNom.getText(), campoContra.getText()))
+					if (c1.getConexion().conectarAD(campoNom.getText(), pw))
 					{
-						JOptionPane.showMessageDialog(Login.this, "Dentro");
+						JOptionPane.showMessageDialog(Login.this, idio.traduz("connection_succesfull"));
 						Principal p1=new Principal(c1);
 						p1.setVisible(true);
+						p1.setExtendedState(p1.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 						Login.this.dispose();
 					}
 					else
@@ -148,11 +161,12 @@ public class Login extends JFrame {
 				}
 				else
 				{
-					if (c1.loginUser(campoNom.getText(), campoContra.getText()))
+					if (c1.loginUser(campoNom.getText(), pw))
 					{
-						JOptionPane.showMessageDialog(Login.this, "Dentro");
+						JOptionPane.showMessageDialog(Login.this, idio.traduz("connection_succesfull"));
 						Principal p1=new Principal(c1);
 						p1.setVisible(true);
+						p1.setExtendedState(p1.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 						Login.this.dispose();
 					}
 					else
@@ -249,9 +263,27 @@ public class Login extends JFrame {
 		Component horizontalStrut_6 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_6);
 		
-		campoContra = new JTextField();
+		campoContra = new JPasswordField();
+		campoContra.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(e.getKeyChar()==KeyEvent.VK_ENTER){
+					botonInicioSesion.doClick();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                //Do Nothing
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                //Do Nothing
+            }
+
+    });
 		contenedorCampos.add(campoContra);
-		campoContra.setColumns(10);
 		
 		Component horizontalStrut_7 = Box.createHorizontalStrut(20);
 		contenedorCampos.add(horizontalStrut_7);
