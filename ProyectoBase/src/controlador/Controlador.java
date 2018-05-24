@@ -193,10 +193,17 @@ public class Controlador {
 		this.desconectar();
 	}
 	
-	public void mostrarNombreApellidos(String id, JTextField nombreApellido)
+	public void mostrarNombreApellidos(String id, JTextField Nombre)
 	{
 		this.conectar();
-		this.comenbd.mostrarNombreApellidos(id, this.cbd, nombreApellido);
+		this.comenbd.mostrarNombre(id, this.cbd, Nombre);
+		this.desconectar();
+	}
+	
+	public void mostrarApellidos(String id, JTextField Apellido)
+	{
+		this.conectar();
+		this.comenbd.mostrarApellido(id, this.cbd, Apellido);
 		this.desconectar();
 	}
 	

@@ -1,7 +1,6 @@
 package modelo;
 
 import java.sql.*;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -32,6 +31,25 @@ public class ReviewBD {
 			titulo.setText(rs.getString(1));
 			sinopsis.setText(rs.getString(2));
 			valmedia.setText(rs.getString(3));
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void mostrarComentarios(ConexionBD cbd1, JTextField comentarios, String idReview)
+	{
+		ResultSet rs;
+		try
+		{
+			state=cbd1.getConexion().createStatement();
+			String sql="Select texto from comentario where idReview='"+idReview+"'";
+			rs=state.executeQuery(sql);
+			while (rs.next())
+			{
+				comentarios.setText(comentarios.getText()+rs.getString(1)+"\n\n");
+			}
 		}
 		catch (SQLException sqle)
 		{
