@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS juego (
 
 CREATE TABLE IF NOT EXISTS serie (
   idReview int(11) NOT NULL,
-  temporadas varchar(45) NOT NULL,
-  dura_cap varchar(45) NOT NULL,
+  temporadas int(2) NOT NULL,
+  dura_cap int(4) NOT NULL,
   productora varchar(45) NOT NULL,
   idGen int (11) NOT NULL,
   PRIMARY KEY (`idReview`),

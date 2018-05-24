@@ -35,11 +35,11 @@ idGen int (11) NOT NULL,
 Nombre varchar (45) NOT NULL,
 PRIMARY KEY (idGen));
 
-CREATE TABLE IF NOT EXISTS libro (
+CREATE TABLE IF NOT EXISTS serie (
   idReview int(11) NOT NULL,
-  autor varchar(45) NOT NULL,
-  editorial varchar(45) NOT NULL,
-  paginas int(11) NOT NULL,
+  temporadas int(2) NOT NULL,
+  dura_cap int(4) NOT NULL,
+  productora varchar(45) NOT NULL,
   idGen int (11) NOT NULL,
   PRIMARY KEY (`idReview`),
   FOREIGN KEY (idReview) REFERENCES review (idReview),
@@ -51,7 +51,6 @@ CREATE TABLE IF NOT EXISTS pelicula (
   director varchar(45) NOT NULL,
   productora varchar(45) NOT NULL,
   duracion int(11) NOT NULL,
-  fecha_estreno date NOT NULL,
   idGen int (11) NOT NULL,
   PRIMARY KEY (`idReview`),
   FOREIGN KEY (idReview) REFERENCES review (idReview),

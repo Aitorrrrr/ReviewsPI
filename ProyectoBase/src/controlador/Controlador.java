@@ -17,8 +17,6 @@ public class Controlador {
 	private UsuarioBD ubd;
 	private ReviewBD rbd;
 	private comentarioBD comenbd;
-	private SerieBD sbd;
-	private Pelicula pbd;
 	private GeneroBD gbd;
 	private PeliculaBD pelibd;
 	private SerieBD seriebd;
@@ -31,10 +29,23 @@ public class Controlador {
 		this.rbd=new ReviewBD();
 		this.comenbd=new comentarioBD();
 		this.gbd=new GeneroBD();
-		this.user=new Usuario(1, "Homer");
 		this.pelibd=new PeliculaBD();
+		this.seriebd=new SerieBD();
 	}
 	
+	/**
+	 * Guardamos datos del User que loguea en la aplicación
+	 * 
+	 * @param id 
+	 * @param Alias
+	 */
+	public void userLogged(int id, String Alias)
+	{
+		this.user=new Usuario(id, Alias);
+	}
+	
+	
+	//Métodos para manejar la conexión
 	public boolean conectar()
 	{
 		if (this.cbd.conectar())
@@ -74,6 +85,13 @@ public class Controlador {
 		}
 	}
 	
+	public ConexionBD getConexion() {
+		return this.cbd;
+	}
+	
+	
+	
+	//Métodos para manejar UsuarioBD
 	public boolean loginUser(String alias, String pw)
 	{
 		this.conectar();
@@ -83,49 +101,6 @@ public class Controlador {
 		return correcto;
 	}
 	
-	public UsuarioBD getUser() {
-		return this.ubd;
-	}
-	
-	public ConexionBD getConexion() {
-		return this.cbd;
-	}
-	
-	public void buscarComentario(String id, JTextArea jarea)
-	{
-		this.conectar();
-		this.comenbd.MostrarComentariosUsuario(id, this.cbd, jarea);
-		this.desconectar();
-	}
-
-	public void ponerGeneros(JCheckBox j1, JCheckBox j2, JCheckBox j3, JCheckBox j4)
-	{
-		this.conectar();
-		this.gbd.ponerGeneros(cbd, j1, j2, j3, j4);
-		this.desconectar();
-	}
-	
-	public void buscarReview(String tit, JLabel j1, JTextField j2, JTextField j3) 
-	{
-		this.conectar();
-		rbd.buscarReview(cbd, tit, j1, j2, j3);
-		this.desconectar();
-	}
-	
-	public void buscarPelicula(String tit, JLabel j1, JTextField j2, JTextField j3) 
-	{
-		this.conectar();
-		this.pelibd.buscarPelicula(cbd, tit, j1, j2, j3);
-		this.desconectar();
-	}
-	
-	public void buscarSerie(String tit, JLabel j1, JTextField j2, JTextField j3) 
-	{
-		this.conectar();
-		this.seriebd.buscarSerie(cbd, tit, j1, j2, j3);
-		this.desconectar();
-	}
-	
 	public void datosUser(JTextField alias, JTextField nombre, JTextField apell, JTextField email, JComboBox genero)
 	{
 		this.conectar();
@@ -133,6 +108,22 @@ public class Controlador {
 		this.desconectar();
 	}
 	
+	public UsuarioBD getUser() {
+		return this.ubd;
+	}
+	
+	public int obtenerIdUser(String alias)
+	{
+		int idUser;
+		
+		this.conectar();
+		idUser=this.ubd.obteneridUser(cbd, alias);
+		this.desconectar();
+		
+		return idUser;
+	}
+	
+	//Actualizaciones UsuarioBD
 	public void actualizarAlias(String alias)
 	{
 		this.conectar();
@@ -168,62 +159,13 @@ public class Controlador {
 		this.desconectar();
 	}
 	
-	public void insertarReview(ConexionBD cbd,int idReview, String autor, int idUser, String Titulo)
-	{
-		this.conectar();
-		
-		this.desconectar();
-	}
 	
-	public void MostrarNombreUsuario(String id, JTextField nombre)
-	{
-		this.conectar();
-		this.comenbd.MostrarNombreUsuario(id, this.cbd, nombre);
-		this.desconectar();
-	}
 	
-	public void MostrarEmail(String id, JTextField email)
+	//Métodos para manejar ComentarioBD
+	public void buscarComentario(String id, JTextArea jarea)
 	{
 		this.conectar();
-		this.comenbd.MostrarEmail(id, this.cbd, email);
-		this.desconectar();
-	}
-	
-	public void MostrarFechaNacimiento(String id, JTextField fechaNacimiento)
-	{
-		this.conectar();
-		this.comenbd.mostrarFechaNacimiento(id, this.cbd, fechaNacimiento);
-		this.desconectar();
-	}
-	
-	public void mostrarNombreApellidos(String id, JTextField Nombre)
-	{
-		this.conectar();
-		this.comenbd.mostrarNombre(id, this.cbd, Nombre);
-		this.desconectar();
-	}
-	
-	public void mostrarApellidos(String id, JTextField Apellido)
-	{
-		this.conectar();
-		this.comenbd.mostrarApellido(id, this.cbd, Apellido);
-		this.desconectar();
-	}
-	
-	public void Genero(String id, JTextField genero)
-	{
-		this.conectar();
-		this.comenbd.Genero(id, this.cbd, genero);
-		this.desconectar();
-	}
-	
-	public void insertarPelicula(String Titulo, String Sinopsis, String director, String productora, int duracion, int idGen)
-	{
-		int idrev;
-		
-		this.conectar();
-		idrev=this.rbd.insertarReview(this.user.getIdUser(), Titulo, Sinopsis, cbd);
-		this.pelibd.insertarPelis(idrev, director, productora, duracion, idGen, cbd);
+		this.comenbd.MostrarComentariosUsuario(id, this.cbd, jarea);
 		this.desconectar();
 	}
 	
@@ -236,5 +178,57 @@ public class Controlador {
 		this.desconectar();
 		
 		return id;
+	}
+
+	public void ponerGeneros(JCheckBox j1, JCheckBox j2, JCheckBox j3, JCheckBox j4)
+	{
+		this.conectar();
+		this.gbd.ponerGeneros(cbd, j1, j2, j3, j4);
+		this.desconectar();
+	}
+	
+	//Métodos para manejar Reviews BD
+	public void insertarPelicula(String Titulo, String Sinopsis, String director, String productora, int duracion, int idGen)
+	{
+		int idReview;
+		
+		this.conectar();
+		idReview=this.rbd.insertarReview(this.user.getIdUser(), Titulo, Sinopsis, cbd);
+		this.pelibd.insertarPelis(idReview, director, productora, duracion, idGen, cbd);
+		this.desconectar();
+	}
+	
+	public void insertarSerie(String titulo, String sinopsis, int temporadas, int duracion, String productora, int idGen)
+	{
+		int idReview;
+		
+		this.conectar();
+		idReview=this.rbd.insertarReview(this.user.getIdUser(), titulo, sinopsis, cbd);
+		this.seriebd.insertarSerie(idReview, temporadas, productora, duracion, idGen, cbd);
+		this.desconectar();
+	}
+	
+	public void buscarReview(String tit, JLabel j1, JTextField j2, JTextField j3) 
+	{
+		this.conectar();
+		rbd.buscarReview(cbd, tit, j1, j2, j3);
+		this.desconectar();
+	}
+	
+	
+	
+	//Métodos para buscar reviews?
+	public void buscarPelicula(String tit, JLabel j1, JTextField j2, JTextField j3) 
+	{
+		this.conectar();
+		this.pelibd.buscarPelicula(cbd, tit, j1, j2, j3);
+		this.desconectar();
+	}
+	
+	public void buscarSerie(String tit, JLabel j1, JTextField j2, JTextField j3) 
+	{
+		this.conectar();
+		this.seriebd.buscarSerie(cbd, tit, j1, j2, j3);
+		this.desconectar();
 	}
 }

@@ -133,6 +133,7 @@ public class Login extends JFrame {
 		botonInicioSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				conectado=c1.primeraConex();
+				
 				String pw=new String(campoContra.getPassword());
 				
 				if (conectado)
@@ -152,6 +153,9 @@ public class Login extends JFrame {
 						Principal p1=new Principal(c1);
 						p1.setVisible(true);
 						p1.setExtendedState(p1.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+						
+						c1.userLogged(c1.obtenerIdUser(campoNom.getText()), campoNom.getText());
+						
 						Login.this.dispose();
 					}
 					else
@@ -167,6 +171,9 @@ public class Login extends JFrame {
 						Principal p1=new Principal(c1);
 						p1.setVisible(true);
 						p1.setExtendedState(p1.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+						
+						c1.userLogged(c1.obtenerIdUser(campoNom.getText()), campoNom.getText());
+						
 						Login.this.dispose();
 					}
 					else

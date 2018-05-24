@@ -18,6 +18,8 @@ public class Principal {
 		c1.primeraConex();
 		c1.desconectar();
 		
+		c1.userLogged(1, "Homer");
+		
 		CrearReview cr1=new CrearReview(c1);
 		cr1.setVisible(true);
 	}

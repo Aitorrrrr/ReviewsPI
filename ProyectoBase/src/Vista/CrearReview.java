@@ -9,6 +9,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -26,6 +27,8 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CrearReview extends JFrame {
 
@@ -47,6 +50,7 @@ public class CrearReview extends JFrame {
 	private JButton btnCrearReview;
 	private JButton btnReestablecer;
 	private JComboBox comboGenero;
+	private JLabel lblGnero;
 
 	public CrearReview(Controlador c1) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -112,6 +116,60 @@ public class CrearReview extends JFrame {
 		lblTipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JComboBox comboTipo = new JComboBox();
+		comboTipo.addItem("");
+		comboTipo.addItem("Pelicula");
+		comboTipo.addItem("Serie");
+		comboTipo.setSelectedItem("");
+		
+		comboTipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comboTipo.getSelectedItem().toString().compareTo("Pelicula")==0)
+				{
+					lblDirector.setText("Director: ");
+					
+					textDirector.setVisible(true);
+					textDuracion.setVisible(true);
+					textProduc.setVisible(true);
+					comboGenero.setVisible(true);
+					
+					lblDirector.setVisible(true);
+					lblDuracin.setVisible(true);
+					lblProductora.setVisible(true);
+					lblGnero.setVisible(true);
+				}
+				else
+				{
+					if (comboTipo.getSelectedItem().toString().compareTo("Serie")==0)
+					{
+						lblDirector.setText("Temporadas: ");
+						lblDuracin.setText("Duración: ");
+						lblProductora.setText("Productora: ");
+						
+						textDirector.setVisible(true);
+						textDuracion.setVisible(true);
+						textProduc.setVisible(true);
+						comboGenero.setVisible(true);
+						
+						lblDirector.setVisible(true);
+						lblDuracin.setVisible(true);
+						lblProductora.setVisible(true);
+						lblGnero.setVisible(true);
+					}
+					else
+					{
+						textDirector.setVisible(false);
+						textDuracion.setVisible(false);
+						textProduc.setVisible(false);
+						comboGenero.setVisible(false);
+						
+						lblDirector.setVisible(false);
+						lblDuracin.setVisible(false);
+						lblProductora.setVisible(false);
+						lblGnero.setVisible(false);
+					}
+				}
+			}
+		});
 		
 		lblDirector = new JLabel("Director: ");
 		lblDirector.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -137,15 +195,58 @@ public class CrearReview extends JFrame {
 		btnCrearReview = new JButton("Crear Review");
 		btnCrearReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int duracion=Integer.parseInt(textDuracion.getText());
-				
-				c1.insertarPelicula(textTitulo.getText(), txtSinopsis.getText(), textDirector.getText(), textProduc.getText(), duracion, c1.buscarGenero(comboGenero.getSelectedItem().toString()));
+				if (camposRellenados(textTitulo.getText(), txtSinopsis.getText(), textDirector.getText(), textDuracion.getText(), textProduc.getText(), comboGenero.getSelectedItem().toString()))
+				{
+					if (comboTipo.getSelectedItem().toString().compareTo("Pelicula")==0)
+					{
+						if (comprobarDuracion(textDuracion.getText()))
+						{
+							int duracion=Integer.parseInt(textDuracion.getText());
+							
+							c1.insertarPelicula(textTitulo.getText(), txtSinopsis.getText(), textDirector.getText(), textProduc.getText(), duracion, c1.buscarGenero(comboGenero.getSelectedItem().toString()));
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(CrearReview.this, "El campo duración debe ser un número");
+						}
+					}
+					
+					if (comboTipo.getSelectedItem().toString().compareTo("Serie")==0)
+					{
+						if (comprobarDuracion(textDuracion.getText()) && comprobarTemporadas(textDirector.getText()))
+						{
+							int temporadas=Integer.parseInt(textDirector.getText());
+							int duracion=Integer.parseInt(textDuracion.getText());
+							
+							c1.insertarSerie(textTitulo.getText(), txtSinopsis.getText(), temporadas, duracion, textProduc.getText(), c1.buscarGenero(comboGenero.getSelectedItem().toString()));
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(CrearReview.this, "Los campos temporadas y duración deben ser un número");
+						}
+					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(CrearReview.this, "Rellene todos los campos");
+				}
 			}
 		});
 		
 		btnReestablecer = new JButton("Reestablecer");
+		btnReestablecer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textTitulo.setText(null);
+				txtSinopsis.setText(null);
+				comboTipo.setSelectedItem("");
+				textDirector.setText(null);
+				textDuracion.setText(null);
+				textProduc.setText(null);
+				comboGenero.setSelectedItem(null);
+			}
+		});
 		
-		JLabel lblGnero = new JLabel("G\u00E9nero:");
+		lblGnero = new JLabel("G\u00E9nero:");
 		lblGnero.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		comboGenero = new JComboBox();
@@ -156,7 +257,7 @@ public class CrearReview extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Pantalla_Pelicula pant=new Pantalla_Pelicula();
 				pant.setVisible(true);
-				dispose();
+				CrearReview.this.dispose();
 			}
 		});
 		GroupLayout gl_panelDatos = new GroupLayout(panelDatos);
@@ -165,10 +266,7 @@ public class CrearReview extends JFrame {
 				.addGroup(gl_panelDatos.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelDatos.createSequentialGroup()
-							.addComponent(comboTipo, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addComponent(txtSinopsis, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+						.addComponent(txtSinopsis)
 						.addGroup(gl_panelDatos.createSequentialGroup()
 							.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panelDatos.createSequentialGroup()
@@ -176,28 +274,7 @@ public class CrearReview extends JFrame {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(textTitulo, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE))
 								.addComponent(lblSinopsis))
-							.addContainerGap(99, Short.MAX_VALUE))
-						.addGroup(gl_panelDatos.createSequentialGroup()
-							.addComponent(lblTipo)
-							.addContainerGap(352, Short.MAX_VALUE))
-						.addGroup(gl_panelDatos.createSequentialGroup()
-							.addComponent(lblDirector)
-							.addContainerGap(317, Short.MAX_VALUE))
-						.addGroup(gl_panelDatos.createSequentialGroup()
-							.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_panelDatos.createSequentialGroup()
-									.addComponent(lblDuracin)
-									.addGap(18)
-									.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
-										.addComponent(textDirector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textDuracion)))
-								.addGroup(gl_panelDatos.createSequentialGroup()
-									.addComponent(lblProductora)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
-										.addComponent(comboGenero, 0, 146, Short.MAX_VALUE)
-										.addComponent(textProduc))))
-							.addContainerGap())
+							.addContainerGap(208, Short.MAX_VALUE))
 						.addGroup(gl_panelDatos.createSequentialGroup()
 							.addComponent(btnCrearReview)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -205,9 +282,25 @@ public class CrearReview extends JFrame {
 							.addGap(73)
 							.addComponent(btnVolver)
 							.addGap(24))
-						.addGroup(gl_panelDatos.createSequentialGroup()
-							.addComponent(lblGnero)
-							.addContainerGap(327, Short.MAX_VALUE))))
+						.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
+							.addComponent(comboTipo, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblTipo)
+							.addComponent(lblDirector)
+							.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblGnero)
+								.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(gl_panelDatos.createSequentialGroup()
+										.addComponent(lblDuracin)
+										.addGap(18)
+										.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
+											.addComponent(textDirector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(textDuracion)))
+									.addGroup(gl_panelDatos.createSequentialGroup()
+										.addComponent(lblProductora)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
+											.addComponent(comboGenero, 0, 146, Short.MAX_VALUE)
+											.addComponent(textProduc))))))))
 		);
 		gl_panelDatos.setVerticalGroup(
 			gl_panelDatos.createParallelGroup(Alignment.LEADING)
@@ -236,7 +329,7 @@ public class CrearReview extends JFrame {
 					.addGroup(gl_panelDatos.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblProductora)
 						.addComponent(textProduc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
 					.addGroup(gl_panelDatos.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblGnero)
 						.addComponent(comboGenero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -260,12 +353,60 @@ public class CrearReview extends JFrame {
 		
 		txtSinopsis.setLineWrap(true);
 		
-		comboTipo.addItem("Pelicula");
-		comboTipo.addItem("Serie");
+		textDirector.setVisible(false);
+		textDuracion.setVisible(false);
+		textProduc.setVisible(false);
+		comboGenero.setVisible(false);
 		
+		lblDirector.setVisible(false);
+		lblDuracin.setVisible(false);
+		lblProductora.setVisible(false);
+		lblGnero.setVisible(false);
+		
+		comboGenero.addItem("");
 		comboGenero.addItem("Acción");
 		comboGenero.addItem("Terror");
 		comboGenero.addItem("Comedia");
 		comboGenero.addItem("Ciencia Ficción");
+	}
+	
+	public boolean comprobarDuracion(String duracion)
+	{
+		try
+		{
+			int dur=Integer.parseInt(duracion);
+			return true;
+		}
+		catch (NumberFormatException nfe)
+		{
+			nfe.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean comprobarTemporadas(String temp)
+	{
+		try
+		{
+			int temporadas=Integer.parseInt(temp);
+			return true;
+		}
+		catch (NumberFormatException nfe)
+		{
+			nfe.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean camposRellenados(String titulo, String sinopsis, String direc, String duracion, String productora, String genero)
+	{
+		if (titulo.length()>0 && sinopsis.length()>0 && direc.length()>0 && duracion.length()>0 && productora.length()>0 && genero.length()>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

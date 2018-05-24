@@ -34,30 +34,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class ElegirIdioma extends JFrame {
 
 	private JPanel contentPane;
-	Idioma idio = new Idioma();
+	Idioma idio;
 	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ElegirIdioma frame = new ElegirIdioma();
-					frame.setVisible(true);
-					frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public ElegirIdioma() {
+		this.idio=new Idioma();
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ElegirIdioma.class.getResource("/assets/ico.png")));
 		setTitle("REVIEWX");
 		
@@ -154,7 +135,7 @@ public class ElegirIdioma extends JFrame {
 				Login log = new Login();
 				log.setVisible(true);
 				log.setExtendedState(log.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-				dispose();
+				ElegirIdioma.this.dispose();
 			}
 		});
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
@@ -174,7 +155,7 @@ public class ElegirIdioma extends JFrame {
 				Login log = new Login();
 				log.setVisible(true);
 				log.setExtendedState(log.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-				dispose();
+				ElegirIdioma.this.dispose();
 			}
 		});
 		lblEspaol.setIcon(new ImageIcon(ElegirIdioma.class.getResource("/assets/esp.png")));

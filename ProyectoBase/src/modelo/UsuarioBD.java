@@ -33,14 +33,12 @@ public class UsuarioBD {
 			
 			st.execute();
 			
-			int insertado=st.getInt(7);
-			
-			return insertado;
+			return st.getInt(7);
 		}
 		catch (SQLException sqle)
 		{
 			sqle.printStackTrace();
-			return 0;
+			return -1;
 		}
 	}
 	
@@ -71,7 +69,7 @@ public class UsuarioBD {
 		catch (SQLException sqle)
 		{
 			sqle.printStackTrace();
-			return 0;
+			return -1;
 		}
 	}
 	
@@ -232,6 +230,29 @@ public class UsuarioBD {
 		else
 		{
 			return 0;
+		}
+	}
+	
+	public int obteneridUser(ConexionBD cbd, String alias)
+	{
+		ResultSet rs;
+		
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="SELECT idUser FROM usuario WHERE Alias='"+alias+"';";
+			
+			rs=state.executeQuery(sql);
+			
+			rs.next();
+			
+			return rs.getInt(1);
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+			return -1;
 		}
 	}
 }

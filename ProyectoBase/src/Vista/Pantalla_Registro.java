@@ -150,6 +150,9 @@ public class Pantalla_Registro extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Login l1=new Login();
+				l1.setVisible(true);
+				Pantalla_Registro.this.dispose();
 			}
 		});
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 18));
