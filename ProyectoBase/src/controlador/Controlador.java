@@ -16,15 +16,11 @@ public class Controlador {
 	private UsuarioBD ubd;
 	private ReviewBD rbd;
 	private comentarioBD comenbd;
-<<<<<<< HEAD
 	private SerieBD sbd;
 	private Pelicula pbd;
-	
-=======
 	private GeneroBD gbd;
 	private PeliculaBD pelibd;
 	private SerieBD seriebd;
->>>>>>> origin/master
 	
 	public Controlador()
 	{
@@ -170,7 +166,6 @@ public class Controlador {
 	public void insertarReview(ConexionBD cbd,int idReview, String autor, int idUser, String Titulo, double Valmedia)
 	{
 		this.conectar();
-		this.comenbd.insertarReview(idReview, this.cbd, autor,idUser,Titulo,Valmedia);
 		this.desconectar();
 	}
 	

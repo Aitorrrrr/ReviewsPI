@@ -33,25 +33,6 @@ public class CrearReview extends JFrame {
 	private JButton buttonReestablecer;
 	private JScrollPane scrollPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CrearReview frame = new CrearReview();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public CrearReview(Controlador c1) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -67,7 +48,6 @@ public class CrearReview extends JFrame {
 		btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				c1.
 			}
 		});
 		btnCrear.setFont(new Font("Tahoma", Font.BOLD, 18));
