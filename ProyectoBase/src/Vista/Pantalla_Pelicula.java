@@ -85,8 +85,6 @@ public class Pantalla_Pelicula extends JFrame {
 		btnCrearReview = new JButton("Crear Review");
 		btnCrearReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CrearReview CR=new CrearReview();
-				CR.setVisible(true);
 			}
 		});
 		btnCrearReview.setFont(new Font("Tahoma", Font.BOLD, 20));

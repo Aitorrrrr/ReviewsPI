@@ -16,6 +16,8 @@ public class Controlador {
 	private UsuarioBD ubd;
 	private ReviewBD rbd;
 	private comentarioBD comenbd;
+	private SerieBD sbd;
+	private Pelicula pbd;
 	private GeneroBD gbd;
 	private PeliculaBD pelibd;
 	private SerieBD seriebd;
@@ -161,6 +163,15 @@ public class Controlador {
 		this.desconectar();
 	}
 	
+
+	public void insertarReview(ConexionBD cbd,int idReview, String autor, int idUser, String Titulo, double Valmedia)
+	{
+		this.conectar();
+		this.desconectar();
+	}
+	
+	
+
 	public void MostrarNombreUsuario(String id, JTextField nombre)
 	{
 		this.conectar();
@@ -195,4 +206,5 @@ public class Controlador {
 		this.comenbd.Genero(id, this.cbd, genero);
 		this.desconectar();
 	}
+
 }

@@ -1,0 +1,1 @@
+SELECT SUM(valoracion)/COUNT(valoracion) AS MEDIA FROM comentario c INNER JOIN review r ON c.idReview=r.idReview;

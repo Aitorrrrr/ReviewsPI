@@ -55,6 +55,8 @@ public class comentarioBD {
 		}
 	}
 	
+
+
 	public void MostrarNombreUsuario(String idUser, ConexionBD conbd3, JTextField nombre)
 	{
 		ResultSet rs3;
@@ -166,4 +168,19 @@ public class comentarioBD {
 		}
 	}
 	
+	public String insertarReview(int idReview, int idUser, String Titulo, String Sinopsis, int valoracion, String texto, ConexionBD conbd8) {
+		
+		ResultSet rs8;
+			try
+			{
+				state=conbd8.getConexion().createStatement();
+				String sql1="INSERT INTO review (idReview, idUser, Titulo, Sinopsis, Valmedia) values ('"+idReview+"','"+idUser+"', '"+Titulo+"', '"+Sinopsis+"', '"+valoracion+"')";
+			}
+			catch (SQLException sql1)
+			{
+				sql1.printStackTrace();
+				return null;
+			}
+			return texto;
+		}
 }
