@@ -38,7 +38,6 @@ public class ReviewBD {
 		}
 	}
 	
-<<<<<<< HEAD
 	public void mostrarComentarios(ConexionBD cbd1, JTextField comentarios, String idReview)
 	{
 		ResultSet rs;
@@ -57,7 +56,7 @@ public class ReviewBD {
 			sqle.printStackTrace();
 		}
 	}
-=======
+
 public String insertarReview(int idReview, int idUser, String Titulo, String Sinopsis, int valoracion, String texto, ConexionBD conbd8) {
 		
 		ResultSet rs8;
@@ -73,5 +72,5 @@ public String insertarReview(int idReview, int idUser, String Titulo, String Sin
 			}
 			return texto;
 		}
->>>>>>> ac24869cede65f9843b5d7dd0c104a7b3bd0c624
+
 }
