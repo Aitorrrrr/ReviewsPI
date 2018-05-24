@@ -148,6 +148,10 @@ public class Pantalla_Registro extends JFrame {
 		buttonRestablecer.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GroupLayout gl_panelCondiciones = new GroupLayout(panelCondiciones);
 		gl_panelCondiciones.setHorizontalGroup(

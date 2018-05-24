@@ -410,14 +410,6 @@ public class Pantalla_Usuario extends JFrame {
 		
 		contentPane.setLayout(gl_contentPane);
 		
-<<<<<<< HEAD
-		c1.MostrarComentariosUsuario("1", textComentarios);
-		c1.MostrarNombreUsuario("1", textNombre);
-		c1.MostrarEmail("1", textEmail);
-		c1.MostrarFechaNacimiento("1", textFechaNacimiento);
-		c1.mostrarNombreApellidos("1", textNombreReal);
-		c1.Genero("1", textGenero);
-=======
 		btnEditarEmail = new JButton("Editar");
 		btnEditarEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -457,7 +449,7 @@ public class Pantalla_Usuario extends JFrame {
 		
 		c1.datosUser(textUser, textNombre, textApell, textEmail, comboGenero);
 		c1.buscarComentario("1", textComentarios);
->>>>>>> 9be92d25ae33a7aa7e84aaa5dd569b3ec34949b0
+
 	}
 	
 	public boolean comprobarEmail(String email)

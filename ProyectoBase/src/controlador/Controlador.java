@@ -90,12 +90,8 @@ public class Controlador {
 		this.comenbd.MostrarComentariosUsuario(id, this.cbd, jarea);
 		this.desconectar();
 	}
-	
-<<<<<<< HEAD
-	public void MostrarComentariosUsuario(String id, JTextArea jarea)
-=======
+
 	public void ponerGeneros(JCheckBox j1, JCheckBox j2, JCheckBox j3, JCheckBox j4)
->>>>>>> 9be92d25ae33a7aa7e84aaa5dd569b3ec34949b0
 	{
 		this.conectar();
 		this.gbd.ponerGeneros(cbd, j1, j2, j3, j4);
