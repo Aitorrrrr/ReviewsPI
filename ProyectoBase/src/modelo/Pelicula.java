@@ -9,7 +9,7 @@ public class Pelicula extends Review {
 	
 	public Pelicula(int idReview, String director, String productora, int duracion, genero idGen)
 	{
-		super(idReview);
+		super();
 		this.director=director;
 		this.productora=productora;
 		this.duracion=duracion;

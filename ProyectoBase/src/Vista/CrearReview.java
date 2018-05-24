@@ -34,18 +34,19 @@ public class CrearReview extends JFrame {
 	private JPanel panelDatos;
 	private JLabel lblCreacinReview;
 	private JLabel lblTitulo;
-	private JTextField textField;
+	private JTextField textTitulo;
 	private JLabel lblSinopsis;
-	private JTextArea txtrAreasinopsis;
+	private JTextArea txtSinopsis;
 	private JLabel lblTipo;
 	private JLabel lblDirector;
 	private JLabel lblDuracin;
 	private JLabel lblProductora;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textProduc;
+	private JTextField textDuracion;
+	private JTextField textDirector;
 	private JButton btnCrearReview;
 	private JButton btnReestablecer;
+	private JComboBox comboGenero;
 
 	public CrearReview(Controlador c1) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -98,19 +99,19 @@ public class CrearReview extends JFrame {
 		lblTitulo = new JLabel("Titulo: ");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField.setColumns(10);
+		textTitulo = new JTextField();
+		textTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textTitulo.setColumns(10);
 		
 		lblSinopsis = new JLabel("Sinopsis:");
 		lblSinopsis.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		txtrAreasinopsis = new JTextArea();
+		txtSinopsis = new JTextArea();
 		
 		lblTipo = new JLabel("Tipo");
 		lblTipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboTipo = new JComboBox();
 		
 		lblDirector = new JLabel("Director: ");
 		lblDirector.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -121,21 +122,43 @@ public class CrearReview extends JFrame {
 		lblProductora = new JLabel("Productora: ");
 		lblProductora.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_1.setColumns(10);
+		textProduc = new JTextField();
+		textProduc.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textProduc.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_2.setColumns(10);
+		textDuracion = new JTextField();
+		textDuracion.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textDuracion.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_3.setColumns(10);
+		textDirector = new JTextField();
+		textDirector.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textDirector.setColumns(10);
 		
 		btnCrearReview = new JButton("Crear Review");
+		btnCrearReview.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int duracion=Integer.parseInt(textDuracion.getText());
+				
+				c1.insertarPelicula(textTitulo.getText(), txtSinopsis.getText(), textDirector.getText(), textProduc.getText(), duracion, c1.buscarGenero(comboGenero.getSelectedItem().toString()));
+			}
+		});
 		
 		btnReestablecer = new JButton("Reestablecer");
+		
+		JLabel lblGnero = new JLabel("G\u00E9nero:");
+		lblGnero.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		comboGenero = new JComboBox();
+		comboGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Pantalla_Pelicula pant=new Pantalla_Pelicula();
+				pant.setVisible(true);
+				dispose();
+			}
+		});
 		GroupLayout gl_panelDatos = new GroupLayout(panelDatos);
 		gl_panelDatos.setHorizontalGroup(
 			gl_panelDatos.createParallelGroup(Alignment.LEADING)
@@ -143,15 +166,15 @@ public class CrearReview extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelDatos.createSequentialGroup()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+							.addComponent(comboTipo, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
-						.addComponent(txtrAreasinopsis, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+						.addComponent(txtSinopsis, GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
 						.addGroup(gl_panelDatos.createSequentialGroup()
 							.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panelDatos.createSequentialGroup()
 									.addComponent(lblTitulo)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE))
+									.addComponent(textTitulo, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE))
 								.addComponent(lblSinopsis))
 							.addContainerGap(99, Short.MAX_VALUE))
 						.addGroup(gl_panelDatos.createSequentialGroup()
@@ -161,23 +184,30 @@ public class CrearReview extends JFrame {
 							.addComponent(lblDirector)
 							.addContainerGap(317, Short.MAX_VALUE))
 						.addGroup(gl_panelDatos.createSequentialGroup()
-							.addGroup(gl_panelDatos.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(Alignment.LEADING, gl_panelDatos.createSequentialGroup()
-									.addComponent(lblProductora)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField_1))
-								.addGroup(Alignment.LEADING, gl_panelDatos.createSequentialGroup()
+							.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panelDatos.createSequentialGroup()
 									.addComponent(lblDuracin)
 									.addGap(18)
 									.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
-										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField_2))))
+										.addComponent(textDirector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textDuracion)))
+								.addGroup(gl_panelDatos.createSequentialGroup()
+									.addComponent(lblProductora)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
+										.addComponent(comboGenero, 0, 146, Short.MAX_VALUE)
+										.addComponent(textProduc))))
 							.addContainerGap())
 						.addGroup(gl_panelDatos.createSequentialGroup()
 							.addComponent(btnCrearReview)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnReestablecer)
-							.addContainerGap())))
+							.addGap(73)
+							.addComponent(btnVolver)
+							.addGap(24))
+						.addGroup(gl_panelDatos.createSequentialGroup()
+							.addComponent(lblGnero)
+							.addContainerGap(327, Short.MAX_VALUE))))
 		);
 		gl_panelDatos.setVerticalGroup(
 			gl_panelDatos.createParallelGroup(Alignment.LEADING)
@@ -185,32 +215,38 @@ public class CrearReview extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_panelDatos.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTitulo)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textTitulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblSinopsis)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtrAreasinopsis, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+					.addComponent(txtSinopsis, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblTipo)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(comboTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblDirector)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textDirector, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panelDatos.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblDuracin)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textDuracion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panelDatos.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblProductora)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+						.addComponent(textProduc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
 					.addGroup(gl_panelDatos.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnReestablecer)
+						.addComponent(lblGnero)
+						.addComponent(comboGenero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_panelDatos.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelDatos.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnReestablecer)
+							.addComponent(btnVolver))
 						.addComponent(btnCrearReview))
-					.addGap(32))
+					.addGap(25))
 		);
 		panelDatos.setLayout(gl_panelDatos);
 		panelTitulo.setLayout(new GridLayout(1, 0, 0, 0));
@@ -222,9 +258,14 @@ public class CrearReview extends JFrame {
 		PanelArriba.setLayout(gl_PanelArriba);
 		contentPane.setLayout(gl_contentPane);
 		
-		txtrAreasinopsis.setLineWrap(true);
+		txtSinopsis.setLineWrap(true);
 		
-		comboBox.addItem("Pelicula");
-		comboBox.addItem("Serie");
+		comboTipo.addItem("Pelicula");
+		comboTipo.addItem("Serie");
+		
+		comboGenero.addItem("Acción");
+		comboGenero.addItem("Terror");
+		comboGenero.addItem("Comedia");
+		comboGenero.addItem("Ciencia Ficción");
 	}
 }

@@ -12,7 +12,7 @@ public class Juego extends Review {
 	public Juego(int idReview, String Productora, int num_jug, generoJuego idGen)
 	{
 		
-		super(idReview);
+		super();
 		this.Productora=Productora;
 		this.num_jug=num_jug;
 		this.idGen=idGen;

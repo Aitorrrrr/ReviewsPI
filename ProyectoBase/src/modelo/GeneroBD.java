@@ -50,4 +50,28 @@ public class GeneroBD {
 			sqle.printStackTrace();
 		}
 	}
+	
+	public int buscarGeneros(ConexionBD cbd, String nomGen)
+	{
+		ResultSet rs;
+		
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="SELECT idGen FROM genero WHERE Nombre='"+nomGen+"';";
+			
+			rs=state.executeQuery(sql);
+			
+			rs.next();
+			
+			return rs.getInt(1);
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+			
+			return 0;
+		}
+	}
 }

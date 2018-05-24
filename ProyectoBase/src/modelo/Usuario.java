@@ -7,34 +7,30 @@ public class Usuario {
 	private String Alias;
 	private String Nombre;
 	private String  Apellido;
-	private Calendar fecha_inscrip;	
 	
 	public Usuario() {
 		
 	}
 	
-	public Usuario(int idUser, String Alias, String Nombre, String  Apellido, Calendar fecha_inscrip) {
+	public Usuario(int idUser, String Alias, String Nombre, String  Apellido) {
 		this.idUser=idUser;
 		this.Alias=Alias;
 		this.Nombre=Nombre;
 		this.Apellido=Apellido;
-		this.fecha_inscrip=Calendar.getInstance();
 	}
 	
-	public Usuario(int idUser, String Alias, Calendar fecha_inscrip) {
+	public Usuario(int idUser, String Alias) {
 		this.idUser=idUser;
 		this.Alias=Alias;
 		this.Nombre=Nombre;
 		this.Apellido=Apellido;
-		this.fecha_inscrip=Calendar.getInstance();
 	}
 	
-	public Usuario(int idUser, String Alias, String Nombre, Calendar fecha_inscrip) {
+	public Usuario(int idUser, String Alias, String Nombre) {
 		this.idUser=idUser;
 		this.Alias=Alias;
 		this.Nombre=Nombre;
 		this.Apellido=Apellido;
-		this.fecha_inscrip=Calendar.getInstance();
 	}
 
 	public int getIdUser() {
@@ -67,18 +63,5 @@ public class Usuario {
 
 	public void setApellido(String apellido) {
 		Apellido = apellido;
-	}
-
-	public Calendar getFecha_inscrip() {
-		return fecha_inscrip;
-	}
-
-	public void setFecha_inscrip(Calendar fecha_inscrip) {
-		this.fecha_inscrip = fecha_inscrip;
-	}
-	
-	
-	
-	
-	
+	}	
 }

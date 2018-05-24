@@ -55,7 +55,7 @@ public class PeliculaBD {
 			}
 			else
 			{
-				sql="INSERT INTO serie (idReview, director, productora, duracion, idGen) VALUES ('"+idReview+"', '"+titulo+"', '"+director+"', '"+productora+", '"+duracion+"', '"+idGen+"')";
+				sql="INSERT INTO pelicula (idReview, director, productora, duracion, idGen) VALUES ('"+idReview+"', '"+titulo+"', '"+director+"', '"+productora+", '"+duracion+"', "+idGen+")";
 				state.executeUpdate(sql);
 				
 				return 1;
@@ -68,20 +68,20 @@ public class PeliculaBD {
 		}
 	}
 	
-public String insertarPelis(int idReview, String director, String productora, int duracion, int idGen, ConexionBD conbd8, String texto) {
+	public void insertarPelis(int idReview, String director, String productora, int duracion, int idGen, ConexionBD conbd8) {
 		
 		ResultSet rs8;
 			try
 			{
 				state=conbd8.getConexion().createStatement();
-				String sql1="INSERT INTO  (idReview, idUser, Titulo, Sinopsis, Valmedia) values ('"+idReview+"','"+director+"', '"+productora+"', '"+duracion+"', '"+idGen+"')";
+				String sql1="INSERT INTO pelicula (idReview, director, productora, duracion, idGen) values ('"+idReview+"','"+director+"', '"+productora+"', '"+duracion+"', '"+idGen+"')";
+				
+				state.executeUpdate(sql1);
 			}
 			catch (SQLException sql1)
 			{
 				sql1.printStackTrace();
-				return null;
 			}
-			return texto;
 		}
 }
 

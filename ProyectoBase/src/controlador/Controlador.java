@@ -13,6 +13,7 @@ import modelo.*;
 public class Controlador {
 
 	private ConexionBD cbd;
+	
 	private UsuarioBD ubd;
 	private ReviewBD rbd;
 	private comentarioBD comenbd;
@@ -22,12 +23,16 @@ public class Controlador {
 	private PeliculaBD pelibd;
 	private SerieBD seriebd;
 	
+	private Usuario user;
+	
 	public Controlador()
 	{
 		this.ubd=new UsuarioBD();
 		this.rbd=new ReviewBD();
 		this.comenbd=new comentarioBD();
 		this.gbd=new GeneroBD();
+		this.user=new Usuario(1, "Homer");
+		this.pelibd=new PeliculaBD();
 	}
 	
 	public boolean conectar()
@@ -203,5 +208,26 @@ public class Controlador {
 		this.conectar();
 		this.comenbd.Genero(id, this.cbd, genero);
 		this.desconectar();
+	}
+	
+	public void insertarPelicula(String Titulo, String Sinopsis, String director, String productora, int duracion, int idGen)
+	{
+		int idrev;
+		
+		this.conectar();
+		idrev=this.rbd.insertarReview(this.user.getIdUser(), Titulo, Sinopsis, cbd);
+		this.pelibd.insertarPelis(idrev, director, productora, duracion, idGen, cbd);
+		this.desconectar();
+	}
+	
+	public int buscarGenero(String nomGen)
+	{
+		int id;
+		
+		this.conectar();
+		id=this.gbd.buscarGeneros(cbd, nomGen);
+		this.desconectar();
+		
+		return id;
 	}
 }

@@ -9,7 +9,7 @@ public class Libro extends Review{
 	
 	public Libro(int idReview, String autor,String editorial,int paginas,genero idGen)
 	{
-		super(idReview);
+		super();
 		this.autor=autor;
 		this.editorial=editorial;
 		this.paginas=paginas;

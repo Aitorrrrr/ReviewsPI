@@ -12,7 +12,7 @@ public class Serie extends Review {
 	public Serie(int idReview, String temporadas,String dura_cap,String productora, genero idGen)
 	{
 		
-		super(idReview);
+		super();
 		this.temporadas=temporadas;
 		this.dura_cap=dura_cap;
 		this.productora=productora;

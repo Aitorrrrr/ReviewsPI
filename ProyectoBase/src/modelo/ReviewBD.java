@@ -39,19 +39,28 @@ public class ReviewBD {
 		}
 	}
 	
-public String insertarReview(int idReview, int idUser, String Titulo, String Sinopsis, int valoracion, String texto, ConexionBD conbd8) {
+	public int insertarReview(int idUser, String Titulo, String Sinopsis, ConexionBD conbd8) {
 		
-		ResultSet rs8;
+		ResultSet rs;
 			try
 			{
 				state=conbd8.getConexion().createStatement();
-				String sql1="INSERT INTO review (idReview, idUser, Titulo, Sinopsis, Valmedia) values ('"+idReview+"','"+idUser+"', '"+Titulo+"', '"+Sinopsis+"', '"+valoracion+"')";
+				String sql1="INSERT INTO review (idUser, Titulo, Sinopsis) values ('"+idUser+"', '"+Titulo+"', '"+Sinopsis+"')";
+				
+				state.executeUpdate(sql1);
+				
+				sql1="SELECT idReview FROM review WHERE Titulo='"+Titulo+"' && idUser='"+idUser+"'";
+				
+				rs=state.executeQuery(sql1);
+				
+				rs.next();
+				
+				return rs.getInt(1);
 			}
 			catch (SQLException sql1)
 			{
 				sql1.printStackTrace();
-				return null;
+				return 0;
 			}
-			return texto;
-		}
+	}
 }

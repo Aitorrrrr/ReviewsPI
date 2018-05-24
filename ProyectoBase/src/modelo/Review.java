@@ -10,18 +10,9 @@ public class Review {
 	
 
 	
-	public Review(int idReview)
+	public Review()
 	{
-		
-		
-		this.idReview=idReview;
-		this.Autor=Autor;
-		this.idUser=idUser;
-		this.Titulo=Titulo;
-		this.ValMedia=ValMedia;
-		
-		
-		
+
 	}
 
 	public int getIdReview() {
