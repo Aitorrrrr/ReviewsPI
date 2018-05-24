@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
 
 import controlador.Controlador;
+import modelo.Idioma;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -42,8 +43,11 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class Pantalla_Usuario extends JFrame {
+	
+	Idioma idio = new Idioma();
 
 	protected JPanel contentPane;
 	protected JPanel panelBiografia;
@@ -72,6 +76,9 @@ public class Pantalla_Usuario extends JFrame {
 	private JButton btnEditGenero;
 
 	public Pantalla_Usuario(Controlador c1) {
+		
+		setTitle("REVIEWX");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Pantalla_Usuario.class.getResource("/assets/ico.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 964, 621);
 		
@@ -82,6 +89,7 @@ public class Pantalla_Usuario extends JFrame {
 		mnNombreUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		menuBar.add(mnNombreUsuario);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(38, 38, 38));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
@@ -90,9 +98,11 @@ public class Pantalla_Usuario extends JFrame {
 		mnNombreUsuario.add("Salir...");
 		
 		panelBiografia = new JPanel();
+		panelBiografia.setBackground(new Color(38, 38, 38));
 		panelBiografia.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		panelComentarios = new JPanel();
+		panelComentarios.setBackground(new Color(38, 38, 38));
 		panelComentarios.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -114,6 +124,7 @@ public class Pantalla_Usuario extends JFrame {
 		);
 		
 		panelPublicaciones = new JPanel();
+		panelPublicaciones.setBackground(new Color(38, 38, 38));
 		panelPublicaciones.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 51, 0), new Color(255, 51, 0)));
 		
 		panelComents = new JPanel();
@@ -148,7 +159,9 @@ public class Pantalla_Usuario extends JFrame {
 		scrollComentarios.setViewportView(textComentarios);
 		panelPublicaciones.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		lblUltimasPublicaciones = new JLabel("Ultimas Publicaciones: ");
+		lblUltimasPublicaciones = new JLabel(idio.traduz("latest_posts"));
+		lblUltimasPublicaciones.setForeground(Color.WHITE);
+		lblUltimasPublicaciones.setBackground(new Color(38, 38, 38));
 		lblUltimasPublicaciones.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		lblUltimasPublicaciones.setHorizontalAlignment(SwingConstants.CENTER);
 		panelPublicaciones.add(lblUltimasPublicaciones);
@@ -173,6 +186,7 @@ public class Pantalla_Usuario extends JFrame {
 		panelDatos.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		btnActuEmail = new JPanel();
+		btnActuEmail.setBackground(new Color(38, 38, 38));
 		GridBagLayout gbl_btnActuEmail = new GridBagLayout();
 		gbl_btnActuEmail.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_btnActuEmail.rowHeights = new int[]{33, 33, 33, 33, 33, 0};
@@ -180,7 +194,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbl_btnActuEmail.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		btnActuEmail.setLayout(gbl_btnActuEmail);
 		
-		JLabel lblNombreUsuario = new JLabel("Nombre Usuario: ");
+		JLabel lblNombreUsuario = new JLabel(idio.traduz("user_name2"));
+		lblNombreUsuario.setForeground(Color.WHITE);
 		lblNombreUsuario.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblNombreUsuario = new GridBagConstraints();
 		gbc_lblNombreUsuario.insets = new Insets(0, 0, 5, 5);
@@ -199,7 +214,8 @@ public class Pantalla_Usuario extends JFrame {
 		btnActuEmail.add(textUser, gbc_textUser);
 		textUser.setColumns(10);
 		
-		btnEditarUser = new JButton("Editar");
+		btnEditarUser = new JButton(idio.traduz("button_edit"));
+		btnEditarUser.setBackground(Color.WHITE);
 		btnEditarUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (textUser.isEditable())
@@ -218,7 +234,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_btnEditarUser.gridy = 0;
 		btnActuEmail.add(btnEditarUser, gbc_btnEditarUser);
 		
-		btnActualizarUser = new JButton("Actualizar");
+		btnActualizarUser = new JButton(idio.traduz("buton_update"));
+		btnActualizarUser.setBackground(Color.WHITE);
 		btnActualizarUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c1.actualizarAlias(textUser.getText());
@@ -230,7 +247,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_btnActualizarUser.gridy = 0;
 		btnActuEmail.add(btnActualizarUser, gbc_btnActualizarUser);
 		
-		JLabel lblNombreReal = new JLabel("Nombre Real:");
+		JLabel lblNombreReal = new JLabel(idio.traduz("real_name"));
+		lblNombreReal.setForeground(Color.WHITE);
 		lblNombreReal.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblNombreReal = new GridBagConstraints();
 		gbc_lblNombreReal.insets = new Insets(0, 0, 5, 5);
@@ -249,7 +267,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_textNombre.gridy = 1;
 		btnActuEmail.add(textNombre, gbc_textNombre);
 		
-		btnEditarNombre = new JButton("Editar");
+		btnEditarNombre = new JButton(idio.traduz("button_edit"));
+		btnEditarNombre.setBackground(Color.WHITE);
 		btnEditarNombre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textNombre.isEditable())
@@ -268,7 +287,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_btnEditarNombre.gridy = 1;
 		btnActuEmail.add(btnEditarNombre, gbc_btnEditarNombre);
 		
-		btnActuNombre = new JButton("Actualizar");
+		btnActuNombre = new JButton(idio.traduz("buton_update"));
+		btnActuNombre.setBackground(Color.WHITE);
 		btnActuNombre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c1.actualizarNombre(textNombre.getText());
@@ -280,7 +300,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_btnActuNombre.gridy = 1;
 		btnActuEmail.add(btnActuNombre, gbc_btnActuNombre);
 		
-		JLabel lblApellido = new JLabel("Apellido:");
+		JLabel lblApellido = new JLabel(idio.traduz("last_name"));
+		lblApellido.setForeground(Color.WHITE);
 		lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblApellido = new GridBagConstraints();
 		gbc_lblApellido.insets = new Insets(0, 0, 5, 5);
@@ -299,7 +320,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_textApell.gridy = 2;
 		btnActuEmail.add(textApell, gbc_textApell);
 		
-		btnEditarApell = new JButton("Editar");
+		btnEditarApell = new JButton(idio.traduz("button_edit"));
+		btnEditarApell.setBackground(Color.WHITE);
 		btnEditarApell.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textApell.isEditable())
@@ -318,7 +340,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_btnEditarApell.gridy = 2;
 		btnActuEmail.add(btnEditarApell, gbc_btnEditarApell);
 		
-		btnActuApell = new JButton("Actualizar");
+		btnActuApell = new JButton(idio.traduz("buton_update"));
+		btnActuApell.setBackground(Color.WHITE);
 		btnActuApell.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c1.actualizarApellido(textApell.getText());
@@ -330,7 +353,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_btnActuApell.gridy = 2;
 		btnActuEmail.add(btnActuApell, gbc_btnActuApell);
 		
-		JLabel lblGnero = new JLabel("G\u00E9nero: ");
+		JLabel lblGnero = new JLabel(idio.traduz("gender"));
+		lblGnero.setForeground(Color.WHITE);
 		lblGnero.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblGnero = new GridBagConstraints();
 		gbc_lblGnero.insets = new Insets(0, 0, 5, 5);
@@ -353,10 +377,11 @@ public class Pantalla_Usuario extends JFrame {
 		comboGenero.setEditable(false);
 		comboGenero.setEnabled(false);
 		
-		comboGenero.addItem("Hombre");
-		comboGenero.addItem("Mujer");
+		comboGenero.addItem(idio.traduz("male"));
+		comboGenero.addItem(idio.traduz("female"));
 		
-		btnEditGenero = new JButton("Editar");
+		btnEditGenero = new JButton(idio.traduz("button_edit"));
+		btnEditGenero.setBackground(Color.WHITE);
 		btnEditGenero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comboGenero.isEnabled())
@@ -375,7 +400,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_btnEditGenero.gridy = 3;
 		btnActuEmail.add(btnEditGenero, gbc_btnEditGenero);
 		
-		btnActuGenero = new JButton("Actualizar");
+		btnActuGenero = new JButton(idio.traduz("buton_update"));
+		btnActuGenero.setBackground(Color.WHITE);
 		btnActuGenero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				c1.actualizarGenero(sacarGenero(comboGenero.getSelectedItem().toString()));
@@ -388,6 +414,7 @@ public class Pantalla_Usuario extends JFrame {
 		btnActuEmail.add(btnActuGenero, gbc_btnActuGenero);
 		
 		JLabel lblEmail = new JLabel("Email: ");
+		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.insets = new Insets(0, 0, 0, 5);
@@ -410,7 +437,8 @@ public class Pantalla_Usuario extends JFrame {
 		
 		contentPane.setLayout(gl_contentPane);
 		
-		btnEditarEmail = new JButton("Editar");
+		btnEditarEmail = new JButton(idio.traduz("button_edit"));
+		btnEditarEmail.setBackground(Color.WHITE);
 		btnEditarEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textEmail.isEditable())
@@ -429,7 +457,8 @@ public class Pantalla_Usuario extends JFrame {
 		gbc_btnEditarEmail.gridy = 4;
 		btnActuEmail.add(btnEditarEmail, gbc_btnEditarEmail);
 		
-		button_3 = new JButton("Actualizar");
+		button_3 = new JButton(idio.traduz("buton_update"));
+		button_3.setBackground(Color.WHITE);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comprobarEmail(textEmail.getText()))
