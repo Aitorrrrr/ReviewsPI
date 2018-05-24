@@ -84,10 +84,45 @@ public class Controlador {
 		this.desconectar();
 	}
 	
-	public void buscarComentario(String id, JTextArea jarea)
+	public void MostrarComentariosUsuario(String id, JTextArea jarea)
 	{
 		this.conectar();
 		this.comenbd.MostrarComentariosUsuario(id, this.cbd, jarea);
+		this.desconectar();
+	}
+	
+	public void MostrarNombreUsuario(String id, JTextField nombre)
+	{
+		this.conectar();
+		this.comenbd.MostrarNombreUsuario(id, this.cbd, nombre);
+		this.desconectar();
+	}
+	
+	public void MostrarEmail(String id, JTextField email)
+	{
+		this.conectar();
+		this.comenbd.MostrarEmail(id, this.cbd, email);
+		this.desconectar();
+	}
+	
+	public void MostrarFechaNacimiento(String id, JTextField fechaNacimiento)
+	{
+		this.conectar();
+		this.comenbd.mostrarFechaNacimiento(id, this.cbd, fechaNacimiento);
+		this.desconectar();
+	}
+	
+	public void mostrarNombreApellidos(String id, JTextField nombreApellido)
+	{
+		this.conectar();
+		this.comenbd.mostrarNombreApellidos(id, this.cbd, nombreApellido);
+		this.desconectar();
+	}
+	
+	public void Genero(String id, JTextField genero)
+	{
+		this.conectar();
+		this.comenbd.Genero(id, this.cbd, genero);
 		this.desconectar();
 	}
 }

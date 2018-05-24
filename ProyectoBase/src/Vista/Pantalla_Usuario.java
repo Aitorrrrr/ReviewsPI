@@ -220,6 +220,11 @@ public class Pantalla_Usuario extends JFrame {
 		
 		contentPane.setLayout(gl_contentPane);
 		
-		c1.buscarComentario("1", textComentarios);
+		c1.MostrarComentariosUsuario("1", textComentarios);
+		c1.MostrarNombreUsuario("1", textNombre);
+		c1.MostrarEmail("1", textEmail);
+		c1.MostrarFechaNacimiento("1", textFechaNacimiento);
+		c1.mostrarNombreApellidos("1", textNombreReal);
+		c1.Genero("1", textGenero);
 	}
 }
