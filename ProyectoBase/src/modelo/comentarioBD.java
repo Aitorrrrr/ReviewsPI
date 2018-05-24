@@ -55,8 +55,6 @@ public class comentarioBD {
 		}
 	}
 	
-
-
 	public void MostrarNombreUsuario(String idUser, ConexionBD conbd3, JTextField nombre)
 	{
 		ResultSet rs3;
