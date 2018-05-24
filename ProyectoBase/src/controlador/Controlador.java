@@ -3,6 +3,7 @@ package controlador;
 import java.sql.SQLException;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -115,6 +116,48 @@ public class Controlador {
 	{
 		this.conectar();
 		this.seriebd.buscarSerie(cbd, tit, j1, j2, j3);
+		this.desconectar();
+	}
+	
+	public void datosUser(JTextField alias, JTextField nombre, JTextField apell, JTextField email, JComboBox genero)
+	{
+		this.conectar();
+		this.ubd.datosUser(cbd, 1, alias, nombre, apell, email, genero);
+		this.desconectar();
+	}
+	
+	public void actualizarAlias(String alias)
+	{
+		this.conectar();
+		this.ubd.actualizarAlias(cbd, 1, alias);
+		this.desconectar();
+	}
+	
+	public void actualizarNombre(String nombre)
+	{
+		this.conectar();
+		this.ubd.actualizarNombre(cbd, 1, nombre);
+		this.desconectar();
+	}
+	
+	public void actualizarApellido(String apellido)
+	{
+		this.conectar();
+		this.ubd.actualizarApellido(cbd, 1, apellido);
+		this.desconectar();
+	}
+	
+	public void actualizarEmail(String email)
+	{
+		this.conectar();
+		this.ubd.actualizarEmail(cbd, 1, email);
+		this.desconectar();
+	}
+	
+	public void actualizarGenero(boolean genero)
+	{
+		this.conectar();
+		this.ubd.actualizarGenero(cbd, 1, genero);
 		this.desconectar();
 	}
 }
