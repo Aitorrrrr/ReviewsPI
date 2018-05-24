@@ -44,7 +44,7 @@ public class Principal extends JFrame {
 	
 	private JLabel imagenReview1;
 	private JLabel lblSinopsisReview1;
-	private JTextField campoSinopsis;
+	private JTextField campoSinopsisAbajo;
 	private JLabel lblTituloReview1;
 	private JButton botonVerReviews1;
 	private JButton botonHacerReviews1;
@@ -52,11 +52,11 @@ public class Principal extends JFrame {
 	
 	private JLabel imagenReview2;
 	private JLabel lblSinopsis;
-	private JTextField campoSinopsisReview2;
+	private JTextField campoSinopsisArriba;
 	private JLabel lblTitulo;
 	private JButton botonVerReviews2;
 	private JButton botonHacerReviews2;
-	private JTextField campoPuntuacionReview2;
+	private JTextField campoPuntuacionArriba;
 	
 	private JTextField campoBuscar;
 	private JLabel lblCategorias;
@@ -67,18 +67,15 @@ public class Principal extends JFrame {
 	private JCheckBox genero2;
 	private JCheckBox genero3;
 	private JCheckBox genero4;
-	private JCheckBox genero5;
-	private JCheckBox genero6;
-	private JCheckBox genero7;
-	private JCheckBox genero8;
 	
 	private JButton botonCateg1;
 	private JButton botonCateg2;
-	private JButton botonCateg3;
-	private JButton botonCateg4;
 	private JButton botonBuscar;
 	
 	private int cont;
+	
+	private boolean peliculas;
+	private boolean series;
 	
 	public Principal(Controlador c1) {
 		cont=0;
@@ -185,9 +182,9 @@ public class Principal extends JFrame {
 		lblSinopsisReview1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSinopsisReview1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		campoSinopsis = new JTextField();
-		campoSinopsis.setEditable(false);
-		campoSinopsis.setColumns(10);
+		campoSinopsisAbajo = new JTextField();
+		campoSinopsisAbajo.setEditable(false);
+		campoSinopsisAbajo.setColumns(10);
 		
 		lblTituloReview1 = new JLabel("TITULO");
 		lblTituloReview1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -222,7 +219,7 @@ public class Principal extends JFrame {
 									.addGap(86))
 								.addGroup(gl_contenedorReview2.createSequentialGroup()
 									.addGap(18)
-									.addComponent(campoSinopsis, GroupLayout.PREFERRED_SIZE, 408, GroupLayout.PREFERRED_SIZE)
+									.addComponent(campoSinopsisAbajo, GroupLayout.PREFERRED_SIZE, 408, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)))
 							.addGap(5))
 						.addGroup(gl_contenedorReview2.createSequentialGroup()
@@ -254,7 +251,7 @@ public class Principal extends JFrame {
 									.addGap(18)
 									.addComponent(lblSinopsisReview1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 									.addGap(20)
-									.addComponent(campoSinopsis, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
+									.addComponent(campoSinopsisAbajo, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
 							.addContainerGap())
 						.addGroup(gl_contenedorReview2.createSequentialGroup()
 							.addComponent(botonVerReviews1)
@@ -316,16 +313,16 @@ public class Principal extends JFrame {
 		JSeparator SeparadorRev2 = new JSeparator();
 		SeparadorRev2.setOrientation(SwingConstants.VERTICAL);
 		
-		campoSinopsisReview2 = new JTextField();
-		campoSinopsisReview2.setEditable(false);
-		campoSinopsisReview2.setColumns(10);
+		campoSinopsisArriba = new JTextField();
+		campoSinopsisArriba.setEditable(false);
+		campoSinopsisArriba.setColumns(10);
 		
-		campoPuntuacionReview2 = new JTextField();
-		campoPuntuacionReview2.setEditable(false);
-		campoPuntuacionReview2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		campoPuntuacionReview2.setHorizontalAlignment(SwingConstants.CENTER);
-		campoPuntuacionReview2.setText("10/10");
-		campoPuntuacionReview2.setColumns(10);
+		campoPuntuacionArriba = new JTextField();
+		campoPuntuacionArriba.setEditable(false);
+		campoPuntuacionArriba.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		campoPuntuacionArriba.setHorizontalAlignment(SwingConstants.CENTER);
+		campoPuntuacionArriba.setText("10/10");
+		campoPuntuacionArriba.setColumns(10);
 		
 		lblSinopsis = new JLabel("SINOPSIS");
 		lblSinopsis.setHorizontalAlignment(SwingConstants.CENTER);
@@ -352,14 +349,14 @@ public class Principal extends JFrame {
 									.addGap(86))
 								.addGroup(gl_contenedorReview1.createSequentialGroup()
 									.addGap(18)
-									.addComponent(campoSinopsisReview2, GroupLayout.PREFERRED_SIZE, 408, GroupLayout.PREFERRED_SIZE)
+									.addComponent(campoSinopsisArriba, GroupLayout.PREFERRED_SIZE, 408, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)))
 							.addGap(5))
 						.addGroup(Alignment.TRAILING, gl_contenedorReview1.createSequentialGroup()
 							.addGap(119)
 							.addComponent(lblTitulo, GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
 							.addGap(62)))
-					.addComponent(campoPuntuacionReview2, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
+					.addComponent(campoPuntuacionArriba, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(gl_contenedorReview1.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(botonVerReviews2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -372,7 +369,7 @@ public class Principal extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_contenedorReview1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contenedorReview1.createSequentialGroup()
-							.addComponent(campoPuntuacionReview2, GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+							.addComponent(campoPuntuacionArriba, GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
 							.addContainerGap())
 						.addGroup(gl_contenedorReview1.createSequentialGroup()
 							.addGroup(gl_contenedorReview1.createParallelGroup(Alignment.TRAILING)
@@ -383,7 +380,7 @@ public class Principal extends JFrame {
 									.addGap(18)
 									.addComponent(lblSinopsis, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 									.addGap(20)
-									.addComponent(campoSinopsisReview2, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)))
+									.addComponent(campoSinopsisArriba, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)))
 							.addContainerGap())
 						.addGroup(Alignment.TRAILING, gl_contenedorReview1.createSequentialGroup()
 							.addComponent(botonVerReviews2)
@@ -463,41 +460,129 @@ public class Principal extends JFrame {
 		contenedorGeneros.setLayout(new GridLayout(4, 2, 0, 0));
 		
 		genero1 = new JCheckBox("New check box");
+		genero1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (genero1.isSelected())
+				{
+					genero2.setEnabled(false);
+					genero3.setEnabled(false);
+					genero4.setEnabled(false);
+				}
+				else
+				{
+					genero2.setEnabled(true);
+					genero3.setEnabled(true);
+					genero4.setEnabled(true);
+				}
+			}
+		});
+		genero1.setEnabled(false);
 		contenedorGeneros.add(genero1);
 		
 		genero2 = new JCheckBox("New check box");
+		genero2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (genero2.isSelected())
+				{
+					genero1.setEnabled(false);
+					genero3.setEnabled(false);
+					genero4.setEnabled(false);
+				}
+				else
+				{
+					genero1.setEnabled(true);
+					genero3.setEnabled(true);
+					genero4.setEnabled(true);
+				}
+			}
+		});
+		genero2.setEnabled(false);
 		contenedorGeneros.add(genero2);
 		
 		genero3 = new JCheckBox("New check box");
+		genero3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (genero3.isSelected())
+				{
+					genero1.setEnabled(false);
+					genero2.setEnabled(false);
+					genero4.setEnabled(false);
+				}
+				else
+				{
+					genero1.setEnabled(true);
+					genero2.setEnabled(true);
+					genero4.setEnabled(true);
+				}
+			}
+		});
+		genero3.setEnabled(false);
 		contenedorGeneros.add(genero3);
 		
 		genero4 = new JCheckBox("New check box");
+		genero4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (genero4.isSelected())
+				{
+					genero1.setEnabled(false);
+					genero2.setEnabled(false);
+					genero3.setEnabled(false);
+				}
+				else
+				{
+					genero1.setEnabled(true);
+					genero2.setEnabled(true);
+					genero3.setEnabled(true);
+				}
+			}
+		});
+		genero4.setEnabled(false);
 		contenedorGeneros.add(genero4);
-		
-		genero5 = new JCheckBox("New check box");
-		contenedorGeneros.add(genero5);
-		
-		genero6 = new JCheckBox("New check box");
-		contenedorGeneros.add(genero6);
-		
-		genero7 = new JCheckBox("New check box");
-		contenedorGeneros.add(genero7);
-		
-		genero8 = new JCheckBox("New check box");
-		contenedorGeneros.add(genero8);
 		contenedorCategorias.setLayout(new GridLayout(4, 0, 0, 0));
 		
+		c1.ponerGeneros(genero1, genero2, genero3, genero4);
+		
 		botonCateg1 = new JButton("Peliculas");
+		botonCateg1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				genero1.setEnabled(true);
+				genero2.setEnabled(true);
+				genero3.setEnabled(true);
+				genero4.setEnabled(true);
+				
+				if (series==true)
+				{
+					series=false;
+					peliculas=true;
+				}
+				else
+				{
+					peliculas=true;
+				}
+			}
+		});
 		contenedorCategorias.add(botonCateg1);
 		
 		botonCateg2 = new JButton("Series");
+		botonCateg2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				genero1.setEnabled(true);
+				genero2.setEnabled(true);
+				genero3.setEnabled(true);
+				genero4.setEnabled(true);
+				
+				if (peliculas==true)
+				{
+					peliculas=false;
+					series=true;
+				}
+				else
+				{
+					series=true;
+				}
+			}
+		});
 		contenedorCategorias.add(botonCateg2);
-		
-		botonCateg3 = new JButton("Videojuegos");
-		contenedorCategorias.add(botonCateg3);
-		
-		botonCateg4 = new JButton("Libros");
-		contenedorCategorias.add(botonCateg4);
 		contenedorBusqueda.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		campoBuscar = new JTextField();
@@ -507,7 +592,21 @@ public class Principal extends JFrame {
 		botonBuscar = new JButton("Buscar");
 		botonBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				c1.buscarReview(campoBuscar.getText(), lblTitulo, campoSinopsis);
+				if (peliculas==true)
+				{
+					c1.buscarPelicula(campoBuscar.getText(), lblTitulo, campoSinopsisArriba, campoPuntuacionArriba);
+				}
+				else
+				{
+					if (series==true)
+					{
+						c1.buscarSerie(campoBuscar.getText(), lblTitulo, campoSinopsisArriba, campoPuntuacionArriba);
+					}
+					else
+					{
+						c1.buscarReview(campoBuscar.getText(), lblTitulo, campoSinopsisArriba, campoPuntuacionArriba);
+					}
+				}
 			}
 		});
 		contenedorBusqueda.add(botonBuscar);

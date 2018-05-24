@@ -1,0 +1,113 @@
+
+html, body  {
+width: 100%;
+height: 100%;
+margin: 0 auto;
+background:url(giphy2.gif); 
+
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+p {
+font-family: arial black;
+
+}
+
+li {
+    float: left;
+    flex-grow: 1;
+}
+
+li a {
+   font-family: arial black;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 123.56px;
+    text-decoration: none;
+
+}
+
+li a:hover {
+    background-color: #111;
+    background:url(giphy2.gif); 
+
+}
+
+.uno:hover {
+    transform: scale(1.1);
+}
+
+.active {
+    background-color: red;
+    -webkit-box-shadow: inset 10px 10px 300px -59px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 10px 10px 300px -59px rgba(0,0,0,0.75);
+    box-shadow: inset 10px 10px 300px -59px rgba(0,0,0,0.75);
+    border-radius: 20px;
+}
+
+.text {
+    margin-top: 100px;
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    color: white;
+}
+.text2 {
+    margin-top: 100px;
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    color: white;
+    text-decoration: underline;
+}
+.principal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    
+
+}
+
+h3{
+    font-size: 25px;
+    font-family: arial black;
+
+}
+
+h1{
+    text-align: center;
+    vertical-align: middle;
+    font-family: arial black;
+}
+.logo{
+    width: 100%;
+    height: 30%;
+    position: relative;
+    margin-top: -1.7%;
+    background:url(giphy2.gif); 
+    color: white;
+    text-align: center;
+}
+.logo img{
+    margin-top: 25px;
+    margin-bottom: 17px;
+    width: 17%;
+}
+
+.imagenes {
+    margin-top: 70px;
+    position: relative;
+    
+}
+.redesSoc{
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+
+}

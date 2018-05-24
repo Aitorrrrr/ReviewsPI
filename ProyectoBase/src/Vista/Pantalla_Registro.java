@@ -9,7 +9,12 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EtchedBorder;
+
+import controlador.Controlador;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -22,21 +27,22 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Pantalla_Registro extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panelDatosObligatorios;
 	private JPanel panelDatosOpcionales;
-	private JPanel panelCaptcha;
 	private JPanel panelCondiciones;
 	private JPanel panelDatos2;
 	private JPanel panelDatosOpcionales2;
 	private JPanel panelTexto;
 	private JPanel panelDatos;
 	private JLabel lblDatosOpcionales;
-	private JLabel lblFoto;
-	private JLabel labelFechaNacimiento;
+	private JLabel lblFechaNac;
+	private JLabel labelApellido;
 	private JLabel labelNombreReal;
 	private JLabel labelGenero;
 	private JLabel lblNombre;
@@ -49,17 +55,15 @@ public class Pantalla_Registro extends JFrame {
 	private JPasswordField passwordContrasena;
 	private JPasswordField passwordRepetirContrasena;
 	private JTextField textNombreReal;
-	private JTextField textFechaNacimiento;
-	private JTextField textFoto;
-	private JTextField textCapcha;
-	private JRadioButton rdbtnCondicionesLegales;
+	private JTextField textApell;
+	private JTextField textFecha;
 	private JRadioButton rdbtnNotificaciones;
 	private JButton btnRegistrar;
 	private JButton buttonRestablecer;
 	private JComboBox comboBoxGenero;
 
 	
-	public Pantalla_Registro() {
+	public Pantalla_Registro(Controlador c1) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 825, 618);
 		contentPane = new JPanel();
@@ -72,9 +76,6 @@ public class Pantalla_Registro extends JFrame {
 		panelDatosOpcionales = new JPanel();
 		panelDatosOpcionales.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
-		panelCaptcha = new JPanel();
-		panelCaptcha.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		
 		panelCondiciones = new JPanel();
 		panelCondiciones.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -82,13 +83,11 @@ public class Pantalla_Registro extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelCaptcha, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-						.addComponent(panelDatosObligatorios, GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+					.addComponent(panelDatosObligatorios, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
 					.addGap(65)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelCondiciones, GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-						.addComponent(panelDatosOpcionales, GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+						.addComponent(panelCondiciones, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panelDatosOpcionales, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -96,17 +95,12 @@ public class Pantalla_Registro extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelDatosOpcionales, GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-						.addComponent(panelDatosObligatorios, GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
+						.addComponent(panelDatosOpcionales, GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+						.addComponent(panelDatosObligatorios, GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelCondiciones, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-						.addComponent(panelCaptcha, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+					.addComponent(panelCondiciones, GroupLayout.PREFERRED_SIZE, 170, Short.MAX_VALUE)
 					.addGap(29))
 		);
-		
-		rdbtnCondicionesLegales = new JRadioButton("Acepto las condiciones");
-		rdbtnCondicionesLegales.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		rdbtnNotificaciones = new JRadioButton("Deseo Recibir Notificaciones");
 		rdbtnNotificaciones.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -114,7 +108,26 @@ public class Pantalla_Registro extends JFrame {
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String pw1=new String(passwordContrasena.getPassword());
+				String pw2=new String(passwordRepetirContrasena.getPassword());
 				
+				System.out.println(pw1+pw2);
+				
+				if (comprobarPassword(pw1, pw2))
+				{
+					if (comprobarEmail(textEmail.getText()))
+					{
+						
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(Pantalla_Registro.this, "E-mail no valido, recuerde, nombre@dominio.es");
+					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(Pantalla_Registro.this, "Los campos contraseña no coinciden");
+				}
 			}
 		});
 		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -127,53 +140,48 @@ public class Pantalla_Registro extends JFrame {
 				passwordContrasena.setText(null);
 				passwordRepetirContrasena.setText(null);
 				textNombreReal.setText(null);
-				textFechaNacimiento.setText(null);
+				textApell.setText(null);
+				textFecha.setText(null);
+				comboBoxGenero.setSelectedIndex(2);
 			}
 		});
 		buttonRestablecer.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GroupLayout gl_panelCondiciones = new GroupLayout(panelCondiciones);
 		gl_panelCondiciones.setHorizontalGroup(
 			gl_panelCondiciones.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelCondiciones.createSequentialGroup()
 					.addGap(53)
 					.addGroup(gl_panelCondiciones.createParallelGroup(Alignment.LEADING)
-						.addComponent(rdbtnCondicionesLegales, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(gl_panelCondiciones.createSequentialGroup()
-							.addGroup(gl_panelCondiciones.createParallelGroup(Alignment.TRAILING)
-								.addComponent(rdbtnNotificaciones, GroupLayout.PREFERRED_SIZE, 72, Short.MAX_VALUE)
-								.addGroup(Alignment.LEADING, gl_panelCondiciones.createSequentialGroup()
-									.addGap(122)
-									.addComponent(btnRegistrar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-							.addGap(18)
-							.addComponent(buttonRestablecer, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
+							.addGroup(gl_panelCondiciones.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(btnVolver, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnRegistrar, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE))
+							.addGap(65)
+							.addComponent(buttonRestablecer, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
+						.addComponent(rdbtnNotificaciones, GroupLayout.PREFERRED_SIZE, 398, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panelCondiciones.setVerticalGroup(
-			gl_panelCondiciones.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panelCondiciones.createSequentialGroup()
-					.addGap(23)
-					.addComponent(rdbtnCondicionesLegales, GroupLayout.PREFERRED_SIZE, 14, Short.MAX_VALUE)
+			gl_panelCondiciones.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelCondiciones.createSequentialGroup()
+					.addGap(24)
+					.addComponent(rdbtnNotificaciones, GroupLayout.PREFERRED_SIZE, 16, Short.MAX_VALUE)
 					.addGap(18)
-					.addComponent(rdbtnNotificaciones, GroupLayout.PREFERRED_SIZE, 14, Short.MAX_VALUE)
+					.addGroup(gl_panelCondiciones.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnRegistrar, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+						.addComponent(buttonRestablecer, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
 					.addGap(18)
-					.addGroup(gl_panelCondiciones.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelCondiciones.createSequentialGroup()
-							.addComponent(buttonRestablecer, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-							.addGap(42))
-						.addGroup(Alignment.TRAILING, gl_panelCondiciones.createSequentialGroup()
-							.addComponent(btnRegistrar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(42))))
+					.addComponent(btnVolver)
+					.addGap(33))
 		);
 		panelCondiciones.setLayout(gl_panelCondiciones);
-		panelCaptcha.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		textCapcha = new JTextField();
-		textCapcha.setHorizontalAlignment(SwingConstants.CENTER);
-		textCapcha.setText("Captcha");
-		textCapcha.setEditable(false);
-		textCapcha.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panelCaptcha.add(textCapcha);
-		textCapcha.setColumns(10);
 		
 		panelDatos2 = new JPanel();
 		panelDatos2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.BLACK, Color.BLACK));
@@ -215,16 +223,16 @@ public class Pantalla_Registro extends JFrame {
 		textNombreReal.setColumns(10);
 		panelDatosOpcionales2.add(textNombreReal);
 		
-		labelFechaNacimiento = new JLabel("Fecha Nacimiento:");
-		labelFechaNacimiento.setHorizontalAlignment(SwingConstants.CENTER);
-		labelFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panelDatosOpcionales2.add(labelFechaNacimiento);
+		labelApellido = new JLabel("Apellido:");
+		labelApellido.setHorizontalAlignment(SwingConstants.CENTER);
+		labelApellido.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panelDatosOpcionales2.add(labelApellido);
 		
-		textFechaNacimiento = new JTextField();
-		textFechaNacimiento.setHorizontalAlignment(SwingConstants.CENTER);
-		textFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFechaNacimiento.setColumns(10);
-		panelDatosOpcionales2.add(textFechaNacimiento);
+		textApell = new JTextField();
+		textApell.setHorizontalAlignment(SwingConstants.CENTER);
+		textApell.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textApell.setColumns(10);
+		panelDatosOpcionales2.add(textApell);
 		
 		labelGenero = new JLabel("Genero:");
 		labelGenero.setHorizontalAlignment(SwingConstants.CENTER);
@@ -233,9 +241,9 @@ public class Pantalla_Registro extends JFrame {
 		
 		comboBoxGenero = new JComboBox();
 		comboBoxGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		comboBoxGenero.addItem("Otro...");
 		comboBoxGenero.addItem("Hombre");
 		comboBoxGenero.addItem("Mujer");
-		comboBoxGenero.addItem("Otro...");
 		panelDatosOpcionales2.add(comboBoxGenero);
 		GroupLayout gl_panelDatosOpcionales = new GroupLayout(panelDatosOpcionales);
 		gl_panelDatosOpcionales.setHorizontalGroup(
@@ -257,14 +265,26 @@ public class Pantalla_Registro extends JFrame {
 					.addGap(7))
 		);
 		
-		lblFoto = new JLabel("Foto del Perfil:");
-		lblFoto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFoto.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		panelDatosOpcionales2.add(lblFoto);
+		lblFechaNac = new JLabel("Fecha Nacimiento");
+		lblFechaNac.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFechaNac.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panelDatosOpcionales2.add(lblFechaNac);
 		
-		textFoto = new JTextField();
-		panelDatosOpcionales2.add(textFoto);
-		textFoto.setColumns(10);
+		textFecha = new JTextField();
+		textFecha.setHorizontalAlignment(SwingConstants.CENTER);
+		textFecha.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				textFecha.setText("");
+			}
+		});
+		textFecha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		textFecha.setText("yyyy/mm/dd");
+		panelDatosOpcionales2.add(textFecha);
+		textFecha.setColumns(10);
 		panelDatosOpcionales.setLayout(gl_panelDatosOpcionales);
 		
 		panelTexto = new JPanel();
@@ -354,5 +374,67 @@ public class Pantalla_Registro extends JFrame {
 		panelTexto.setLayout(gl_panelTexto);
 		panelDatosObligatorios.setLayout(gl_panelDatosObligatorios);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public boolean comprobarFecha(String fecha)
+	{
+		fecha=fecha.replace("/", "");
+		
+		if (fecha.length()<8 || fecha.length()>8)
+		{
+			return false;
+		}
+		
+		for (int cont=0; cont<fecha.length(); cont++)
+		{
+			if (Character.isLetter(fecha.charAt(cont)))
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public boolean comprobarPassword(String pw1, String pw2)
+	{
+		if (pw1.equals(pw2))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean comprobarEmail(String email)
+	{
+		int arroba=0;
+		int dominio=0;
+		int posarroba=0;
+		
+		for (int cont=0; cont<email.length(); cont++)
+		{
+			if (cont!=0 && email.charAt(cont)=='@')
+			{
+				arroba++;
+				posarroba=cont;
+			}
+			
+			if (arroba==1 && email.charAt(cont)=='.' && cont>(posarroba+1))
+			{
+				dominio++;
+			}
+		}
+		
+		if (arroba==1 && dominio==1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
