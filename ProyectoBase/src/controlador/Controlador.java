@@ -164,9 +164,10 @@ public class Controlador {
 	}
 	
 
-	public void insertarReview(ConexionBD cbd,int idReview, String autor, int idUser, String Titulo, double Valmedia)
+	public void insertarReview(ConexionBD cbd,int idReview, String autor, int idUser, String Titulo, String Sinopsis, int valoracion, String texto, ConexionBD conbd8)
 	{
 		this.conectar();
+		
 		this.desconectar();
 	}
 	

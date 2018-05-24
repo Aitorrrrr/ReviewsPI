@@ -1,5 +1,4 @@
 package modelo;
-
 import java.sql.*;
 
 import javax.swing.JLabel;
@@ -68,6 +67,22 @@ public class PeliculaBD {
 			return 0;
 		}
 	}
+	
+public String insertarPelis(int idReview, String director, String productora, int duracion, int idGen, ConexionBD conbd8, String texto) {
+		
+		ResultSet rs8;
+			try
+			{
+				state=conbd8.getConexion().createStatement();
+				String sql1="INSERT INTO  (idReview, idUser, Titulo, Sinopsis, Valmedia) values ('"+idReview+"','"+director+"', '"+productora+"', '"+duracion+"', '"+idGen+"')";
+			}
+			catch (SQLException sql1)
+			{
+				sql1.printStackTrace();
+				return null;
+			}
+			return texto;
+		}
 }
 
 
