@@ -60,10 +60,6 @@ public class Login extends JFrame {
 	private Controlador c1;
 	private boolean conectado;
 	
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -77,9 +73,6 @@ public class Login extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Login() {
 		c1=new Controlador();
 		
@@ -176,16 +169,33 @@ public class Login extends JFrame {
 					JOptionPane.showMessageDialog(Login.this, "No se puede conectar con la bbdd");
 				}
 				
-				if (c1.loginUser(campoNom.getText(), campoContra.getText()))
+				if (campoNom.getText().equals("userpi"))
 				{
-					JOptionPane.showMessageDialog(Login.this, "Dentro");
-					Principal p1=new Principal(c1);
-					p1.setVisible(true);
-					Login.this.dispose();
+					if (c1.getConexion().conectarAD(campoNom.getText(), campoContra.getText()))
+					{
+						JOptionPane.showMessageDialog(Login.this, "Dentro");
+						Principal p1=new Principal(c1);
+						p1.setVisible(true);
+						Login.this.dispose();
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(Login.this, "User/PW erróneos");
+					}
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(Login.this, "User/PW erróneos");
+					if (c1.loginUser(campoNom.getText(), campoContra.getText()))
+					{
+						JOptionPane.showMessageDialog(Login.this, "Dentro");
+						Principal p1=new Principal(c1);
+						p1.setVisible(true);
+						Login.this.dispose();
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(Login.this, "User/PW erróneos");
+					}
 				}
 			}
 		});
@@ -196,6 +206,13 @@ public class Login extends JFrame {
 		contenedorBotones.add(horizontalStrut_9);
 		
 		botonNuevoUsuario = new JButton("Nuevo Usuario");
+		botonNuevoUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Pantalla_Registro pr1=new Pantalla_Registro(c1);
+				pr1.setVisible(true);
+				Login.this.dispose();
+			}
+		});
 		botonNuevoUsuario.setBackground(Color.WHITE);
 		contenedorBotones.add(botonNuevoUsuario);
 		
