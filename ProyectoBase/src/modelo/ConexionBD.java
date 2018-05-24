@@ -77,7 +77,7 @@ static final String CONTROLADOR_MYSQL="com.mysql.jdbc.Driver";
 		}
 	}
 	
-	public void conectarAD(String user, String pw)
+	public boolean conectarAD(String user, String pw)
 	{
 		Hashtable <String, String> env=new Hashtable<String, String>();
 		
@@ -95,10 +95,12 @@ static final String CONTROLADOR_MYSQL="com.mysql.jdbc.Driver";
 			ctx=new InitialDirContext(env);
 			System.out.println("Autenticado en Windows Server");
 			ctx.close();
+			return true;
 		}
 		catch (NamingException ne)
 		{
 			System.out.println("Autenticación fallida");
+			return false;
 		}
 	}
 }

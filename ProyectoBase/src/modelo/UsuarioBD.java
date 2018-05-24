@@ -2,6 +2,9 @@ package modelo;
 
 import java.sql.*;
 
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 public class UsuarioBD {
 
 	private CallableStatement st;
@@ -97,6 +100,138 @@ public class UsuarioBD {
 		{
 			sqle.printStackTrace();
 			return false;
+		}
+	}
+	
+	public void datosUser(ConexionBD cbd, int id, JTextField alias, JTextField nombre, JTextField apell, JTextField email, JComboBox genero)
+	{
+		ResultSet rs;
+		
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="SELECT Alias, Nombre, Apellido, Email, esVaron FROM usuario WHERE idUser='"+id+"';";
+			
+			rs=state.executeQuery(sql);
+			
+			rs.next();
+			
+			alias.setText(rs.getString(1));
+			nombre.setText(rs.getString(2));
+			apell.setText(rs.getString(3));
+			email.setText(rs.getString(4));
+			genero.setSelectedItem((genero(rs.getBoolean(5))));
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+	}
+	
+	private String genero(boolean genero)
+	{
+		if (genero)
+		{
+			return "Hombre";
+		}
+		else
+		{
+			return "Mujer";
+		}
+	}
+	
+	public void actualizarAlias(ConexionBD cbd, int id, String alias)
+	{
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="UPDATE usuario SET Alias='"+alias+"' WHERE idUser='"+id+"';";
+			
+			state.executeUpdate(sql);
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void actualizarNombre(ConexionBD cbd, int id, String nombre)
+	{
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="UPDATE usuario SET Nombre='"+nombre+"' WHERE idUser='"+id+"';";
+			
+			state.executeUpdate(sql);
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void actualizarApellido(ConexionBD cbd, int id, String apell)
+	{
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="UPDATE usuario SET Apellido='"+apell+"' WHERE idUser='"+id+"';";
+			
+			state.executeUpdate(sql);
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void actualizarEmail(ConexionBD cbd, int id, String email)
+	{
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="UPDATE usuario SET Email='"+email+"' WHERE idUser='"+id+"';";
+			
+			state.executeUpdate(sql);
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void actualizarGenero(ConexionBD cbd, int id, boolean genero)
+	{
+		int gen=convertirGenero(genero);
+		
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="UPDATE usuario SET esVaron='"+gen+"' WHERE idUser='"+id+"';";
+			
+			state.executeUpdate(sql);
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+		}
+	}
+	
+	private int convertirGenero(boolean genero)
+	{
+		if (genero)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
 		}
 	}
 }
