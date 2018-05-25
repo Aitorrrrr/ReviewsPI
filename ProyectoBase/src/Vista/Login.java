@@ -150,11 +150,10 @@ public class Login extends JFrame {
 					if (c1.getConexion().conectarAD(campoNom.getText(), pw))
 					{
 						JOptionPane.showMessageDialog(Login.this, idio.traduz("connection_succesfull"));
-						Principal p1=new Principal(c1);
-						p1.setVisible(true);
-						p1.setExtendedState(p1.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-						
 						c1.userLogged(c1.obtenerIdUser(campoNom.getText()), campoNom.getText());
+						
+						PantallaBusqueda p1=new PantallaBusqueda(c1);
+						p1.setVisible(true);
 						
 						Login.this.dispose();
 					}
@@ -168,11 +167,10 @@ public class Login extends JFrame {
 					if (c1.loginUser(campoNom.getText(), pw))
 					{
 						JOptionPane.showMessageDialog(Login.this, idio.traduz("connection_succesfull"));
-						Principal p1=new Principal(c1);
-						p1.setVisible(true);
-						p1.setExtendedState(p1.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-						
 						c1.userLogged(c1.obtenerIdUser(campoNom.getText()), campoNom.getText());
+						
+						PantallaBusqueda p1=new PantallaBusqueda(c1);
+						p1.setVisible(true);
 						
 						Login.this.dispose();
 					}

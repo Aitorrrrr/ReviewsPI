@@ -1,6 +1,5 @@
 package Vista;
 
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -35,7 +34,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Toolkit;
 
-public class Principal extends JFrame {
+public class PantallaBusqueda extends JFrame {
 
 	private JPanel contenedorPrincipal;
 
@@ -43,17 +42,6 @@ public class Principal extends JFrame {
 	private JMenu menuUsuario;
 	
 	private JLabel logo2;
-	
-	private JButton botonPaginaAnterior;
-	private JButton botonPaginaSiguiente;
-	
-	private JLabel imagenReview1;
-	private JLabel lblSinopsisReview1;
-	private JTextField campoSinopsisAbajo;
-	private JLabel lblTituloReview1;
-	private JButton botonVerReviews1;
-	private JButton botonHacerReviews1;
-	private JTextField campoPuntuacionReview1;
 	
 	private JLabel imagenReview2;
 	private JLabel lblSinopsis;
@@ -82,8 +70,8 @@ public class Principal extends JFrame {
 	private boolean peliculas;
 	private boolean series;
 	
-	public Principal(Controlador c1) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/assets/ico.png")));
+	public PantallaBusqueda(Controlador c1) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaBusqueda.class.getResource("/assets/ico.png")));
 		setTitle("REVIEWX");
 		Idioma idio = new Idioma();
 		cont=0;
@@ -103,6 +91,8 @@ public class Principal extends JFrame {
 		contenedorPrincipal.setBackground(new Color(38, 38, 38));
 		contenedorPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedorPrincipal);
+		
+		menuUsuario.setText(c1.getUserLogged().getAlias());
 		
 		JPanel contenedorMenu = new JPanel();
 		contenedorMenu.setBackground(new Color(38, 38, 38));
@@ -178,137 +168,15 @@ public class Principal extends JFrame {
 		contenedorReview1.setBackground(new Color(38, 38, 38));
 		
 		JSeparator separadorReviews2 = new JSeparator();
-		
-		botonPaginaAnterior = new JButton(idio.traduz("button_previousPage"));
-		botonPaginaAnterior.setBackground(Color.WHITE);
-		
-		botonPaginaSiguiente = new JButton("Pagina Siguiente ->");
-		botonPaginaSiguiente.setBackground(Color.WHITE);
-		
-		JSeparator separadorReviews1 = new JSeparator();
-		
-		JPanel contenedorReview2 = new JPanel();
-		contenedorReview2.setBackground(new Color(38, 38, 38));
-		
-		imagenReview1 = new JLabel("");
-		imagenReview1.setIcon(new ImageIcon(Principal.class.getResource("/assets/poster_placeholder.png")));
-		imagenReview1.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JSeparator SeparadorRev1 = new JSeparator();
-		SeparadorRev1.setOrientation(SwingConstants.VERTICAL);
-		
-		lblSinopsisReview1 = new JLabel(idio.traduz("synopsis"));
-		lblSinopsisReview1.setForeground(Color.WHITE);
-		lblSinopsisReview1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSinopsisReview1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
-		campoSinopsisAbajo = new JTextField();
-		campoSinopsisAbajo.setBackground(Color.WHITE);
-		campoSinopsisAbajo.setEditable(false);
-		campoSinopsisAbajo.setColumns(10);
-		
-		lblTituloReview1 = new JLabel("<TITULO>");
-		lblTituloReview1.setForeground(Color.WHITE);
-		lblTituloReview1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTituloReview1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
-		campoPuntuacionReview1 = new JTextField();
-		campoPuntuacionReview1.setForeground(Color.WHITE);
-		campoPuntuacionReview1.setBackground(new Color(38, 38, 38));
-		campoPuntuacionReview1.setText("10/10");
-		campoPuntuacionReview1.setHorizontalAlignment(SwingConstants.CENTER);
-		campoPuntuacionReview1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		campoPuntuacionReview1.setEditable(false);
-		campoPuntuacionReview1.setColumns(10);
-		
-		botonVerReviews1 = new JButton(idio.traduz("button_seeReview"));
-		botonVerReviews1.setBackground(Color.WHITE);
-		
-		botonHacerReviews1 = new JButton(idio.traduz("button_newReview"));
-		botonHacerReviews1.setBackground(Color.WHITE);
-		GroupLayout gl_contenedorReview2 = new GroupLayout(contenedorReview2);
-		gl_contenedorReview2.setHorizontalGroup(
-			gl_contenedorReview2.createParallelGroup(Alignment.TRAILING)
-				.addGap(0, 993, Short.MAX_VALUE)
-				.addGroup(gl_contenedorReview2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(imagenReview1, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(SeparadorRev1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_contenedorReview2.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contenedorReview2.createSequentialGroup()
-							.addGap(16)
-							.addGroup(gl_contenedorReview2.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contenedorReview2.createSequentialGroup()
-									.addGap(113)
-									.addComponent(lblSinopsisReview1, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-									.addGap(86))
-								.addGroup(gl_contenedorReview2.createSequentialGroup()
-									.addGap(18)
-									.addComponent(campoSinopsisAbajo, GroupLayout.PREFERRED_SIZE, 408, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)))
-							.addGap(5))
-						.addGroup(gl_contenedorReview2.createSequentialGroup()
-							.addGap(119)
-							.addComponent(lblTituloReview1, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-							.addGap(62)))
-					.addComponent(campoPuntuacionReview1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_contenedorReview2.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(botonVerReviews1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(botonHacerReviews1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(34))
-		);
-		gl_contenedorReview2.setVerticalGroup(
-			gl_contenedorReview2.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 245, Short.MAX_VALUE)
-				.addGroup(gl_contenedorReview2.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contenedorReview2.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contenedorReview2.createSequentialGroup()
-							.addComponent(campoPuntuacionReview1, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_contenedorReview2.createSequentialGroup()
-							.addGroup(gl_contenedorReview2.createParallelGroup(Alignment.LEADING)
-								.addComponent(SeparadorRev1, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-								.addComponent(imagenReview1, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-								.addGroup(gl_contenedorReview2.createSequentialGroup()
-									.addComponent(lblTituloReview1)
-									.addGap(18)
-									.addComponent(lblSinopsisReview1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-									.addGap(20)
-									.addComponent(campoSinopsisAbajo, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)))
-							.addContainerGap())
-						.addGroup(gl_contenedorReview2.createSequentialGroup()
-							.addComponent(botonVerReviews1)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(botonHacerReviews1)
-							.addGap(20))))
-		);
-		contenedorReview2.setLayout(gl_contenedorReview2);
 		GroupLayout gl_contenedorReviews = new GroupLayout(contenedorReviews);
 		gl_contenedorReviews.setHorizontalGroup(
 			gl_contenedorReviews.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contenedorReviews.createSequentialGroup()
-					.addContainerGap(38, Short.MAX_VALUE)
-					.addGroup(gl_contenedorReviews.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(Alignment.TRAILING, gl_contenedorReviews.createSequentialGroup()
-							.addComponent(botonPaginaAnterior)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(botonPaginaSiguiente))
-						.addComponent(separadorReviews1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 993, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-				.addGroup(gl_contenedorReviews.createSequentialGroup()
 					.addGap(28)
 					.addGroup(gl_contenedorReviews.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contenedorReviews.createSequentialGroup()
-							.addComponent(contenedorReview2, GroupLayout.PREFERRED_SIZE, 993, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(gl_contenedorReviews.createSequentialGroup()
-							.addGroup(gl_contenedorReviews.createParallelGroup(Alignment.LEADING)
-								.addComponent(separadorReviews2, GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
-								.addComponent(contenedorReview1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE))
-							.addGap(20))))
+						.addComponent(separadorReviews2, GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
+						.addComponent(contenedorReview1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE))
+					.addGap(20))
 		);
 		gl_contenedorReviews.setVerticalGroup(
 			gl_contenedorReviews.createParallelGroup(Alignment.LEADING)
@@ -317,20 +185,12 @@ public class Principal extends JFrame {
 					.addComponent(contenedorReview1, GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
 					.addGap(50)
 					.addComponent(separadorReviews2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(61)
-					.addComponent(contenedorReview2, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
-					.addGap(94)
-					.addComponent(separadorReviews1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_contenedorReviews.createParallelGroup(Alignment.BASELINE)
-						.addComponent(botonPaginaSiguiente)
-						.addComponent(botonPaginaAnterior))
-					.addGap(27))
+					.addGap(470))
 		);
 		
 		imagenReview2 = new JLabel("");
 		imagenReview2.setHorizontalAlignment(SwingConstants.CENTER);
-		imagenReview2.setIcon(new ImageIcon(Principal.class.getResource("/assets/poster_placeholder.png")));
+		imagenReview2.setIcon(new ImageIcon(PantallaBusqueda.class.getResource("/assets/poster_placeholder.png")));
 		
 		lblTitulo = new JLabel("<TITULO>");
 		lblTitulo.setForeground(Color.WHITE);
@@ -360,9 +220,46 @@ public class Principal extends JFrame {
 		lblSinopsis.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		botonHacerReviews2 = new JButton(idio.traduz("button_newReview"));
+		botonHacerReviews2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearReview cr1=new CrearReview(c1);
+				cr1.setVisible(true);
+				
+				PantallaBusqueda.this.dispose();
+			}
+		});
 		botonHacerReviews2.setBackground(Color.WHITE);
 		
 		botonVerReviews2 = new JButton(idio.traduz("button_seeReview"));
+		botonVerReviews2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (peliculas)
+				{
+					Pantalla_Pelicula pp=new Pantalla_Pelicula(c1, true);
+					pp.setVisible(true);
+					
+					PantallaBusqueda.this.dispose();
+				}
+				
+				if (series)
+				{
+					Pantalla_Pelicula pp=new Pantalla_Pelicula(c1, false);
+					pp.setVisible(true);
+					
+					PantallaBusqueda.this.dispose();
+				}
+				
+				if (!peliculas && !series)
+				{
+					boolean tipo=c1.tipoReview(lblTitulo.getText());
+					
+					Pantalla_Pelicula pp=new Pantalla_Pelicula(c1, tipo);
+					pp.setVisible(true);
+					
+					PantallaBusqueda.this.dispose();
+				}
+			}
+		});
 		botonVerReviews2.setBackground(Color.WHITE);
 		GroupLayout gl_contenedorReview1 = new GroupLayout(contenedorReview1);
 		gl_contenedorReview1.setHorizontalGroup(
@@ -649,17 +546,31 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if (peliculas==true)
 				{
-					c1.buscarPelicula(campoBuscar.getText(), lblTitulo, campoSinopsisArriba, campoPuntuacionArriba);
-				}
-				else
-				{
-					if (series==true)
+					if (c1.buscarPelicula(campoBuscar.getText(), lblTitulo, campoSinopsisArriba, campoPuntuacionArriba))
 					{
-						c1.buscarSerie(campoBuscar.getText(), lblTitulo, campoSinopsisArriba, campoPuntuacionArriba);
+						c1.reviewBuscado(c1.idReview(lblTitulo.getText()), lblTitulo.getText());
+						contenedorReview1.setVisible(true);
 					}
-					else
+				}
+				
+				if (series==true)
+				{
+					if (c1.buscarSerie(campoBuscar.getText(), lblTitulo, campoSinopsisArriba, campoPuntuacionArriba)) 
 					{
-						c1.buscarReview(campoBuscar.getText(), lblTitulo, campoSinopsisArriba, campoPuntuacionArriba);
+						c1.reviewBuscado(c1.idReview(lblTitulo.getText()), lblTitulo.getText());
+						contenedorReview1.setVisible(true);
+					}
+						
+				}
+				
+				if (peliculas==false && series==false)
+				{
+					if (c1.buscarReview(campoBuscar.getText(), lblTitulo, campoSinopsisArriba, campoPuntuacionArriba))
+					{
+						{
+								c1.reviewBuscado(c1.idReview(lblTitulo.getText()), lblTitulo.getText());
+								contenedorReview1.setVisible(true);
+						}
 					}
 				}
 			}
@@ -667,5 +578,8 @@ public class Principal extends JFrame {
 		contenedorBusqueda.add(botonBuscar);
 		contenedorMenu.setLayout(gl_contenedorMenu);
 		contenedorPrincipal.setLayout(gl_contenedorPrincipal);
+		
+		contenedorReview1.setVisible(false);
 	}
 }
+

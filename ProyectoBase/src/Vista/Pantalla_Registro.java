@@ -57,7 +57,6 @@ public class Pantalla_Registro extends JFrame {
 	private JTextField textNombreReal;
 	private JTextField textApell;
 	private JTextField textFecha;
-	private JRadioButton rdbtnNotificaciones;
 	private JButton btnRegistrar;
 	private JButton buttonRestablecer;
 	private JComboBox comboBoxGenero;
@@ -101,9 +100,6 @@ public class Pantalla_Registro extends JFrame {
 					.addComponent(panelCondiciones, GroupLayout.PREFERRED_SIZE, 170, Short.MAX_VALUE)
 					.addGap(29))
 		);
-		
-		rdbtnNotificaciones = new JRadioButton("Deseo Recibir Notificaciones");
-		rdbtnNotificaciones.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.addActionListener(new ActionListener() {
@@ -161,22 +157,17 @@ public class Pantalla_Registro extends JFrame {
 			gl_panelCondiciones.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelCondiciones.createSequentialGroup()
 					.addGap(53)
-					.addGroup(gl_panelCondiciones.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelCondiciones.createSequentialGroup()
-							.addGroup(gl_panelCondiciones.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(btnVolver, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnRegistrar, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE))
-							.addGap(65)
-							.addComponent(buttonRestablecer, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
-						.addComponent(rdbtnNotificaciones, GroupLayout.PREFERRED_SIZE, 398, Short.MAX_VALUE))
-					.addContainerGap())
+					.addGroup(gl_panelCondiciones.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(btnVolver, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnRegistrar, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE))
+					.addGap(65)
+					.addComponent(buttonRestablecer, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(72, Short.MAX_VALUE))
 		);
 		gl_panelCondiciones.setVerticalGroup(
 			gl_panelCondiciones.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelCondiciones.createSequentialGroup()
-					.addGap(24)
-					.addComponent(rdbtnNotificaciones, GroupLayout.PREFERRED_SIZE, 16, Short.MAX_VALUE)
-					.addGap(18)
+					.addGap(58)
 					.addGroup(gl_panelCondiciones.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnRegistrar, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
 						.addComponent(buttonRestablecer, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))

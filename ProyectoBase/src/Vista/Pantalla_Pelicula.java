@@ -25,6 +25,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JMenu;
 
+import controlador.Controlador;
+import javax.swing.JMenuItem;
+
 public class Pantalla_Pelicula extends JFrame {
 
 	private JPanel contentPantallaPelicula;
@@ -32,53 +35,29 @@ public class Pantalla_Pelicula extends JFrame {
 	private JPanel panelReviewsUsuarios;
 	private JPanel panelTituloUsuarios;
 	private JPanel panelReviewsU;
-	private JPanel panelValorar;
-	private JPanel panelPublicarComentarios;
-	private JPanel panelValorar1;
 	private JPanel panelPortada;
 	private JPanel panelAgregarDatos;
-	private JLabel lblComentariosDeLos;
-	private JLabel lblValorar;
+	private JLabel lblSinopsis;
 	private JLabel lblNombre;
-	private JLabel lblPublicarComentario;
 	private JLabel labelValoracion;
-	private JScrollPane scrollPane_2;
 	private JMenuBar menuBar;
 	private JMenu mnNombreUsuario;
 	private JButton btnCrearReview;
-	private JButton btnPublicar;
-	private JButton btnValorar;
-	private JButton btnVerNetflix;
-	private JButton buttonComprarAmazon;
-	private JButton buttonComprarEntradas;
 	private JScrollPane scrollPane_1;
-	private JTextArea textReviewsUsuarios;
-	private JComboBox comboBoxMedia;
-	private JLabel lblNombre_1;
-	private JTextField textNombreReview;
+	private JTextArea textSinopsis;
+	private JLabel lblTitulo;
+	private JTextField textTitulo;
 	private JTextField textValoracionMedia;
-	private JTextArea textArea;
+	private JTextField textDirec;
+	private JLabel lblDuracin;
+	private JTextField textDuracin;
+	private JLabel lblProductora;
+	private JTextField textProductora;
+	private JLabel lblComentariosDelReview;
+	private JButton btnConfirmar;
+	private JMenuItem mntmPerfil;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Pantalla_Pelicula frame = new Pantalla_Pelicula();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Pantalla_Pelicula() {
+	public Pantalla_Pelicula(Controlador c1, boolean tipo) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 837, 690);
 		
@@ -94,6 +73,10 @@ public class Pantalla_Pelicula extends JFrame {
 		btnCrearReview = new JButton("Crear Review");
 		btnCrearReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				CrearReview cr=new CrearReview(c1);
+				cr.setVisible(true);
+				
+				Pantalla_Pelicula.this.dispose();
 			}
 		});
 		btnCrearReview.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -114,31 +97,21 @@ public class Pantalla_Pelicula extends JFrame {
 		panelReviewsU = new JPanel();
 		panelReviewsU.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.RED, Color.RED));
 		
-		scrollPane_2 = new JScrollPane();
+		lblComentariosDelReview = new JLabel("Comentarios del Review");
+		lblComentariosDelReview.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		btnPublicar = new JButton("Publicar");
-		btnPublicar.setFont(new Font("Tahoma", Font.BOLD, 16));
-		
-		lblPublicarComentario = new JLabel("Publicar Comentario:");
-		lblPublicarComentario.setFont(new Font("Tahoma", Font.BOLD, 20));
+		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_panelReviewsUsuarios = new GroupLayout(panelReviewsUsuarios);
 		gl_panelReviewsUsuarios.setHorizontalGroup(
 			gl_panelReviewsUsuarios.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelReviewsUsuarios.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panelReviewsUsuarios.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelReviewsUsuarios.createSequentialGroup()
-							.addGroup(gl_panelReviewsUsuarios.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panelReviewsUsuarios.createSequentialGroup()
-									.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnPublicar, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
-								.addComponent(panelReviewsU, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
-								.addComponent(panelTituloUsuarios, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
-							.addContainerGap())
-						.addGroup(gl_panelReviewsUsuarios.createSequentialGroup()
-							.addComponent(lblPublicarComentario, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-							.addGap(312))))
+					.addGroup(gl_panelReviewsUsuarios.createParallelGroup(Alignment.TRAILING)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+						.addComponent(panelReviewsU, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+						.addComponent(panelTituloUsuarios, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+						.addComponent(lblComentariosDelReview, Alignment.LEADING))
+					.addContainerGap())
 		);
 		gl_panelReviewsUsuarios.setVerticalGroup(
 			gl_panelReviewsUsuarios.createParallelGroup(Alignment.LEADING)
@@ -146,55 +119,85 @@ public class Pantalla_Pelicula extends JFrame {
 					.addContainerGap()
 					.addComponent(panelTituloUsuarios, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelReviewsU, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panelReviewsU, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblComentariosDelReview)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblPublicarComentario, GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panelReviewsUsuarios.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panelReviewsUsuarios.createSequentialGroup()
-							.addGap(22)
-							.addComponent(btnPublicar, GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-							.addGap(31))
-						.addGroup(gl_panelReviewsUsuarios.createSequentialGroup()
-							.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-							.addContainerGap())))
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		
-		textArea = new JTextArea();
-		scrollPane_2.setViewportView(textArea);
+		JTextArea textComentarios = new JTextArea();
+		scrollPane.setViewportView(textComentarios);
 		panelReviewsU.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		scrollPane_1 = new JScrollPane();
 		panelReviewsU.add(scrollPane_1);
 		
-		textReviewsUsuarios = new JTextArea();
-		textReviewsUsuarios.setEditable(false);
-		scrollPane_1.setViewportView(textReviewsUsuarios);
+		textSinopsis = new JTextArea();
+		textSinopsis.setEditable(false);
+		scrollPane_1.setViewportView(textSinopsis);
 		
-		lblComentariosDeLos = new JLabel("Rewiews de los Usuarios:");
-		lblComentariosDeLos.setFont(new Font("Tahoma", Font.BOLD, 17));
-		panelTituloUsuarios.add(lblComentariosDeLos);
+		lblSinopsis = new JLabel("Sinopsis");
+		lblSinopsis.setFont(new Font("Tahoma", Font.BOLD, 17));
+		panelTituloUsuarios.add(lblSinopsis);
 		panelReviewsUsuarios.setLayout(gl_panelReviewsUsuarios);
-		
-		panelValorar = new JPanel();
-		panelValorar.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		panelAgregarDatos = new JPanel();
 		panelAgregarDatos.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		
+		JLabel lblCrearComentario = new JLabel("Comentar Review");
+		lblCrearComentario.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		JTextArea textCreacion = new JTextArea();
+		
+		JComboBox comboNota = new JComboBox();
+		
+		JButton btnComentar = new JButton("Comentar");
+		btnComentar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comprobarRellenos(textCreacion.getText(), comboNota.getSelectedItem().toString()))
+				{
+					int valor=Integer.parseInt(comboNota.getSelectedItem().toString());
+					
+					if (c1.crearComentario(textCreacion.getText(), valor))
+					{
+						JOptionPane.showMessageDialog(Pantalla_Pelicula.this, "Comentario guardado");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(Pantalla_Pelicula.this, "Error al guardar el comentario, inténtelo de nuevo");
+					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(Pantalla_Pelicula.this, "Debes introducir un texto y una valoración para guardar tu comentario");
+				}
+			}
+		});
 		GroupLayout gl_contentPantallaPelicula = new GroupLayout(contentPantallaPelicula);
 		gl_contentPantallaPelicula.setHorizontalGroup(
 			gl_contentPantallaPelicula.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panelValorar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+					.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
-							.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panelPelicula, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-								.addComponent(panelAgregarDatos, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+							.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.LEADING)
+								.addComponent(panelAgregarDatos, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+								.addComponent(panelPelicula, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+								.addComponent(lblCrearComentario))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panelReviewsUsuarios, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)))
-					.addGap(3))
+							.addComponent(panelReviewsUsuarios, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+							.addGap(3))
+						.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
+							.addComponent(textCreacion, GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+							.addContainerGap())))
+				.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
+					.addGap(594)
+					.addComponent(comboNota, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnComentar, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		gl_contentPantallaPelicula.setVerticalGroup(
 			gl_contentPantallaPelicula.createParallelGroup(Alignment.LEADING)
@@ -202,22 +205,30 @@ public class Pantalla_Pelicula extends JFrame {
 					.addContainerGap()
 					.addComponent(panelPelicula, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelReviewsUsuarios, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-						.addComponent(panelAgregarDatos, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
+					.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
+							.addComponent(panelReviewsUsuarios, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(18))
+						.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
+							.addComponent(panelAgregarDatos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblCrearComentario)
+							.addGap(5)))
+					.addComponent(textCreacion, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelValorar, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-					.addGap(80))
+					.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboNota, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnComentar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
 		);
 		
-		lblNombre_1 = new JLabel("Nombre:");
-		lblNombre_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNombre_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo = new JLabel("Nombre:");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		textNombreReview = new JTextField();
-		textNombreReview.setEditable(false);
-		textNombreReview.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textNombreReview.setColumns(10);
+		textTitulo = new JTextField();
+		textTitulo.setEditable(false);
+		textTitulo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textTitulo.setColumns(10);
 		
 		labelValoracion = new JLabel("Valoracion Media:");
 		labelValoracion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -228,97 +239,112 @@ public class Pantalla_Pelicula extends JFrame {
 		textValoracionMedia.setEditable(false);
 		textValoracionMedia.setColumns(10);
 		
-		btnVerNetflix = new JButton("Ver en Netfilx");
+		JLabel lblDirector = new JLabel("Director:");
+		lblDirector.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDirector.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		buttonComprarAmazon = new JButton("Comprar en Amazon");
+		textDirec = new JTextField();
+		textDirec.setEditable(false);
+		textDirec.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textDirec.setColumns(10);
 		
-		buttonComprarEntradas = new JButton("Comprar Entradas");
+		lblDuracin = new JLabel("Duraci\u00F3n: ");
+		lblDuracin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDuracin.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		textDuracin = new JTextField();
+		textDuracin.setEditable(false);
+		textDuracin.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textDuracin.setColumns(10);
+		
+		lblProductora = new JLabel("Productora: ");
+		lblProductora.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProductora.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		textProductora = new JTextField();
+		textProductora.setEditable(false);
+		textProductora.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textProductora.setColumns(10);
+		
+		JButton btnEditarReview = new JButton("Editar");
+		btnEditarReview.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textDirec.setEditable(true);
+				textDuracin.setEditable(true);
+				textProductora.setEditable(true);
+			}
+		});
+		
+		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tipo==true)
+				{
+					int duracion=Integer.parseInt(textDuracin.getText());
+					
+					c1.actualizarPelicula(textDirec.getText(), duracion, textProductora.getText());
+				}
+				else
+				{
+					int temporadas=Integer.parseInt(textDirec.getText());
+					int duracion=Integer.parseInt(textDuracin.getText());
+					
+					c1.actualizarSerie(temporadas, duracion, textProductora.getText());
+				}
+			}
+		});
 		GroupLayout gl_panelAgregarDatos = new GroupLayout(panelAgregarDatos);
 		gl_panelAgregarDatos.setHorizontalGroup(
 			gl_panelAgregarDatos.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAgregarDatos.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelAgregarDatos.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnVerNetflix, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-						.addComponent(textNombreReview, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-						.addComponent(lblNombre_1, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+						.addComponent(lblProductora, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+						.addComponent(textDuracin, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+						.addComponent(textTitulo, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+						.addComponent(lblTitulo, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
 						.addComponent(labelValoracion, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-						.addComponent(textValoracionMedia, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-						.addComponent(buttonComprarAmazon, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-						.addComponent(buttonComprarEntradas, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+						.addComponent(textValoracionMedia, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+						.addComponent(lblDirector, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+						.addComponent(textDirec, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+						.addComponent(lblDuracin, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+						.addComponent(textProductora, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+						.addGroup(gl_panelAgregarDatos.createSequentialGroup()
+							.addComponent(btnEditarReview, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnConfirmar)))
 					.addContainerGap())
 		);
 		gl_panelAgregarDatos.setVerticalGroup(
 			gl_panelAgregarDatos.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAgregarDatos.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNombre_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblTitulo, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textNombreReview, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addComponent(textTitulo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(labelValoracion, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textValoracionMedia, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnVerNetflix, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(buttonComprarAmazon, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(buttonComprarEntradas, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(38, Short.MAX_VALUE))
+					.addComponent(textValoracionMedia, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblDirector)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textDirec, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblDuracin)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textDuracin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblProductora)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textProductora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panelAgregarDatos.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnEditarReview)
+						.addComponent(btnConfirmar))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panelAgregarDatos.setLayout(gl_panelAgregarDatos);
-		panelValorar.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		panelPublicarComentarios = new JPanel();
-		panelPublicarComentarios.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		
-		panelValorar1 = new JPanel();
-		panelValorar1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.RED, Color.RED));
-		
-		comboBoxMedia = new JComboBox();
-		comboBoxMedia.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		comboBoxMedia.addItem(1);
-		comboBoxMedia.addItem(2);
-		comboBoxMedia.addItem(3);
-		comboBoxMedia.addItem(4);
-		comboBoxMedia.addItem(5);
-		
-		
-		btnValorar = new JButton("Valorar");
-		GroupLayout gl_panelPublicarComentarios = new GroupLayout(panelPublicarComentarios);
-		gl_panelPublicarComentarios.setHorizontalGroup(
-			gl_panelPublicarComentarios.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelPublicarComentarios.createSequentialGroup()
-					.addGap(13)
-					.addComponent(panelValorar1, GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-					.addGap(29)
-					.addComponent(comboBoxMedia, 0, 191, Short.MAX_VALUE)
-					.addGap(28)
-					.addComponent(btnValorar, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_panelPublicarComentarios.setVerticalGroup(
-			gl_panelPublicarComentarios.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelPublicarComentarios.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panelPublicarComentarios.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelValorar1, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panelPublicarComentarios.createSequentialGroup()
-							.addGap(9)
-							.addGroup(gl_panelPublicarComentarios.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnValorar, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBoxMedia, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))))
-					.addGap(27))
-		);
-		panelValorar1.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		lblValorar = new JLabel("Valorar");
-		panelValorar1.add(lblValorar);
-		lblValorar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblValorar.setFont(new Font("Tahoma", Font.BOLD, 16));
-		panelPublicarComentarios.setLayout(gl_panelPublicarComentarios);
-		panelValorar.add(panelPublicarComentarios);
 		
 		lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 22));
@@ -357,5 +383,60 @@ public class Pantalla_Pelicula extends JFrame {
 		panelPortada.setLayout(gl_panelPortada);
 		panelPelicula.setLayout(gl_panelPelicula);
 		contentPantallaPelicula.setLayout(gl_contentPantallaPelicula);
+		
+		textSinopsis.setLineWrap(true);
+		textComentarios.setLineWrap(true);
+		textCreacion.setLineWrap(true);
+		
+		comboNota.addItem("");
+		comboNota.addItem("0");
+		comboNota.addItem("1");
+		comboNota.addItem("2");
+		comboNota.addItem("3");
+		comboNota.addItem("4");
+		comboNota.addItem("5");
+		comboNota.addItem("6");
+		comboNota.addItem("7");
+		comboNota.addItem("8");
+		comboNota.addItem("9");
+		comboNota.addItem("10");
+		
+		if (!tipo)
+		{
+			lblDirector.setText("Temporadas: ");
+			c1.datosSerie(textTitulo, textValoracionMedia, textDirec, textDuracin, textProductora, textSinopsis);
+		}
+		else
+		{
+			c1.datosPelicula(textTitulo, textValoracionMedia, textDirec, textDuracin, textProductora, textSinopsis);
+		}
+		
+		mnNombreUsuario.setText(c1.getUserLogged().getAlias());
+		
+		mntmPerfil = new JMenuItem("Perfil");
+		mntmPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla_Usuario pu1=new Pantalla_Usuario(c1);
+				pu1.setVisible(true);
+				
+				Pantalla_Pelicula.this.dispose();
+			}
+		});
+		mnNombreUsuario.add(mntmPerfil);
+		c1.mostrarComentarios(textComentarios);
+		
+		
+	}
+	
+	public boolean comprobarRellenos(String texto, String valoracion)
+	{
+		if (texto.length()>0 && valoracion.length()>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

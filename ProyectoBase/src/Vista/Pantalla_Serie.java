@@ -68,25 +68,6 @@ public class Pantalla_Serie extends JFrame {
 	private JTextArea textCrearComentarios;
 	private JComboBox comboBoxMedia;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Pantalla_Pelicula frame = new Pantalla_Pelicula();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Pantalla_Serie() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 837, 690);

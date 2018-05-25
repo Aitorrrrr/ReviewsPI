@@ -477,7 +477,7 @@ public class Pantalla_Usuario extends JFrame {
 		btnActuEmail.add(button_3, gbc_button_3);
 		
 		c1.datosUser(textUser, textNombre, textApell, textEmail, comboGenero);
-		c1.buscarComentario("1", textComentarios);
+		c1.mostrarComentariosUser(textComentarios);
 
 	}
 	

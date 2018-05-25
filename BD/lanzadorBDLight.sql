@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS usuario (
 CREATE TABLE IF NOT EXISTS review (
   idReview int(11) NOT NULL AUTO_INCREMENT,
   idUser int(11) NOT NULL,
-  Titulo varchar(45) NOT NULL,
+  Titulo varchar(45) NOT NULL UNIQUE,
   Sinopsis varchar(200) NOT NULL,
   ValMedia decimal(2,0) NOT NULL DEFAULT 0,
   PRIMARY KEY (`idReview`), FOREIGN KEY (idUser) REFERENCES usuario (idUser));

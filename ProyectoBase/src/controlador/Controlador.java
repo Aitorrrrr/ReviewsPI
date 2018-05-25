@@ -22,6 +22,7 @@ public class Controlador {
 	private SerieBD seriebd;
 	
 	private Usuario user;
+	private Review review;
 	
 	public Controlador()
 	{
@@ -44,6 +45,10 @@ public class Controlador {
 		this.user=new Usuario(id, Alias);
 	}
 	
+	public void reviewBuscado(int id, String tit)
+	{
+		this.review=new Review (id, tit);
+	}
 	
 	//Métodos para manejar la conexión
 	public boolean conectar()
@@ -162,11 +167,29 @@ public class Controlador {
 	
 	
 	//Métodos para manejar ComentarioBD
-	public void buscarComentario(String id, JTextArea jarea)
+	public void mostrarComentarios(JTextArea jarea)
 	{
 		this.conectar();
-		this.comenbd.MostrarComentariosUsuario(id, this.cbd, jarea);
+		this.comenbd.MostrarComentarios(this.review.getIdReview(), this.cbd, jarea);
 		this.desconectar();
+	}
+	
+	public void mostrarComentariosUser(JTextArea jarea)
+	{
+		this.conectar();
+		this.comenbd.mostrarComentariosUser(this.user.getIdUser(), this.cbd, jarea);
+		this.desconectar();
+	}
+	
+	public boolean crearComentario(String texto, int valoracion)
+	{
+		boolean correcto;
+		
+		this.conectar();
+		correcto=this.comenbd.crearComentario(texto, valoracion, this.user.getIdUser(), this.review.getIdReview(), cbd);
+		this.desconectar();
+		
+		return correcto;
 	}
 	
 	public int buscarGenero(String nomGen)
@@ -188,47 +211,122 @@ public class Controlador {
 	}
 	
 	//Métodos para manejar Reviews BD
-	public void insertarPelicula(String Titulo, String Sinopsis, String director, String productora, int duracion, int idGen)
+	public boolean tipoReview(String titulo)
+	{
+		boolean tipo;
+		
+		this.conectar();
+		tipo=this.rbd.tipoReview(cbd, titulo);
+		this.desconectar();
+		
+		return tipo;
+	}
+	
+	public int idReview(String titulo)
 	{
 		int idReview;
+		
+		this.conectar();
+		idReview=this.rbd.idReview(cbd, titulo);
+		this.desconectar();
+		
+		return idReview;
+	}
+	
+	public boolean insertarPelicula(String Titulo, String Sinopsis, String director, String productora, int duracion, int idGen)
+	{
+		int idReview;
+		boolean correcto;
 		
 		this.conectar();
 		idReview=this.rbd.insertarReview(this.user.getIdUser(), Titulo, Sinopsis, cbd);
-		this.pelibd.insertarPelis(idReview, director, productora, duracion, idGen, cbd);
+		correcto=this.pelibd.insertarPelis(idReview, director, productora, duracion, idGen, cbd);
 		this.desconectar();
+		
+		return correcto;
 	}
 	
-	public void insertarSerie(String titulo, String sinopsis, int temporadas, int duracion, String productora, int idGen)
+	public boolean insertarSerie(String titulo, String sinopsis, int temporadas, int duracion, String productora, int idGen)
 	{
 		int idReview;
+		boolean correcto;
 		
 		this.conectar();
 		idReview=this.rbd.insertarReview(this.user.getIdUser(), titulo, sinopsis, cbd);
-		this.seriebd.insertarSerie(idReview, temporadas, productora, duracion, idGen, cbd);
+		correcto=this.seriebd.insertarSerie(idReview, temporadas, productora, duracion, idGen, cbd);
+		this.desconectar();
+		
+		return correcto;
+	}
+	
+	public boolean buscarReview(String tit, JLabel j1, JTextField j2, JTextField j3) 
+	{
+		boolean correcto;
+		
+		this.conectar();
+		correcto=rbd.buscarReview(cbd, tit, j1, j2, j3);
+		this.desconectar();
+		
+		return correcto;
+	}
+	
+	public boolean buscarPelicula(String tit, JLabel j1, JTextField j2, JTextField j3) 
+	{
+		boolean correcto;
+		
+		this.conectar();
+		correcto=this.pelibd.buscarPelicula(cbd, tit, j1, j2, j3);
+		this.desconectar();
+		
+		return correcto;
+	}
+	
+	public boolean buscarSerie(String tit, JLabel j1, JTextField j2, JTextField j3) 
+	{
+		boolean correcto;
+		
+		this.conectar();
+		correcto=this.seriebd.buscarSerie(cbd, tit, j1, j2, j3);
+		this.desconectar();
+		
+		return correcto;
+	}
+	
+	public void datosPelicula(JTextField j1,  JTextField j2,  JTextField j3,  JTextField j4,  JTextField j5, JTextArea jarea)
+	{
+		this.conectar();
+		this.pelibd.datosPelicula(cbd, this.review.getIdReview(), j1, j2, j3, j4, j5, jarea);
 		this.desconectar();
 	}
 	
-	public void buscarReview(String tit, JLabel j1, JTextField j2, JTextField j3) 
+	public void datosSerie(JTextField j1,  JTextField j2,  JTextField j3,  JTextField j4,  JTextField j5, JTextArea jarea)
 	{
 		this.conectar();
-		rbd.buscarReview(cbd, tit, j1, j2, j3);
+		this.seriebd.datosSerie(cbd, this.review.getIdReview(), j1, j2, j3, j4, j5, jarea);
 		this.desconectar();
 	}
 	
-	
-	
-	//Métodos para buscar reviews?
-	public void buscarPelicula(String tit, JLabel j1, JTextField j2, JTextField j3) 
+	public void actualizarPelicula(String director, int duracion, String productora)
 	{
 		this.conectar();
-		this.pelibd.buscarPelicula(cbd, tit, j1, j2, j3);
+		this.pelibd.actualizarPelicula(cbd, this.review.getIdReview(), director, duracion, productora);
 		this.desconectar();
 	}
 	
-	public void buscarSerie(String tit, JLabel j1, JTextField j2, JTextField j3) 
+	public void actualizarSerie(int temporadas, int duracion, String productora)
 	{
 		this.conectar();
-		this.seriebd.buscarSerie(cbd, tit, j1, j2, j3);
+		this.seriebd.actualizarSerie(cbd, this.review.getIdReview(), temporadas, duracion, productora);
 		this.desconectar();
+	}
+	
+	public Usuario getUserLogged()
+	{
+		return this.user;
+	}
+	
+	public Review getReview()
+	{
+		return this.review;
 	}
 }

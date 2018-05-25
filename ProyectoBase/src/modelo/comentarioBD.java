@@ -9,8 +9,7 @@ import javax.swing.JTextField;
 import Vista.Pantalla_Usuario;
 
 public class comentarioBD {
-	Calendar fecha=Calendar.getInstance();
-	Calendar calendario = new GregorianCalendar();
+
 	private static Statement state;
 	
 	public comentarioBD()
@@ -18,40 +17,64 @@ public class comentarioBD {
 		this.state=null;
 	}
 	
-	public String crearComentario(String idComentario, Calendar fecha, String hora, String texto, int valoracion, int idUser, int idReview, ConexionBD conbd1)
+	public boolean crearComentario(String texto, int valoracion, int idUser, int idReview, ConexionBD conbd1)
 	{
-		ResultSet rs1;
 		try
 		{
 			state=conbd1.getConexion().createStatement();
-			String sql1="INSERT INTO Comentario (idComentario, Texto, Valoracion, idUser, idReview) values ('"+idComentario+"','"+texto+"', '"+valoracion+"', '"+idUser+"', '"+idReview+"')";
+			String sql="INSERT INTO Comentario (Texto, Valoracion, idUser, idReview) values ('"+texto+"', '"+valoracion+"', '"+idUser+"', '"+idReview+"')";
+			
+			state.executeUpdate(sql);
+			
+			return true;
 		}
 		catch (SQLException sql1)
 		{
 			sql1.printStackTrace();
-			return null;
+			return false;
 		}
-		return texto;
 	}
 	
-	public void MostrarComentariosUsuario(String idUser, ConexionBD conbd2, JTextArea text)
+	public void MostrarComentarios(int idReview, ConexionBD conbd2, JTextArea text)
 	{
 		ResultSet rs2;
 		try
 		{
 			state=conbd2.getConexion().createStatement();
-			String sql2="Select Texto from Comentario where idUser='"+idUser+"'";
+			String sql2="Select Texto from Comentario where idReview='"+idReview+"'";
 			
 			rs2=state.executeQuery(sql2);
 			
 			while (rs2.next())
 			{
-					text.setText(text.getText()+rs2.getString(1)+"\n\n");
+				text.setText(text.getText()+rs2.getString(1)+"\n\n");
 			}
 		}
 		catch (SQLException sql2)
 		{
 			sql2.printStackTrace();
 		}
+	}
+	
+	public void mostrarComentariosUser(int id, ConexionBD cbd, JTextArea text)
+	{
+		ResultSet rs2;
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			String sql2="Select Texto from Comentario where idUser='"+id+"'";
+			
+			rs2=state.executeQuery(sql2);
+			
+			while (rs2.next())
+			{
+				text.setText(text.getText()+rs2.getString(1)+"\n\n");
+			}
+		}
+		catch (SQLException sql2)
+		{
+			sql2.printStackTrace();
+		}
+		
 	}
 }

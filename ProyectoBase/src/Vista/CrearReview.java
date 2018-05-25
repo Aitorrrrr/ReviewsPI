@@ -203,7 +203,14 @@ public class CrearReview extends JFrame {
 						{
 							int duracion=Integer.parseInt(textDuracion.getText());
 							
-							c1.insertarPelicula(textTitulo.getText(), txtSinopsis.getText(), textDirector.getText(), textProduc.getText(), duracion, c1.buscarGenero(comboGenero.getSelectedItem().toString()));
+							if (c1.insertarPelicula(textTitulo.getText(), txtSinopsis.getText(), textDirector.getText(), textProduc.getText(), duracion, c1.buscarGenero(comboGenero.getSelectedItem().toString())))
+							{
+								JOptionPane.showMessageDialog(CrearReview.this, "Película insertada con éxito");
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(CrearReview.this, "Ha habido un error en la inserción, inténtelo de nuevo");
+							}
 						}
 						else
 						{
@@ -218,7 +225,14 @@ public class CrearReview extends JFrame {
 							int temporadas=Integer.parseInt(textDirector.getText());
 							int duracion=Integer.parseInt(textDuracion.getText());
 							
-							c1.insertarSerie(textTitulo.getText(), txtSinopsis.getText(), temporadas, duracion, textProduc.getText(), c1.buscarGenero(comboGenero.getSelectedItem().toString()));
+							if (c1.insertarSerie(textTitulo.getText(), txtSinopsis.getText(), temporadas, duracion, textProduc.getText(), c1.buscarGenero(comboGenero.getSelectedItem().toString())))
+							{
+								JOptionPane.showMessageDialog(CrearReview.this, "Serie insertada con éxito");
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(CrearReview.this, "Ha habido un error en la inserción, inténtelo de nuevo");
+							}
 						}
 						else
 						{
@@ -255,8 +269,9 @@ public class CrearReview extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Pantalla_Pelicula pant=new Pantalla_Pelicula();
-				pant.setVisible(true);
+				PantallaBusqueda pb1=new PantallaBusqueda(c1);
+				pb1.setVisible(true);
+				
 				CrearReview.this.dispose();
 			}
 		});

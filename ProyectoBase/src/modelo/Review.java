@@ -3,16 +3,27 @@ package modelo;
 public class Review {
 
 	private int idReview;
-	private String Autor;
 	private Usuario idUser;
 	private String Titulo;
-	private double ValMedia;
-	
-
+	private String sinopsis;
 	
 	public Review()
 	{
+		
+	}
+	
+	public Review(int id, String tit)
+	{
+		this.idReview=id;
+		this.Titulo=tit;
+	}
+	
+	public String getSinopsis() {
+		return sinopsis;
+	}
 
+	public void setSinopsis(String sinopsis) {
+		this.sinopsis = sinopsis;
 	}
 
 	public int getIdReview() {
@@ -21,14 +32,6 @@ public class Review {
 
 	public void setIdReview(int idReview) {
 		this.idReview = idReview;
-	}
-
-	public String getAutor() {
-		return Autor;
-	}
-
-	public void setAutor(String autor) {
-		Autor = autor;
 	}
 
 	public Usuario getIdUser() {
@@ -46,18 +49,4 @@ public class Review {
 	public void setTitulo(String titulo) {
 		Titulo = titulo;
 	}
-
-	public double getValMedia() {
-		return ValMedia;
-	}
-
-	public void setValMedia(double valMedia) {
-		ValMedia = valMedia;
-	}
-	
-	
-	
-	
-	
-	
 }

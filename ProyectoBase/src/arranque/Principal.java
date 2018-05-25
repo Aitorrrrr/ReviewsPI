@@ -14,14 +14,8 @@ public class Principal {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Controlador c1=new Controlador();
-		c1.primeraConex();
-		c1.desconectar();
-		
-		c1.userLogged(1, "Homer");
-		
-		CrearReview cr1=new CrearReview(c1);
-		cr1.setVisible(true);
+		ElegirIdioma ei1=new ElegirIdioma();
+		ei1.setVisible(true);
 	}
-
 }
+    
