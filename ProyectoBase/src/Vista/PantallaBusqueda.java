@@ -69,6 +69,7 @@ public class PantallaBusqueda extends JFrame {
 	
 	private boolean peliculas;
 	private boolean series;
+	private JMenuItem mntmPerfil;
 	
 	public PantallaBusqueda(Controlador c1) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaBusqueda.class.getResource("/assets/ico.png")));
@@ -93,6 +94,17 @@ public class PantallaBusqueda extends JFrame {
 		setContentPane(contenedorPrincipal);
 		
 		menuUsuario.setText(c1.getUserLogged().getAlias());
+		
+		mntmPerfil = new JMenuItem("Perfil");
+		mntmPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pantalla_Usuario pu1=new Pantalla_Usuario(c1);
+				pu1.setVisible(true);
+				
+				dispose();
+			}
+		});
+		menuUsuario.add(mntmPerfil);
 		
 		JPanel contenedorMenu = new JPanel();
 		contenedorMenu.setBackground(new Color(38, 38, 38));

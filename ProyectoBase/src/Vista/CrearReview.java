@@ -16,6 +16,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EtchedBorder;
 
 import controlador.Controlador;
+import modelo.Idioma;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -29,8 +30,12 @@ import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class CrearReview extends JFrame {
+	
+	Idioma idio = new Idioma();
 
 	private JPanel contentPane;
 	private JPanel panelTitulo;
@@ -53,6 +58,8 @@ public class CrearReview extends JFrame {
 	private JLabel lblGnero;
 
 	public CrearReview(Controlador c1) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CrearReview.class.getResource("/assets/ico.png")));
+		setTitle("REVIEWX");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 601);
 		contentPane = new JPanel();
@@ -100,25 +107,28 @@ public class CrearReview extends JFrame {
 					.addContainerGap())
 		);
 		
-		lblTitulo = new JLabel("Titulo: ");
+		lblTitulo = new JLabel(idio.traduz("review_title"));
+		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		textTitulo = new JTextField();
 		textTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textTitulo.setColumns(10);
 		
-		lblSinopsis = new JLabel("Sinopsis:");
+		lblSinopsis = new JLabel(idio.traduz("review_sinopsis"));
+		lblSinopsis.setForeground(Color.WHITE);
 		lblSinopsis.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		txtSinopsis = new JTextArea();
 		
-		lblTipo = new JLabel("Tipo");
+		lblTipo = new JLabel(idio.traduz("review_type"));
+		lblTipo.setForeground(Color.WHITE);
 		lblTipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JComboBox comboTipo = new JComboBox();
 		comboTipo.addItem("");
-		comboTipo.addItem("Pelicula");
-		comboTipo.addItem("Serie");
+		comboTipo.addItem(idio.traduz("type_movie"));
+		comboTipo.addItem(idio.traduz("type_show"));
 		comboTipo.setSelectedItem("");
 		
 		comboTipo.addActionListener(new ActionListener() {
@@ -171,13 +181,16 @@ public class CrearReview extends JFrame {
 			}
 		});
 		
-		lblDirector = new JLabel("Director: ");
+		lblDirector = new JLabel(idio.traduz("review_director"));
+		lblDirector.setForeground(Color.WHITE);
 		lblDirector.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		lblDuracin = new JLabel("Duraci\u00F3n: ");
+		lblDuracin = new JLabel(idio.traduz("review_length"));
+		lblDuracin.setForeground(Color.WHITE);
 		lblDuracin.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		lblProductora = new JLabel("Productora: ");
+		lblProductora = new JLabel(idio.traduz("review_producer"));
+		lblProductora.setForeground(Color.WHITE);
 		lblProductora.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		textProduc = new JTextField();
@@ -192,7 +205,8 @@ public class CrearReview extends JFrame {
 		textDirector.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textDirector.setColumns(10);
 		
-		btnCrearReview = new JButton("Crear Review");
+		btnCrearReview = new JButton(idio.traduz("review_create_button"));
+		btnCrearReview.setBackground(Color.WHITE);
 		btnCrearReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (camposRellenados(textTitulo.getText(), txtSinopsis.getText(), textDirector.getText(), textDuracion.getText(), textProduc.getText(), comboGenero.getSelectedItem().toString()))
@@ -247,7 +261,8 @@ public class CrearReview extends JFrame {
 			}
 		});
 		
-		btnReestablecer = new JButton("Reestablecer");
+		btnReestablecer = new JButton(idio.traduz("review_restore_button"));
+		btnReestablecer.setBackground(Color.WHITE);
 		btnReestablecer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				textTitulo.setText(null);
@@ -260,13 +275,15 @@ public class CrearReview extends JFrame {
 			}
 		});
 		
-		lblGnero = new JLabel("G\u00E9nero:");
+		lblGnero = new JLabel(idio.traduz("review_genre"));
+		lblGnero.setForeground(Color.WHITE);
 		lblGnero.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		comboGenero = new JComboBox();
 		comboGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton(idio.traduz("review_back_button"));
+		btnVolver.setBackground(Color.WHITE);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PantallaBusqueda pb1=new PantallaBusqueda(c1);
@@ -359,7 +376,8 @@ public class CrearReview extends JFrame {
 		panelDatos.setLayout(gl_panelDatos);
 		panelTitulo.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		lblCreacinReview = new JLabel("Creaci\u00F3n Review");
+		lblCreacinReview = new JLabel(idio.traduz("review_creation"));
+		lblCreacinReview.setForeground(Color.WHITE);
 		lblCreacinReview.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCreacinReview.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelTitulo.add(lblCreacinReview);

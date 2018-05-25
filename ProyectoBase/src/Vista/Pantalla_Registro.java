@@ -102,6 +102,7 @@ public class Pantalla_Registro extends JFrame {
 		);
 		
 		btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setBackground(Color.WHITE);
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String pw1=new String(passwordContrasena.getPassword());
@@ -129,6 +130,7 @@ public class Pantalla_Registro extends JFrame {
 		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		buttonRestablecer = new JButton("Restablecer");
+		buttonRestablecer.setBackground(Color.WHITE);
 		buttonRestablecer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				textNombre.setText(null);
@@ -144,6 +146,7 @@ public class Pantalla_Registro extends JFrame {
 		buttonRestablecer.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBackground(Color.WHITE);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Login l1=new Login();
@@ -182,7 +185,7 @@ public class Pantalla_Registro extends JFrame {
 		
 		lblDatosOpcionales = new JLabel("Datos Opcionales:");
 		lblDatosOpcionales.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDatosOpcionales.setForeground(Color.RED);
+		lblDatosOpcionales.setForeground(Color.WHITE);
 		lblDatosOpcionales.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GroupLayout gl_panelDatos2 = new GroupLayout(panelDatos2);
 		gl_panelDatos2.setHorizontalGroup(
@@ -207,6 +210,7 @@ public class Pantalla_Registro extends JFrame {
 		panelDatosOpcionales2.setLayout(new GridLayout(8, 1, 0, 0));
 		
 		labelNombreReal = new JLabel("Nombre Real:");
+		labelNombreReal.setForeground(Color.WHITE);
 		labelNombreReal.setHorizontalAlignment(SwingConstants.CENTER);
 		labelNombreReal.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelDatosOpcionales2.add(labelNombreReal);
@@ -218,6 +222,7 @@ public class Pantalla_Registro extends JFrame {
 		panelDatosOpcionales2.add(textNombreReal);
 		
 		labelApellido = new JLabel("Apellido:");
+		labelApellido.setForeground(Color.WHITE);
 		labelApellido.setHorizontalAlignment(SwingConstants.CENTER);
 		labelApellido.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelDatosOpcionales2.add(labelApellido);
@@ -229,6 +234,7 @@ public class Pantalla_Registro extends JFrame {
 		panelDatosOpcionales2.add(textApell);
 		
 		labelGenero = new JLabel("Genero:");
+		labelGenero.setForeground(Color.WHITE);
 		labelGenero.setHorizontalAlignment(SwingConstants.CENTER);
 		labelGenero.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelDatosOpcionales2.add(labelGenero);
@@ -260,6 +266,7 @@ public class Pantalla_Registro extends JFrame {
 		);
 		
 		lblFechaNac = new JLabel("Fecha Nacimiento");
+		lblFechaNac.setForeground(Color.WHITE);
 		lblFechaNac.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFechaNac.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelDatosOpcionales2.add(lblFechaNac);
@@ -308,6 +315,7 @@ public class Pantalla_Registro extends JFrame {
 		panelDatos.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		lblNombre = new JLabel("Nombre de Usuario:");
+		lblNombre.setForeground(Color.WHITE);
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		panelDatos.add(lblNombre);
@@ -319,6 +327,7 @@ public class Pantalla_Registro extends JFrame {
 		textNombre.setColumns(10);
 		
 		lblEmail = new JLabel("Email:");
+		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
 		panelDatos.add(lblEmail);
@@ -330,6 +339,7 @@ public class Pantalla_Registro extends JFrame {
 		textEmail.setColumns(10);
 		
 		lblContrasena = new JLabel("Contrase\u00F1a:");
+		lblContrasena.setForeground(Color.WHITE);
 		lblContrasena.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblContrasena.setHorizontalAlignment(SwingConstants.CENTER);
 		panelDatos.add(lblContrasena);
@@ -340,6 +350,7 @@ public class Pantalla_Registro extends JFrame {
 		panelDatos.add(passwordContrasena);
 		
 		lblRepetirContraseña = new JLabel("Repetir Contrase\u00F1a:");
+		lblRepetirContraseña.setForeground(Color.WHITE);
 		lblRepetirContraseña.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblRepetirContraseña.setHorizontalAlignment(SwingConstants.CENTER);
 		panelDatos.add(lblRepetirContraseña);
@@ -351,7 +362,7 @@ public class Pantalla_Registro extends JFrame {
 		
 		lblDatosObligatorios = new JLabel("Datos Obligatorios:");
 		lblDatosObligatorios.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDatosObligatorios.setForeground(Color.RED);
+		lblDatosObligatorios.setForeground(Color.WHITE);
 		lblDatosObligatorios.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GroupLayout gl_panelTexto = new GroupLayout(panelTexto);
 		gl_panelTexto.setHorizontalGroup(

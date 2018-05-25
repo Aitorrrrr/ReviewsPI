@@ -26,9 +26,14 @@ import javax.swing.JTextArea;
 import javax.swing.JMenu;
 
 import controlador.Controlador;
+import modelo.Idioma;
+
 import javax.swing.JMenuItem;
+import java.awt.Toolkit;
 
 public class Pantalla_Pelicula extends JFrame {
+	
+	Idioma idio = new Idioma();
 
 	private JPanel contentPantallaPelicula;
 	private JPanel panelPelicula;
@@ -58,19 +63,23 @@ public class Pantalla_Pelicula extends JFrame {
 	private JMenuItem mntmPerfil;
 
 	public Pantalla_Pelicula(Controlador c1, boolean tipo) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Pantalla_Pelicula.class.getResource("/assets/ico.png")));
+		setTitle("REVIEWX");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 837, 690);
 		
 		menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(102, 0, 0));
 		setJMenuBar(menuBar);
 		
 		mnNombreUsuario = new JMenu("Nombre de Usuario");
+		mnNombreUsuario.setForeground(Color.WHITE);
 		mnNombreUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		menuBar.add(mnNombreUsuario);
 		mnNombreUsuario.add("Perfil");
 		mnNombreUsuario.add("Salir...");
 		
-		btnCrearReview = new JButton("Crear Review");
+		btnCrearReview = new JButton(idio.traduz("create_review"));
 		btnCrearReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CrearReview cr=new CrearReview(c1);
@@ -82,6 +91,7 @@ public class Pantalla_Pelicula extends JFrame {
 		btnCrearReview.setFont(new Font("Tahoma", Font.BOLD, 20));
 		menuBar.add(btnCrearReview);
 		contentPantallaPelicula = new JPanel();
+		contentPantallaPelicula.setBackground(new Color(38, 38, 38));
 		contentPantallaPelicula.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPantallaPelicula);
 		
@@ -89,15 +99,18 @@ public class Pantalla_Pelicula extends JFrame {
 		panelPelicula.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		panelReviewsUsuarios = new JPanel();
+		panelReviewsUsuarios.setBackground(new Color(38, 38, 38));
 		panelReviewsUsuarios.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		panelTituloUsuarios = new JPanel();
+		panelTituloUsuarios.setBackground(new Color(38, 38, 38));
 		panelTituloUsuarios.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.RED, Color.RED));
 		
 		panelReviewsU = new JPanel();
 		panelReviewsU.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.RED, Color.RED));
 		
-		lblComentariosDelReview = new JLabel("Comentarios del Review");
+		lblComentariosDelReview = new JLabel(idio.traduz("reviwew_coments"));
+		lblComentariosDelReview.setForeground(Color.WHITE);
 		lblComentariosDelReview.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -138,22 +151,27 @@ public class Pantalla_Pelicula extends JFrame {
 		textSinopsis.setEditable(false);
 		scrollPane_1.setViewportView(textSinopsis);
 		
-		lblSinopsis = new JLabel("Sinopsis");
+		lblSinopsis = new JLabel(idio.traduz("movie_sinop_title"));
+		lblSinopsis.setForeground(Color.WHITE);
 		lblSinopsis.setFont(new Font("Tahoma", Font.BOLD, 17));
 		panelTituloUsuarios.add(lblSinopsis);
 		panelReviewsUsuarios.setLayout(gl_panelReviewsUsuarios);
 		
 		panelAgregarDatos = new JPanel();
+		panelAgregarDatos.setBackground(new Color(38, 38, 38));
 		panelAgregarDatos.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
-		JLabel lblCrearComentario = new JLabel("Comentar Review");
+		JLabel lblCrearComentario = new JLabel(idio.traduz("coment_review"));
+		lblCrearComentario.setForeground(Color.WHITE);
 		lblCrearComentario.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JTextArea textCreacion = new JTextArea();
 		
 		JComboBox comboNota = new JComboBox();
 		
-		JButton btnComentar = new JButton("Comentar");
+		JButton btnComentar = new JButton(idio.traduz("coment_button"));
+		btnComentar.setForeground(Color.BLACK);
+		btnComentar.setBackground(Color.WHITE);
 		btnComentar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comprobarRellenos(textCreacion.getText(), comboNota.getSelectedItem().toString()))
@@ -221,7 +239,8 @@ public class Pantalla_Pelicula extends JFrame {
 						.addComponent(btnComentar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
 		);
 		
-		lblTitulo = new JLabel("Nombre:");
+		lblTitulo = new JLabel(idio.traduz("movie_name"));
+		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -230,7 +249,8 @@ public class Pantalla_Pelicula extends JFrame {
 		textTitulo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textTitulo.setColumns(10);
 		
-		labelValoracion = new JLabel("Valoracion Media:");
+		labelValoracion = new JLabel(idio.traduz("movie_rating"));
+		labelValoracion.setForeground(Color.WHITE);
 		labelValoracion.setHorizontalAlignment(SwingConstants.CENTER);
 		labelValoracion.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
@@ -239,7 +259,8 @@ public class Pantalla_Pelicula extends JFrame {
 		textValoracionMedia.setEditable(false);
 		textValoracionMedia.setColumns(10);
 		
-		JLabel lblDirector = new JLabel("Director:");
+		JLabel lblDirector = new JLabel(idio.traduz("movie_director"));
+		lblDirector.setForeground(Color.WHITE);
 		lblDirector.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDirector.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
@@ -248,7 +269,8 @@ public class Pantalla_Pelicula extends JFrame {
 		textDirec.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textDirec.setColumns(10);
 		
-		lblDuracin = new JLabel("Duraci\u00F3n: ");
+		lblDuracin = new JLabel(idio.traduz("movie_length"));
+		lblDuracin.setForeground(Color.WHITE);
 		lblDuracin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDuracin.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
@@ -257,7 +279,8 @@ public class Pantalla_Pelicula extends JFrame {
 		textDuracin.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textDuracin.setColumns(10);
 		
-		lblProductora = new JLabel("Productora: ");
+		lblProductora = new JLabel(idio.traduz("movie_producer"));
+		lblProductora.setForeground(Color.WHITE);
 		lblProductora.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProductora.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
@@ -266,7 +289,9 @@ public class Pantalla_Pelicula extends JFrame {
 		textProductora.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textProductora.setColumns(10);
 		
-		JButton btnEditarReview = new JButton("Editar");
+		JButton btnEditarReview = new JButton(idio.traduz("movie_edit_button"));
+		btnEditarReview.setBackground(Color.WHITE);
+		btnEditarReview.setForeground(Color.BLACK);
 		btnEditarReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				textDirec.setEditable(true);
@@ -275,7 +300,9 @@ public class Pantalla_Pelicula extends JFrame {
 			}
 		});
 		
-		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar = new JButton(idio.traduz("movie_accept_button"));
+		btnConfirmar.setBackground(Color.WHITE);
+		btnConfirmar.setForeground(Color.BLACK);
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (tipo==true)

@@ -44,6 +44,7 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import javax.swing.JMenuItem;
 
 public class Pantalla_Usuario extends JFrame {
 	
@@ -74,6 +75,7 @@ public class Pantalla_Usuario extends JFrame {
 	private JButton btnActuGenero;
 	private JButton button_3;
 	private JButton btnEditGenero;
+	private JMenuItem mntmMenuPrincipal;
 
 	public Pantalla_Usuario(Controlador c1) {
 		
@@ -88,6 +90,17 @@ public class Pantalla_Usuario extends JFrame {
 		JMenu mnNombreUsuario = new JMenu("Nombre de Usuario");
 		mnNombreUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		menuBar.add(mnNombreUsuario);
+		
+		mntmMenuPrincipal = new JMenuItem("Menu principal");
+		mntmMenuPrincipal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaBusqueda pb=new PantallaBusqueda(c1);
+				pb.setVisible(true);
+				
+				dispose();
+			}
+		});
+		mnNombreUsuario.add(mntmMenuPrincipal);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(38, 38, 38));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
