@@ -2,16 +2,44 @@ package modelo;
 
 public class Review {
 
+	// Atributos
+	
+	/**
+	 * Número identificativo del review
+	 */
 	private int idReview;
+	
+	/**
+	 * Número identificativo del usuario que creó el Review
+	 */
 	private Usuario idUser;
+	
+	/** 
+	 * Título del Review
+	 */
 	private String Titulo;
+	
+	/**
+	 * Sinopsis del review
+	 */
 	private String sinopsis;
 	
+	// Contructores
+	
+	/**
+	 * Contructor por defecto para crear objetos Review
+	 */
 	public Review()
 	{
 		
 	}
 	
+	/**
+	 * Constructor parametrizado para crear objetos Review, y usarlos durante la ejecución como información
+	 * 
+	 * @param id
+	 * @param tit
+	 */
 	public Review(int id, String tit)
 	{
 		this.idReview=id;

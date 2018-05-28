@@ -2,40 +2,63 @@ package modelo;
 
 public class Serie extends Review {
 
-
-	private String temporadas;
-	private String dura_cap;
+	// Atributos
+	
+	/**
+	 * Número de temporadas que posee la serie
+	 */
+	private int temporadas;
+	
+	/**
+	 * Duración media de un capítulo, en minutos
+	 */
+	private int duracionCapitulo;
+	
+	/**
+	 * Empresa que produjo la serie
+	 */
 	private String productora;
+	
+	/**
+	 * Número identificativo del género al que pertenece la serie
+	 */
 	private genero idGen;
 	
+	// Constructor
 	
-	public Serie(int idReview, String temporadas,String dura_cap,String productora, genero idGen)
+	/**
+	 * Constructor parametrizado para la creación de un objeto Serie
+	 * 
+	 * @param idReview
+	 * @param temporadas
+	 * @param dura_cap
+	 * @param productora
+	 * @param idGen
+	 */
+	public Serie(int idReview, int temporadas,int dura_cap,String productora, genero idGen)
 	{
 		
 		super();
 		this.temporadas=temporadas;
-		this.dura_cap=dura_cap;
+		this.duracionCapitulo=dura_cap;
 		this.productora=productora;
 		this.idGen=idGen;
-		
-		
-		
 	}
 
-	public String getTemporadas() {
+	public int getTemporadas() {
 		return temporadas;
 	}
 
-	public void setTemporadas(String temporadas) {
+	public void setTemporadas(int temporadas) {
 		this.temporadas = temporadas;
 	}
 
-	public String getDura_cap() {
-		return dura_cap;
+	public int getDura_cap() {
+		return duracionCapitulo;
 	}
 
-	public void setDura_cap(String dura_cap) {
-		this.dura_cap = dura_cap;
+	public void setDura_cap(int dura_cap) {
+		this.duracionCapitulo = dura_cap;
 	}
 
 	public String getProductora() {

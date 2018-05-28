@@ -6,13 +6,35 @@ import javax.swing.JTextField;
 
 public class ReviewBD {
 	
+	// Atributos
+	
+	/**
+	 * Statement para poder lanzar consultas sql
+	 */
 	private Statement state;
 	
+	// Contructor
+	
+	/**
+	 * Constructor por defecto para crear objetos ReviewBD
+	 */
 	public ReviewBD()
 	{
 	
 	}
 	
+	// Métodos públicos
+	
+	/**
+	 * Recibimos por parámetro el título del Review a buscar en la BD
+	 * 
+	 * @param cbd Objeto ConexionBD para reliazar la conexión a la BD
+	 * @param tit Título del review que buscaremos en la BD
+	 * @param titulo JLabel donde mostraremos el titúlo del Review
+	 * @param sinopsis JTextfield donde mostraremos la sinopsis del Review
+	 * @param valmedia JTextField donde mostraremos la valoración media del Review
+	 * @return Devolvemos un boolean, true en caso de existir alguna coincidencia en la BD, false en caso de que no se haya encontrado ningún review con ese título
+	 */
 	public boolean buscarReview(ConexionBD cbd, String tit, JLabel titulo, JTextField sinopsis, JTextField valmedia)
 	{
 		ResultSet rs;
@@ -47,6 +69,13 @@ public class ReviewBD {
 		}
 	}
 	
+	/**
+	 * Método para saber el número de Reviews con ese mismo título (Método en desuso...)
+	 * 
+	 * @param cbd Objeto ConexionBD para reliazar la conexión a la BD
+	 * @param tit Título a buscar en la BD
+	 * @return
+	 */
 	public int numeroReviews(ConexionBD cbd, String tit)
 	{
 		ResultSet rs;
@@ -67,26 +96,17 @@ public class ReviewBD {
 			return 0;
 		}
 	}
-	
-	public void mostrarComentarios(ConexionBD cbd1, JTextField comentarios, String idReview)
-	{
-		ResultSet rs;
-		try
-		{
-			state=cbd1.getConexion().createStatement();
-			String sql="Select texto from comentario where idReview='"+idReview+"'";
-			rs=state.executeQuery(sql);
-			while (rs.next())
-			{
-				comentarios.setText(comentarios.getText()+rs.getString(1)+"\n\n");
-			}
-		}
-		catch (SQLException sqle)
-		{
-			sqle.printStackTrace();
-		}
-	}
 
+	/**
+	 * Método que recibe por parámetro los campos necesarios para crear un Review.
+	 * Lo combinamos con el método de sus hijas para poder definir si es una película o una serie
+	 * 
+	 * @param idUser Número identificativo del usuario que crea el Review
+	 * @param Titulo Titulo del review a crear
+	 * @param Sinopsis Sinopsis del review a crear
+	 * @param conbd8 Objeto ConexionBD para reliazar la conexión a la BD
+	 * @return Devolvemos un int, que es el id del Review para poder pasarselo al método de las hijas, y así continuar con la creación del Review
+	 */
 	public int insertarReview(int idUser, String Titulo, String Sinopsis, ConexionBD conbd8) 
 	{
 		ResultSet rs;
@@ -113,6 +133,13 @@ public class ReviewBD {
 		}
 	}
 	
+	/**
+	 * Método para obtener el id de un Review (Creo que esta en desuso)
+	 * 
+	 * @param cbd Objeto ConexionBD para reliazar la conexión a la BD
+	 * @param titulo Título del Review del cual deseamos su número identificativo
+	 * @return
+	 */
 	public int idReview(ConexionBD cbd, String titulo)
 	{
 		ResultSet rs;
@@ -136,6 +163,14 @@ public class ReviewBD {
 		}
 	}
 	
+	/**
+	 * Método para saber el tipo de Review, como sólo tenemos 2 (Película y serie) no me he complicado demasiado...
+	 * Busco una película, sino hay coincidencias es una serie...
+	 * 
+	 * @param cbd Objeto ConexionBD para reliazar la conexión a la BD
+	 * @param titulo Titulo del Review del que queremos saber el tipo
+	 * @return Devuelvemos un boolean, true si es película, false en caso de ser una serie
+	 */
 	public boolean tipoReview(ConexionBD cbd, String titulo)
 	{
 		ResultSet rs;
