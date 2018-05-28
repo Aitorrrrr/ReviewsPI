@@ -491,7 +491,6 @@ public class Pantalla_Usuario extends JFrame {
 		
 		c1.datosUser(textUser, textNombre, textApell, textEmail, comboGenero);
 		c1.mostrarComentariosUser(textComentarios);
-
 	}
 	
 	public boolean comprobarEmail(String email)

@@ -81,7 +81,7 @@ public class UsuarioBD {
 	 * @param fecha Fecha de nacimiento (Opcional)
 	 * @return Devuelve un entero, 0 en caso de que el alias ya exista, 1 en caso de una inserción correcta, -1 en caso de una excepción SQL
 	 */
-	public int insertarUserV2(ConexionBD cbd, String alias, String nombre, String apellido, String fecha)
+	public int insertarUserV2(ConexionBD cbd, String alias, String pw, String nombre, String apellido, String email)
 	{
 		ResultSet rs;
 		
@@ -99,7 +99,7 @@ public class UsuarioBD {
 			}
 			else
 			{
-				sql="INSERT INTO usuario (Alias, Nombre, Apellido, Fecha_Inscrip) VALUES ('"+alias+"', '"+nombre+"', '"+apellido+"', '"+fecha+"')";
+				sql="INSERT INTO usuario (Alias, Contrasenia, Nombre, Apellido, Email) VALUES ('"+alias+"', '"+pw+"', '"+nombre+"', '"+apellido+"', '"+email+"')";
 				state.executeUpdate(sql);
 				
 				return 1;
@@ -367,6 +367,29 @@ public class UsuarioBD {
 		{
 			sqle.printStackTrace();
 			return -1;
+		}
+	}
+	
+	public boolean esAvanzado (ConexionBD cbd, int id)
+	{
+		ResultSet rs;
+		
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="SELECT esAvanzado FROM usuario WHERE idUser='"+id+"';";
+			
+			rs=state.executeQuery(sql);
+			
+			rs.next();
+			
+			return rs.getBoolean(1);
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+			return false;
 		}
 	}
 }

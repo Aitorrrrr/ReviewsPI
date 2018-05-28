@@ -105,6 +105,8 @@ public class Pantalla_Registro extends JFrame {
 		btnRegistrar.setBackground(Color.WHITE);
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				c1.primeraConex();
+				
 				String pw1=new String(passwordContrasena.getPassword());
 				String pw2=new String(passwordRepetirContrasena.getPassword());
 				
@@ -114,7 +116,18 @@ public class Pantalla_Registro extends JFrame {
 				{
 					if (comprobarEmail(textEmail.getText()))
 					{
+						int bueno;
 						
+						bueno=c1.insertarUserV2(textNombre.getText(), textNombreReal.getText(), textApell.getText(), textEmail.getText(), pw1);
+						
+						if (bueno==1)
+						{
+							JOptionPane.showMessageDialog(Pantalla_Registro.this, "Usuario registrado con éxito");
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(Pantalla_Registro.this, "Ha habido algún problema con el registro");
+						}
 					}
 					else
 					{

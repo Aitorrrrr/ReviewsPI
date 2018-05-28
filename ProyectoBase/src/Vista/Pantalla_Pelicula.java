@@ -61,6 +61,8 @@ public class Pantalla_Pelicula extends JFrame {
 	private JLabel lblComentariosDelReview;
 	private JButton btnConfirmar;
 	private JMenuItem mntmPerfil;
+	private JButton btnVolver;
+	private JButton btnBorrarReview;
 
 	public Pantalla_Pelicula(Controlador c1, boolean tipo) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Pantalla_Pelicula.class.getResource("/assets/ico.png")));
@@ -82,10 +84,28 @@ public class Pantalla_Pelicula extends JFrame {
 		btnCrearReview = new JButton(idio.traduz("create_review"));
 		btnCrearReview.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CrearReview cr=new CrearReview(c1);
-				cr.setVisible(true);
-				
-				Pantalla_Pelicula.this.dispose();
+				if (c1.getUserLogged().getAlias().equals("userpi"))
+				{
+					CrearReview cr1=new CrearReview(c1);
+					cr1.setVisible(true);
+					
+					Pantalla_Pelicula.this.dispose();
+				}
+				else
+				{
+					if (c1.esAvanzado())
+					{
+						CrearReview cr1=new CrearReview(c1);
+						cr1.setVisible(true);
+						
+						Pantalla_Pelicula.this.dispose();
+					}
+					else
+					{
+						int numComentarios=c1.numComentarios();
+						JOptionPane.showMessageDialog(Pantalla_Pelicula.this, "No es un usuario avanzado, le faltan "+(15-numComentarios)+" para llegar a serlo");
+					}
+				}
 			}
 		});
 		btnCrearReview.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -193,6 +213,44 @@ public class Pantalla_Pelicula extends JFrame {
 				}
 			}
 		});
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaBusqueda pb1=new PantallaBusqueda(c1);
+				pb1.setVisible(true);
+				
+				Pantalla_Pelicula.this.dispose();
+			}
+		});
+		
+		btnBorrarReview = new JButton("Borrar Review");
+		btnBorrarReview.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tipo)
+				{
+					if (c1.borrarPelicula())
+					{
+						JOptionPane.showMessageDialog(Pantalla_Pelicula.this, "Borrado con éxito");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(Pantalla_Pelicula.this, "Borrado fallido");
+					}
+				}
+				else
+				{
+					if (c1.borrarSerie())
+					{
+						JOptionPane.showMessageDialog(Pantalla_Pelicula.this, "Borrado con éxito");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(Pantalla_Pelicula.this, "Borrado fallido");
+					}
+				}
+			}
+		});
 		GroupLayout gl_contentPantallaPelicula = new GroupLayout(contentPantallaPelicula);
 		gl_contentPantallaPelicula.setHorizontalGroup(
 			gl_contentPantallaPelicula.createParallelGroup(Alignment.TRAILING)
@@ -201,21 +259,24 @@ public class Pantalla_Pelicula extends JFrame {
 					.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
 							.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.LEADING)
-								.addComponent(panelAgregarDatos, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-								.addComponent(panelPelicula, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+								.addComponent(panelAgregarDatos, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(panelPelicula, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
 								.addComponent(lblCrearComentario))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panelReviewsUsuarios, GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+							.addComponent(panelReviewsUsuarios, GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
 							.addGap(3))
 						.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
 							.addComponent(textCreacion, GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
+							.addComponent(btnVolver)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnBorrarReview)
+							.addGap(396)
+							.addComponent(comboNota, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnComentar, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
 							.addContainerGap())))
-				.addGroup(gl_contentPantallaPelicula.createSequentialGroup()
-					.addGap(594)
-					.addComponent(comboNota, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnComentar, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-					.addContainerGap())
 		);
 		gl_contentPantallaPelicula.setVerticalGroup(
 			gl_contentPantallaPelicula.createParallelGroup(Alignment.LEADING)
@@ -236,7 +297,9 @@ public class Pantalla_Pelicula extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPantallaPelicula.createParallelGroup(Alignment.BASELINE)
 						.addComponent(comboNota, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnComentar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(btnComentar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnVolver)
+						.addComponent(btnBorrarReview)))
 		);
 		
 		lblTitulo = new JLabel(idio.traduz("movie_name"));
@@ -305,19 +368,29 @@ public class Pantalla_Pelicula extends JFrame {
 		btnConfirmar.setForeground(Color.BLACK);
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (tipo==true)
+				
+				if (c1.esAvanzado())
 				{
-					int duracion=Integer.parseInt(textDuracin.getText());
-					
-					c1.actualizarPelicula(textDirec.getText(), duracion, textProductora.getText());
+					if (tipo==true)
+					{
+						int duracion=Integer.parseInt(textDuracin.getText());
+						
+						c1.actualizarPelicula(textDirec.getText(), duracion, textProductora.getText());
+					}
+					else
+					{
+						int temporadas=Integer.parseInt(textDirec.getText());
+						int duracion=Integer.parseInt(textDuracin.getText());
+						
+						c1.actualizarSerie(temporadas, duracion, textProductora.getText());
+					}
 				}
 				else
 				{
-					int temporadas=Integer.parseInt(textDirec.getText());
-					int duracion=Integer.parseInt(textDuracin.getText());
-					
-					c1.actualizarSerie(temporadas, duracion, textProductora.getText());
+					int numComentarios=c1.numComentarios();
+					JOptionPane.showMessageDialog(Pantalla_Pelicula.this, "No es un usuario avanzado, le faltan "+(15-numComentarios)+" para llegar a serlo");
 				}
+				
 			}
 		});
 		GroupLayout gl_panelAgregarDatos = new GroupLayout(panelAgregarDatos);
@@ -452,7 +525,14 @@ public class Pantalla_Pelicula extends JFrame {
 		mnNombreUsuario.add(mntmPerfil);
 		c1.mostrarComentarios(textComentarios);
 		
-		
+		if (c1.getUserLogged().getAlias().equals("userpi"))
+		{
+			btnBorrarReview.setVisible(true);
+		}
+		else
+		{
+			btnBorrarReview.setVisible(false);
+		}
 	}
 	
 	public boolean comprobarRellenos(String texto, String valoracion)

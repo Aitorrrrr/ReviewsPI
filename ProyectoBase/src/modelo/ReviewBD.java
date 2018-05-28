@@ -43,24 +43,19 @@ public class ReviewBD {
 		{
 			state=cbd.getConexion().createStatement();
 			
-			String sql="SELECT r.Titulo, r.Sinopsis, r.ValMedia FROM review r INNER JOIN comentario c ON c.idReview=r.idReview WHERE Titulo='"+tit+"'";
+			String sql="SELECT Titulo, Sinopsis, ValMedia FROM review WHERE Titulo='"+tit+"'";
 			
 			
 			rs=state.executeQuery(sql);
 			
-			if (rs.next())
-			{
-				rs.next();
-				titulo.setText(rs.getString(1));
-				sinopsis.setText(rs.getString(2));
-				valmedia.setText(rs.getString(3));
+			rs.next();
+			
+			titulo.setText(rs.getString(1));
+			sinopsis.setText(rs.getString(2));
+			valmedia.setText(rs.getString(3));
 				
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return true;
+			
 		}
 		catch (SQLException sqle)
 		{
@@ -195,6 +190,25 @@ public class ReviewBD {
 		catch (SQLException sql)
 		{
 			sql.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean borrarReview(ConexionBD cbd, int id)
+	{
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="DELETE FROM review WHERE idReview='"+id+"';";
+			
+			state.executeUpdate(sql);
+			
+			return true;
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
 			return false;
 		}
 	}

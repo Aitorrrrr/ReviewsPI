@@ -15,6 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.SwingConstants;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -138,21 +139,55 @@ public class PantallaBusqueda extends JFrame {
 		
 		JSeparator separador1 = new JSeparator();
 		separador1.setOrientation(SwingConstants.VERTICAL);
+		
+		JButton btnCrearReview = new JButton("Crear Review");
+		btnCrearReview.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (c1.getUserLogged().getAlias().equals("userpi"))
+				{
+					CrearReview cr1=new CrearReview(c1);
+					cr1.setVisible(true);
+					
+					PantallaBusqueda.this.dispose();
+				}
+				else
+				{
+					if (c1.esAvanzado())
+					{
+						CrearReview cr1=new CrearReview(c1);
+						cr1.setVisible(true);
+						
+						PantallaBusqueda.this.dispose();
+					}
+					else
+					{
+						int numComentarios=c1.numComentarios();
+						JOptionPane.showMessageDialog(PantallaBusqueda.this, "No es un usuario avanzado, le faltan "+(15-numComentarios)+" para llegar a serlo");
+					}
+				}
+			}
+		});
 		GroupLayout gl_contenedorPrincipal = new GroupLayout(contenedorPrincipal);
 		gl_contenedorPrincipal.setHorizontalGroup(
 			gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-					.addGap(37)
-					.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
-						.addComponent(contenedorMenu, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_contenedorPrincipal.createSequentialGroup()
-							.addGap(24)
-							.addComponent(logo2)))
-					.addGap(59)
+							.addGap(37)
+							.addGroup(gl_contenedorPrincipal.createParallelGroup(Alignment.LEADING)
+								.addComponent(contenedorMenu, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contenedorPrincipal.createSequentialGroup()
+									.addGap(24)
+									.addComponent(logo2)))
+							.addGap(59))
+						.addGroup(Alignment.TRAILING, gl_contenedorPrincipal.createSequentialGroup()
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnCrearReview)
+							.addGap(124)))
 					.addComponent(separador2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(84)
 					.addComponent(contenedorReviews, GroupLayout.PREFERRED_SIZE, 1041, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
 					.addComponent(separador1, GroupLayout.PREFERRED_SIZE, 2, GroupLayout.PREFERRED_SIZE)
 					.addGap(23))
 		);
@@ -164,7 +199,9 @@ public class PantallaBusqueda extends JFrame {
 							.addContainerGap()
 							.addComponent(contenedorMenu, GroupLayout.PREFERRED_SIZE, 554, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(logo2))
+							.addComponent(logo2)
+							.addGap(18)
+							.addComponent(btnCrearReview))
 						.addGroup(gl_contenedorPrincipal.createSequentialGroup()
 							.addGap(30)
 							.addComponent(separador1, GroupLayout.PREFERRED_SIZE, 762, GroupLayout.PREFERRED_SIZE))
@@ -234,10 +271,29 @@ public class PantallaBusqueda extends JFrame {
 		botonHacerReviews2 = new JButton(idio.traduz("button_newReview"));
 		botonHacerReviews2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CrearReview cr1=new CrearReview(c1);
-				cr1.setVisible(true);
 				
-				PantallaBusqueda.this.dispose();
+				if (c1.getUserLogged().getAlias().equals("userpi"))
+				{
+					CrearReview cr1=new CrearReview(c1);
+					cr1.setVisible(true);
+					
+					PantallaBusqueda.this.dispose();
+				}
+				else
+				{
+					if (c1.esAvanzado())
+					{
+						CrearReview cr1=new CrearReview(c1);
+						cr1.setVisible(true);
+						
+						PantallaBusqueda.this.dispose();
+					}
+					else
+					{
+						int numComentarios=c1.numComentarios();
+						JOptionPane.showMessageDialog(PantallaBusqueda.this, "No es un usuario avanzado, le faltan "+(15-numComentarios)+" para llegar a serlo");
+					}
+				}
 			}
 		});
 		botonHacerReviews2.setBackground(Color.WHITE);
@@ -582,6 +638,7 @@ public class PantallaBusqueda extends JFrame {
 						{
 								c1.reviewBuscado(c1.idReview(lblTitulo.getText()), lblTitulo.getText());
 								contenedorReview1.setVisible(true);
+								System.out.println("hehe");
 						}
 					}
 				}
@@ -592,6 +649,9 @@ public class PantallaBusqueda extends JFrame {
 		contenedorPrincipal.setLayout(gl_contenedorPrincipal);
 		
 		contenedorReview1.setVisible(false);
+		
+		peliculas=false;
+		series=false;
 	}
 }
 

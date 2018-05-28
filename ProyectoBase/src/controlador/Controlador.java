@@ -109,7 +109,7 @@ public class Controlador {
 	public void datosUser(JTextField alias, JTextField nombre, JTextField apell, JTextField email, JComboBox genero)
 	{
 		this.conectar();
-		this.ubd.datosUser(cbd, 1, alias, nombre, apell, email, genero);
+		this.ubd.datosUser(cbd, this.user.getIdUser(), alias, nombre, apell, email, genero);
 		this.desconectar();
 	}
 	
@@ -328,5 +328,64 @@ public class Controlador {
 	public Review getReview()
 	{
 		return this.review;
+	}
+	
+	public boolean esAvanzado()
+	{
+		boolean avanzado;
+		
+		this.conectar();
+		avanzado=this.ubd.esAvanzado(cbd, this.user.getIdUser());
+		this.desconectar();
+		
+		return avanzado;
+	}
+	
+	public int numComentarios()
+	{
+		int numComentarios;
+		
+		this.conectar();
+		numComentarios=this.comenbd.contarComentarios(this.user.getIdUser(), cbd);
+		this.desconectar();
+		
+		return numComentarios;
+	}
+	
+	public int insertarUserV2(String alias, String nombre, String apell, String email, String pw)
+	{
+		int bueno;
+		
+		this.conectar();
+		bueno=this.ubd.insertarUserV2(cbd, alias, pw, nombre, apell, email);
+		this.desconectar();
+		
+		return bueno;
+	}
+	
+	public boolean borrarSerie()
+	{
+		boolean ok;
+		
+		this.conectar();
+		ok=this.comenbd.borrarComentarios(cbd, this.review.getIdReview());
+		ok=this.seriebd.borrarSerie(cbd, this.review.getIdReview());
+		ok=this.rbd.borrarReview(cbd, this.review.getIdReview());
+		this.desconectar();
+
+		return ok;
+	}
+	
+	public boolean borrarPelicula()
+	{
+		boolean ok;
+		
+		this.conectar();
+		ok=this.comenbd.borrarComentarios(cbd, this.review.getIdReview());
+		ok=this.pelibd.borrarPelicula(cbd, this.review.getIdReview());
+		ok=this.rbd.borrarReview(cbd, this.review.getIdReview());
+		this.desconectar();
+
+		return ok;
 	}
 }

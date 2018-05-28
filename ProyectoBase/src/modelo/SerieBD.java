@@ -157,13 +157,32 @@ public class SerieBD {
 		{
 			state=cbd.getConexion().createStatement();
 			
-			String sql="UPDATE pelicula SET temporadas='"+temporadas+"', productora='"+productora+"', dura_cap='"+duracion+"';";
+			String sql="UPDATE serie SET temporadas='"+temporadas+"', productora='"+productora+"', dura_cap='"+duracion+"' WHERE idReview='"+idReview+"';";
 			
 			state.executeUpdate(sql);
 		}
 		catch (SQLException sqle)
 		{
 			sqle.printStackTrace();
+		}
+	}
+	
+	public boolean borrarSerie(ConexionBD cbd, int id)
+	{
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="DELETE FROM serie WHERE idReview='"+id+"';";
+			
+			state.executeUpdate(sql);
+			
+			return true;
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+			return false;
 		}
 	}
 }

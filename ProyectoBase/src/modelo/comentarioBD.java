@@ -116,4 +116,47 @@ public class comentarioBD {
 		}
 		
 	}
+	
+	public int contarComentarios(int id, ConexionBD cbd)
+	{
+		ResultSet rs;
+		
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="SELECT count(idUser) FROM comentario WHERE idUser='"+id+"';";
+			
+			rs=state.executeQuery(sql);
+			
+			rs.next();
+			
+			return rs.getInt(1);
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+			
+			return -1;
+		}
+	}
+	
+	public boolean borrarComentarios(ConexionBD cbd, int id)
+	{
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="DELETE FROM comentario WHERE idReview='"+id+"';";
+			
+			state.executeUpdate(sql);
+			
+			return true;
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+			return false;
+		}
+	}
 }

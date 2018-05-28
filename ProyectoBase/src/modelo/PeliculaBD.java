@@ -155,13 +155,32 @@ public class PeliculaBD {
 		{
 			state=cbd.getConexion().createStatement();
 			
-			String sql="UPDATE pelicula SET director='"+director+"', productora='"+productora+"', duracion='"+duracion+"';";
+			String sql="UPDATE pelicula SET director='"+director+"', productora='"+productora+"', duracion='"+duracion+"' WHERE idReview='"+idReview+"';";
 			
 			state.executeUpdate(sql);
 		}
 		catch (SQLException sqle)
 		{
 			sqle.printStackTrace();
+		}
+	}
+	
+	public boolean borrarPelicula(ConexionBD cbd, int id)
+	{
+		try
+		{
+			state=cbd.getConexion().createStatement();
+			
+			String sql="DELETE FROM pelicula WHERE idReview='"+id+"';";
+			
+			state.executeUpdate(sql);
+			
+			return true;
+		}
+		catch (SQLException sqle)
+		{
+			sqle.printStackTrace();
+			return false;
 		}
 	}
 }
